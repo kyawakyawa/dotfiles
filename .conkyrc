@@ -1,0 +1,98 @@
+alignment top_right
+own_window_transparent yes
+own_window_argb_visual true
+own_window_argb_value 155
+background no
+border_width 1
+cpu_avg_samples 2
+default_color white
+default_outline_color white
+default_shade_color white
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+override_utf8_locale yes
+use_xft yes
+xftfont TakaoGothic:style=Regular:size=12
+gap_x 10
+gap_y 10
+minimum_size 320 5
+maximum_width 320
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+own_window yes
+own_window_class Conky
+own_window_type override
+stippled_borders 0
+update_interval 1.0
+uppercase no
+use_spacer none
+show_graph_scale no
+show_graph_range no
+double_buffer yes
+ 
+TEXT
+#$nodename $kernel
+#$hr
+${font IPA:size=18}$alignc${time %Y - %m - %d %a}${font}
+${font Ubuntu:size=36}$alignc${time %H:%M:%S}${font}
+$hr
+${color pink}Uptime:$color $uptime
+${color pink}Frequency (in MHz):$color $freq
+${color pink}RAM Usage:$color $mem/$memmax - $memperc%
+$alignc${membar 5,300}
+#${color pink}Swap Usage:$color $swap/$swapmax - $swapperc%
+#$alignc${swapbar 5,300}
+${color ff5000}CPU Usage:${cpu} %
+# $alignc${cpubar 5,300}
+$alignc${color pink}${cpugraph cpu0 32,300 0000ff ff0000}
+${color yellow}CPU1 ${cpu cpu1} %
+$alignc${cpubar cpu1 5,300}
+${color yellow}CPU2 ${cpu cpu2} %
+$alignc${cpubar cpu2 5,300}
+${color yellow}CPU3 ${cpu cpu3} %
+$alignc${cpubar cpu3 5,300}
+${color yellow}CPU4 ${cpu cpu4} %
+$alignc${cpubar cpu4 5,300}
+#${color red}CPU5 ${cpu cpu5} %
+#$alignc${cpubar cpu5 5,300}
+#${color red}CPU6 ${cpu cpu6} %
+#$alignc${cpubar cpu6 5,300}
+#${color red}CPU7 ${cpu cpu7} %
+#$alignc${cpubar cpu7 5,300}
+#${color red}CPU8 ${cpu cpu8} %
+#$alignc${cpubar cpu8 5,300}
+${color pink}Processes:$color $processes  ${color pink}Running:$color $running_processes
+$hr
+#${color pink}Temperature:$color
+# ${color pink}CPU Core 0$color $alignr${execi 10 sensors | grep "^Core 0:"  | sed "s/ \+/\t/g" | cut -f 3}
+# ${color pink}CPU Core 1$color $alignr${execi 10 sensors | grep "^Core 1:"  | sed "s/ \+/\t/g" | cut -f 3}
+# ${color pink}CPU Core 2$color $alignr${execi 10 sensors | grep "^Core 2:"  | sed "s/ \+/\t/g" | cut -f 3}
+# ${color pink}CPU Core 3$color $alignr${execi 10 sensors | grep "^Core 3:"  | sed "s/ \+/\t/g" | cut -f 3}
+#${color pink}Motherboard$color $alignr${execi 10 sensors | grep "^MB Temperature:"  | sed "s/ \+/\t/g" | cut -f 3}
+#${color pink}GPU$color $alignr${execi 8 nvidia-settings -q [gpu:0]/GPUCoreTemp | grep '):' | awk '{print $4}' | sed 's/\.//'}°C
+#${color pink}/dev/sda $color $alignr${hddtemp /dev/sda}°C
+#${color pink}/dev/sdb $color $alignr${hddtemp /dev/sdb}°C
+#${color pink}/dev/sdc $color $alignr${hddtemp /dev/sdc}°C
+#$hr
+${color pink}File systems:
+ / $color${fs_used /}/${fs_size /}
+$alignc${fs_bar 5,300 /}
+ /home $color${fs_used /home}/${fs_size /home}
+$alignc${fs_bar 5,300 /home}
+$hr
+${color pink}Networking:
+LAN IP: $alignr${color red}${addr wlp3s0}${color}
+ Down:${color #8844ee} ${downspeed wlp3s0} k/s${color red} ${offset 50}Up:${color #22ccff} ${upspeed wlp3s0} k/s
+${color pink}${downspeedgraph wlp3s0 32,150 ff0000 0000ff} $alignr${color pink}${upspeedgraph wlp3s0 32,150 0000ff ff0000}
+${color pink}Name              PID   CPU%   MEM%
+${color yellow} ${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
+${color yellow} ${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2}
+${color yellow} ${top name 3} ${top pid 3} ${top cpu 3} ${top mem 3}
+${color yellow} ${top name 4} ${top pid 4} ${top cpu 4} ${top mem 4}
+$hr
+${color pink}Desktop:$alignc${color pink}${font Ubuntu:size=21}${desktop}$color / ${desktop_number}${font}
