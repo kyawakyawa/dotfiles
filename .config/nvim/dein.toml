@@ -12,3 +12,6 @@ repo = 'Shougo/deoplete.nvim'
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
