@@ -156,7 +156,7 @@ bar {
 }
 
 #wallpaper--2017-05-28
-exec --no-startup-id "feh --bg-scale $HOME/Pictures/Yosemite.jpg"#background-papers-archlinuxbg-scottscreations-archlinux-wallpapers-59401.jpg "#wHCYt.jpg"
+exec --no-startup-id "feh --bg-scale $HOME/Pictures/8qQ4WVxK3MI4e2D1506993079_1506993087.jpg"#background-papers-archlinuxbg-scottscreations-archlinux-wallpapers-59401.jpg "#wHCYt.jpg"
 #fcitx
 exec --no-startup-id fcitx
 #NetworkManager
