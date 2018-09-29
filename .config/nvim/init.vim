@@ -90,6 +90,11 @@ nnoremap : ;
 "    autocmd!
 "    autocmd BufNewFile,BufRead *.html inoremap < <><Left>
 "augroup END
+"mdの$補完
+augroup fileTypeIndent
+    autocmd!
+    autocmd BufNewFile,BufRead *.md inoremap $ $$<Left>
+augroup END
 
 autocmd BufNewFile *.js 0r $HOME/.vim/template/javascript.js
 "autocmd BufNewFile *.cpp 0r $HOME/.vim/template/cpp.cpp
