@@ -41,9 +41,9 @@ filetype plugin indent on
 syntax enable
 
 " If you want to install not installed plugins on startup.
-"if dein#check_install()
-"  call dein#install()
-"endif
+if dein#check_install()
+  call dein#install()
+endif
 
 "End dein Scripts-------------------------
 
@@ -58,9 +58,9 @@ set encoding=utf-8
 scriptencoding=utf-8
 set number
 set title
-"set expandtab
-set tabstop=4
-set shiftwidth=4
+set expandtab
+set tabstop=2
+set shiftwidth=2
 set softtabstop=0
 set hlsearch
 set showmatch
@@ -113,4 +113,4 @@ inoremap <silent> <C-[> <ESC>:call ImInActivate()<CR>
 inoremap <silent> <C-c> <ESC>:call ImInActivate()<CR>
 
 
-runtime! userautoload/*.vim
+"runtime! userautoload/*.vim

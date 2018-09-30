@@ -2,16 +2,40 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'Shougo/neosnippet.vim'
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-
-[[plugins]]
 repo = 'Shougo/deoplete.nvim'
+depends = 'context_filetype.vim'
+on_i = 1
+hook_add = '''
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay = 0
+let g:deoplete#auto_complete_start_length = 1
+let g:deoplete#enable_camel_case = 0
+let g:deoplete#enable_ignore_case = 0
+let g:deoplete#enable_refresh_always = 0
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#file#enable_buffer_path = 1
+let g:deoplete#max_list = 10000
+'''
+
+#[[plugins]]
+#repo = 'Shougo/deoplete-clangx'
+#on_ft = ['c', 'cpp', 'cmake']
+#hook_done_update = '''
+#	call deoplete#custom#var('clangx', 'clang_binary', '/usr/bin/clang++')
+#
+#	" Change clang options
+#	call deoplete#custom#var('clangx', 'default_c_options', '')
+#	call deoplete#custom#var('clangx', 'default_cpp_options', '-std=c++11')
+#'''
+#depends = ['deoplete.nvim']
 
 [[plugins]]
-repo = 'itchyny/lightline.vim'
+repo = 'zchee/deoplete-clang'
+hook_source = '''
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
+let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
+let g:deoplete#sources#clang#sort_algo = 'priority'
+'''
 
-[[plugins]]
-repo = 'Shougo/denite.nvim'
+on_ft = ['c', 'cpp', 'cmake']
+depends = ['deoplete.nvim']
