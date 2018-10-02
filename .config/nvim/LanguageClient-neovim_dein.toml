@@ -1,0 +1,115 @@
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+depends = 'context_filetype.vim'
+on_i = 1
+hook_add = '''
+let g:deoplete#enable_at_startup = 1
+"let g:deoplete#auto_complete_delay = 0
+"let g:deoplete#auto_complete_start_length = 1
+"let g:deoplete#enable_camel_case = 0
+"let g:deoplete#enable_ignore_case = 0
+"let g:deoplete#enable_refresh_always = 0
+"let g:deoplete#enable_smart_case = 1
+"let g:deoplete#file#enable_buffer_path = 1
+"let g:deoplete#max_list = 1000
+'''
+
+hook_post_source = '''
+ call deoplete#custom#option({
+    \ 'auto_complete_delay': 0,
+    \ 'auto_refresh_delay': 0,
+    \ 'refresh_always': 0,
+    \ 'min_pattern_length': 1,
+    \ })
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+on_i = 1
+hook_add = '''
+
+let g:neosnippet#snippets_directory = '~/.config/nvim/snippets/'
+"neosnippet用のキーマップ
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'autozimu/LanguageClient-neovim'
+rev = 'next'
+build = ['./install.sh']
+depends = ['deoplete.nvim']
+
+#hook_add = '''
+#set hidden
+#let g:LanguageClient_serverCommands = {
+#      \ 'cpp': ['clangd'],
+#      \ }
+#let g:LanguageClient_loadSettings = 1
+#
+#nnoremap K :call LanguageClient#textDocument_hover()<CR>
+#nnoremap F :call LanguageClient#textDocument_formatting()<CR>
+#'''
+#hook_source = '''
+#set completefunc=LanguageClient#complete
+#'''
+
+hook_add = '''
+set hidden
+let g:LanguageClient_serverCommands = {
+    \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
+    \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
+    \ }
+
+let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
+let g:LanguageClient_settingsPath = '/home/kai/.config/nvim/settings.json'
+set formatexpr=LanguageClient_textDocument_rangeFormatting()
+set completefunc=LanguageClient#complete
+
+nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+nnoremap <silent> gs :call LanguageClient#textDocument_documentSymbol()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+'''
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+on_i = 1
+hook_add = '''
+" START: settings for lightline ------------------------------------------
+if !has('gui_runnig')
+	set t_Co=256
+endif
+let g:lightline = {
+\   'colorscheme': 'wombat',
+\   'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
+\   'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"}
+\}
+" END: settings for lightline --------------------------------------------
+'''

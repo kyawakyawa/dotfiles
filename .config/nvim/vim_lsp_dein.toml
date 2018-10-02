@@ -1,0 +1,121 @@
+#reference http://kutimoti.hatenablog.com/entry/2018/06/09/165225
+
+[[plugins]]
+repo='prabirshrestha/async.vim'
+
+[[plugins]]
+repo='prabirshrestha/vim-lsp'
+hook_source = '''
+if executable('cquery')
+   au User lsp_setup call lsp#register_server({
+      \ 'name': 'cquery',
+      \ 'cmd': {server_info->['cquery']},
+      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery/cache' },
+      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+      \ })
+endif
+let g:lsp_signs_enabled = 1         " enable signs
+let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+
+let g:lsp_signs_error = {'text': '✗'}
+let g:lsp_signs_warning = {'text': '‼'}
+
+let g:asyncomplete_completion_delay=1
+
+'''
+
+[[plugins]]
+repo='prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+repo='Shougo/neosnippet.vim'
+on_i = 1
+hook_add = '''
+
+let g:neosnippet#snippets_directory = '~/.config/nvim/snippets/'
+"neosnippet用のキーマップ
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+'''
+
+[[plugins]]
+repo='Shougo/neosnippet-snippets'
+on_i = 1
+
+[[plugins]]
+repo='prabirshrestha/asyncomplete-neosnippet.vim'
+on_i = 1
+hook_add = '''
+call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+    \ 'name': 'neosnippet',
+    \ 'whitelist': ['*'],
+    \ 'completor': function('asyncomplete#sources#neosnippet#completor'),
+    \ }))
+'''
+#
+#[[plugins]]
+#repo = 'prabirshrestha/asyncomplete-lsp.vim'
+#
+#[[plugins]]
+#repo = 'itchyny/lightline.vim'
+#on_i = 1
+#hook_add = '''
+#" START: settings for lightline ------------------------------------------
+#if !has('gui_runnig')
+#	set t_Co=256
+#endif
+#let g:lightline = {
+#\   'colorscheme': 'wombat',
+#\   'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
+#\   'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"}
+#\}
+#" END: settings for lightline --------------------------------------------
+#'''
+#
+#[[plugins]]
+#repo = 'Shougo/denite.nvim'
+#on_i = 1
+#
+#hook_post_source = '''
+#" file_recやgrepをagに変更 $sudo pacman -S the_silver_searcher
+#call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+#call denite#custom#var('grep', 'command', ['ag'])
+#call denite#custom#var('grep', 'recursive_opts', [])
+#call denite#custom#var('grep', 'pattern_opt', [])
+#call denite#custom#var('grep', 'default_opts', ['--follow', '--no-group', '--no-color'])
+#'''
+#
+#[[plugins]]
+#repo = 'vim-jp/vim-cpp'
+#on_i = 1
+#
+#[[plugins]]
+#repo = "airblade/vim-gitgutter"
+#hook_add = '''
+#nmap ]h <Plug>GitGutterNextHunk
+#nmap [h <Plug>GitGutterPrevHunk
+#'''
+#
+#[[plugins]]
+#repo = "tpope/vim-fugitive"
+#
