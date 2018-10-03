@@ -1,3 +1,4 @@
 .config/nvim/snippets
 .vim/.netrwhist
 .config/nvim/.netrwhist
+*.snip

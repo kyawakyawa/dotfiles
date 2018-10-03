@@ -165,6 +165,8 @@ exec --no-startup-id nm-applet
 exec --no-startup-id compton -cbm 1.00
 #conky
 exec --no-startup-id conky -p 5
+#load .Xresources
+exec --no-startup-id xrdb -merge ~/.Xresources
 
 #Multimdia keys
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+
