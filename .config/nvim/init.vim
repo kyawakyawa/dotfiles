@@ -19,8 +19,12 @@ if dein#load_state('~/.cache/dein/')
   "call dein#add('Shougo/neosnippet-snippets')
   "call dein#add('Shougo/deoplete.nvim')
   "call dein#add('zchee/deoplete-clang')
+
   let g:dein_dir = expand('~/.config/nvim')
-  let s:toml = g:dein_dir . '/dein.toml'
+  "let s:toml = g:dein_dir . '/ycm_dein.toml'
+  "let s:toml = g:dein_dir . '/dein.toml'
+  let s:toml = g:dein_dir . '/vim_lsp_dein.toml'
+  "let s:toml = g:dein_dir . '/LanguageClient-neovim_dein.toml'
   let s:lazy_toml = g:dein_dir . '/dein_lazy.toml'
 
   " You can specify revision/branch/tag.
@@ -111,6 +115,12 @@ function! ImInActivate()
 endfunction
 inoremap <silent> <C-[> <ESC>:call ImInActivate()<CR>
 inoremap <silent> <C-c> <ESC>:call ImInActivate()<CR>
+
+function MakeCompilationDatabase()
+  let temp = expand('%:p')
+  let dir = expand('%:p:h')
+  echo system('echo ''[{"directory": " ' . dir . '","command": "/usr/bin/c++  ' . temp . ' -std=c++11","file": "' . temp . '"}]'' > compile_commands.json')
+endfunction
 
 
 "runtime! userautoload/*.vim

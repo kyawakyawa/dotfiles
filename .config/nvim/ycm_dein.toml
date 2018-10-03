@@ -1,0 +1,61 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Valloric/YouCompleteMe'
+merged = 0
+hook_source = '''
+let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+on_i = 1
+hook_post_source = '''
+
+let g:neosnippet#snippets_directory = '~/.config/nvim/snippets/'
+"neosnippet用のキーマップ
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+'''
+
+[[plugins]]
+repo = 'w0rp/ale'
+hook_add = '''
+    " シンボルカラムを表示したままにする
+    let g:ale_sign_column_always = 1
+    " 保存時に整形してくれる
+    let g:ale_fix_on_save = 1
+    " 補完してくれる
+    let g:ale_completion_enabled = 0
+    " エラー行に表示するマーク
+    let g:ale_sign_error = 'e'
+    let g:ale_sign_warning = 'w'
+    " エラー行にカーソルをあわせた際に表示されるメッセージフォーマット
+    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+    let g:ale_statusline_format = ['e %d', 'w %d', 'o ok']
+    let g:ale_linters = {
+        \   'c' : ['clang'],
+        \   'cpp' : ['clang']
+    \}
+'''
