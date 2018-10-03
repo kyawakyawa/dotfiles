@@ -45,9 +45,9 @@ filetype plugin indent on
 syntax enable
 
 " If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
+"if dein#check_install()
+"  call dein#install()
+"endif
 
 "End dein Scripts-------------------------
 
@@ -116,6 +116,7 @@ endfunction
 inoremap <silent> <C-[> <ESC>:call ImInActivate()<CR>
 inoremap <silent> <C-c> <ESC>:call ImInActivate()<CR>
 
+"compile_commands.jsonを生成する
 function MakeCompilationDatabase()
   let temp = expand('%:p')
   let dir = expand('%:p:h')

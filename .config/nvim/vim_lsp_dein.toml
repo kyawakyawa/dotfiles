@@ -6,6 +6,7 @@ repo='prabirshrestha/async.vim'
 [[plugins]]
 repo='prabirshrestha/vim-lsp'
 hook_add = '''
+"cqueryは保存してから出ないとシンタックスチェックが動かない
 if executable('cquery')
    au User lsp_setup call lsp#register_server({
       \ 'name': 'cquery',
@@ -99,30 +100,30 @@ let g:lightline = {
 " END: settings for lightline --------------------------------------------
 '''
 
-#[[plugins]]
-#repo = 'Shougo/denite.nvim'
-#on_i = 1
-#
-#hook_post_source = '''
-#" file_recやgrepをagに変更 $sudo pacman -S the_silver_searcher
-#call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-#call denite#custom#var('grep', 'command', ['ag'])
-#call denite#custom#var('grep', 'recursive_opts', [])
-#call denite#custom#var('grep', 'pattern_opt', [])
-#call denite#custom#var('grep', 'default_opts', ['--follow', '--no-group', '--no-color'])
-#'''
-#
-#[[plugins]]
-#repo = 'vim-jp/vim-cpp'
-#on_i = 1
-#
-#[[plugins]]
-#repo = "airblade/vim-gitgutter"
-#hook_add = '''
-#nmap ]h <Plug>GitGutterNextHunk
-#nmap [h <Plug>GitGutterPrevHunk
-#'''
-#
-#[[plugins]]
-#repo = "tpope/vim-fugitive"
-#
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+on_i = 1
+
+hook_post_source = '''
+" file_recやgrepをagに変更 $sudo pacman -S the_silver_searcher
+call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'default_opts', ['--follow', '--no-group', '--no-color'])
+'''
+
+[[plugins]]
+repo = 'vim-jp/vim-cpp'
+on_i = 1
+
+[[plugins]]
+repo = "airblade/vim-gitgutter"
+hook_add = '''
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+'''
+
+[[plugins]]
+repo = "tpope/vim-fugitive"
+

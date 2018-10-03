@@ -9,12 +9,12 @@ hook_add = '''
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_delay = 0
 let g:deoplete#auto_complete_start_length = 1
-let g:deoplete#enable_camel_case = 0
-let g:deoplete#enable_ignore_case = 0
-let g:deoplete#enable_refresh_always = 0
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#max_list = 10000
+"let g:deoplete#enable_camel_case = 0
+"let g:deoplete#enable_ignore_case = 0
+"let g:deoplete#enable_refresh_always = 0
+"let g:deoplete#enable_smart_case = 1
+"let g:deoplete#file#enable_buffer_path = 1
+let g:deoplete#max_list = 100
 '''
 
 #[[plugins]]
@@ -39,3 +39,62 @@ let g:deoplete#sources#clang#sort_algo = 'priority'
 
 on_ft = ['c', 'cpp', 'cmake']
 depends = ['deoplete.nvim']
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+on_i = 1
+hook_post_source = '''
+
+let g:neosnippet#snippets_directory = '~/.config/nvim/snippets/'
+"neosnippet用のキーマップ
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'Shougo/neoinclude.vim'
+on_ft = ['c', 'cpp']
+depends = ['deoplete.nvim']
+
+#[[plugins]]
+#repo = 'w0rp/ale'
+#hook_add = '''
+#    " シンボルカラムを表示したままにする
+#    let g:ale_sign_column_always = 1
+#    " 保存時に整形してくれる
+#    let g:ale_fix_on_save = 1
+#    " 補完してくれる
+#    let g:ale_completion_enabled = 0
+#    " エラー行に表示するマーク
+#    let g:ale_sign_error = 'e'
+#    let g:ale_sign_warning = 'w'
+#    " エラー行にカーソルをあわせた際に表示されるメッセージフォーマット
+#    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+#    let g:ale_statusline_format = ['e %d', 'w %d', 'o ok']
+#    let g:ale_linters = {
+#        \   'c' : ['clangcheck'],
+#        \   'cpp' : ['clangcheck']
+#    \}
+#'''
