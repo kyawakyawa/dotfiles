@@ -1,0 +1,205 @@
+!! ~/.Xresources
+
+!!
+!! rxvt-unicode (urxvt)
+!!
+
+!!スクロールバーを右側
+URxvt.scrollBar_right:      true
+!!レールを消す
+URxvt.scrollBar_floating:   true
+!!rxvt plain next xterm
+URxvt.scrollstyle:          plain
+!!カーソル点滅
+URxvt.cursorBlink:          true
+!!カーソル形状
+URxvt.cursorUnderline:      true
+!!キーボード入力するとマウスポインタが消える
+URxvt.pointerBlank:         true
+!!ヴィジュアルベル
+URxvt.visualBell:           true
+!!バックスクロール出来る最大行数
+URxvt.saveLines:            3000
+!!アウトオブフォーカス時に画面を暗くする(%)
+URxvt.fading:               10
+
+!!フォント
+!Ricty powerlineのパッチのやつだとバグる nerd-fontsを試すべし
+!URxvt.font:              xft:Ricty\ Discord\ for\ Powerline:style=Regular:size=12:antialiase=true:hinting=true
+!URxvt.boldFont:          xft:Ricty\ Discord\ for\ Powerline:style=Bold:size=12:antialiase=true:hinting=true
+!URxvt.italicFont:        xft:Ricty\ Discord\ for\ Powerline:style=Italic:size=12:antialiase=true:hinting=true
+!URxvt.bolditalicFont:    xft:Ricty\ Discord\ for\ Powerline:style=BoldItalic:size=12:antialiase=true:hinting=true
+
+!using font for vim-powerline
+URxvt*font: xft:Ricty\ Diminished\ for\ Powerline:style=Regular:size=12:antialias=true
+URxvt.font:              xft:Ricty\ Diminished\ for\ Powerline:size=12:antialiase=true:hinting=true
+URxvt.boldFont:          xft:Ricty\ Diminished\ for\ Powerline:bold:size=12:antialiase=true:hinting=true
+URxvt.italicFont:        xft:Ricty\ Diminished\ for\ Powerline:italic:size=12:antialiase=true:hinting=true
+URxvt.bolditalicFont:    xft:Ricty\ Diminished\ for\ Powerline:bold:italic:size=12:antialiase=true:hinting=true
+
+!URxvt*font: xft:Ricty\ Diminished:style=Regular:size=12:antialias=true
+!URxvt.font:              xft:Ricty\ Diminished:size=12:antialiase=true:hinting=true
+!URxvt.boldFont:          xft:Ricty\ Diminished:bold:size=12:antialiase=true:hinting=true
+!URxvt.italicFont:        xft:Ricty\ Diminished:italic:size=12:antialiase=true:hinting=true
+!URxvt.bolditalicFont:    xft:Ricty\ Diminished:bold:italic:size=12:antialiase=true:hinting=true
+
+!!文字間 小さい程狭い マイナスもオーケー
+URxvt.letterSpace:          0
+!!行間
+URxvt.lineSpace:            0
+
+! hybrid color for URxvt
+!#define u_background        rgb:1d/1f/21
+!#define u_foreground        rgb:c5/c8/c6
+!#define u_normal_black      rgb:28/2a/2e
+!#define u_normal_red        rgb:a5/42/42
+!#define u_normal_green      rgb:8c/94/40
+!#define u_normal_yellow     rgb:de/93/5f
+!#define u_normal_blue       rgb:5f/81/9d
+!#define u_normal_magenta    rgb:85/67/8f
+!#define u_normal_cyan       rgb:5e/8d/87
+!#define u_normal_white      rgb:70/78/80
+!#define u_bright_black      rgb:37/3b/41
+!#define u_bright_red        rgb:cc/66/66
+!#define u_bright_green      rgb:b5/bd/68
+!#define u_bright_yellow     rgb:f0/c6/74
+!#define u_bright_blue       rgb:81/a2/be
+!#define u_bright_magenta    rgb:b2/94/bb
+!#define u_bright_cyan       rgb:8a/be/b7
+!#define u_bright_white      rgb:c5/c8/c6
+!
+!URxvt.depth: 32
+!URxvt.background:   u_background
+!URxvt.foreground:   u_foreground
+!URxvt.color0:       u_normal_black
+!URxvt.color1:       u_normal_red
+!URxvt.color2:       u_normal_green
+!URxvt.color3:       u_normal_yellow
+!URxvt.color4:       u_normal_blue
+!URxvt.color5:       u_normal_magenta
+!URxvt.color6:       u_normal_cyan
+!URxvt.color7:       u_normal_white
+!URxvt.color8:       u_bright_black
+!URxvt.color9:       u_bright_red
+!URxvt.color10:      u_bright_green
+!URxvt.color11:      u_bright_yellow
+!URxvt.color12:      u_bright_blue
+!URxvt.color13:      u_bright_magenta
+!URxvt.color14:      u_bright_cyan
+!URxvt.color15:      u_bright_white
+
+!! color scheme and opacity - gruvbox-dark https://github.com/morhetz/gruvbox
+!URxvt.depth:       32
+!URxvt.color0:      [100]#282828
+!URxvt.color1:      [100]#cc241d
+!URxvt.color2:      [100]#98971a
+!URxvt.color3:      [100]#d79921
+!URxvt.color4:      [100]#458588
+!URxvt.color5:      [100]#b16286
+!URxvt.color6:      [100]#689d6a
+!URxvt.color7:      [100]#a89984
+!URxvt.color8:      [100]#928374
+!URxvt.color9:      [100]#fb4934
+!URxvt.color10:     [100]#b8bb26
+!URxvt.color11:     [100]#fabd2f
+!URxvt.color12:     [100]#83a598
+!URxvt.color13:     [100]#d3869b
+!URxvt.color14:     [100]#8ec07c
+!URxvt.color15:     [100]#ebdbb2
+!URxvt.foreground:  [100]#ebdbb2
+!URxvt.background:  [100]#282828
+!URxvt.colorIT:     [100]#8ec07c
+!URxvt.colorBD:     [100]#fe8019
+!URxvt.colorUL:     [100]#83a598
+!URxvt.scrollColor: [100]#504945
+!!URxvt.troughColor: [100]#3C3836
+
+! Molokai theme ref https://gist.github.com/vreon/845878
+!URxvt.background: #101010
+!URxvt.foreground: #d0d0d0
+!URxvt.cursorColor: #d0d0d0
+!URxvt.color0: #101010
+!URxvt.color1: #960050
+!URxvt.color2: #66aa11
+!URxvt.color3: #c47f2c
+!URxvt.color4: #30309b
+!URxvt.color5: #7e40a5
+!URxvt.color6: #3579a8
+!URxvt.color7: #9999aa
+!URxvt.color8: #303030
+!URxvt.color9: #ff0090
+!URxvt.color10: #80ff00
+!URxvt.color11: #ffba68
+!URxvt.color12: #5f5fee
+!URxvt.color13: #bb88dd
+!URxvt.color14: #4eb4fa
+!URxvt.color15: #d0d0d0
+!URxvt.colorIT:     [100]#8ec07c
+!URxvt.colorBD:     [100]#fe8019
+!URxvt.colorUL:     [100]#83a598
+!URxvt.scrollColor: [100]#504945
+
+! Hybrid Terminal Colours. Uses the palette from Tomorrow-Night:
+! https://github.com/chriskempson/tomorrow-theme/blob/master/vim/colors/Tomorrow-Night.vim
+! vim: ft=xdefaults
+
+!URxvt.background: #1D1F21
+URxvt.background: #000000
+URxvt.foreground: #C5C8C6
+! black
+URxvt.color0: #282A2E
+URxvt.color8: #373B41
+! red
+URxvt.color1: #A54242
+URxvt.color9: #CC6666
+! green
+URxvt.color2: #8C9440
+URxvt.color10: #B5BD68
+! yellow
+URxvt.color3: #DE935F
+URxvt.color11: #F0C674
+! blue
+URxvt.color4: #5F819D
+URxvt.color12: #81A2BE
+! magenta
+URxvt.color5: #85678F
+URxvt.color13: #B294BB
+! cyan
+URxvt.color6: #5E8D87
+URxvt.color14: #8ABEB7
+! white
+URxvt.color7: #707880
+URxvt.color15: #C5C8C6
+
+! Hybrid Terminal Colours. Uses the palette from Tomorrow-Night:
+! https://github.com/chriskempson/tomorrow-theme/blob/master/vim/colors/Tomorrow-Night.vim and the reduced contrast background color from Codecademy's online editor:
+! https://www.codecademy.com/learn
+! vim: ft=xdefaults
+
+!*background: #232C31
+!URxvt.background: #010101
+!URxvt.foreground: #C5C8C6
+!! black
+!URxvt.color0: #2D3C46
+!URxvt.color8: #425059
+!! red
+!URxvt.color1: #A54242
+!URxvt.color9: #CC6666
+!! green
+!URxvt.color2: #8C9440
+!URxvt.color10: #B5BD68
+!! yellow
+!URxvt.color3: #DE935F
+!URxvt.color11: #F0C674
+!! blue
+!URxvt.color4: #5F819D
+!URxvt.color12: #81A2BE
+!! magenta
+!URxvt.color5: #85678F
+!URxvt.color13: #B294BB
+!! cyan
+!URxvt.color6: #5E8D87
+!URxvt.color14: #8ABEB7
+!! white
+!URxvt.color7: #6C7A80
+!URxvt.color15: #C5C8C6
