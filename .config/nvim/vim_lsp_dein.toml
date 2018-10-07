@@ -7,12 +7,22 @@ repo='prabirshrestha/async.vim'
 repo='prabirshrestha/vim-lsp'
 hook_add = '''
 "cqueryは保存してから出ないとシンタックスチェックが動かない
-if executable('cquery')
+"if executable('cquery')
+"   au User lsp_setup call lsp#register_server({
+"      \ 'name': 'cquery',
+"      \ 'cmd': {server_info->['cquery']},
+"      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+"      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery/cache' },
+"      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+"      \ })
+"endif
+" Register ccls C++ lanuage server.
+if executable('ccls')
    au User lsp_setup call lsp#register_server({
-      \ 'name': 'cquery',
-      \ 'cmd': {server_info->['cquery']},
+      \ 'name': 'ccls',
+      \ 'cmd': {server_info->['ccls']},
       \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery/cache' },
+      \ 'initialization_options': { 'cacheDirectory': '/tmp/ccls/cache' },
       \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
       \ })
 endif
@@ -126,6 +136,7 @@ repo = "airblade/vim-gitgutter"
 hook_add = '''
 nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
+let g:gitgutter_max_signs = 10000
 '''
 
 [[plugins]]
@@ -140,3 +151,13 @@ let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 colorscheme hybrid
 '''
+
+#[[plugins]]
+#repo = "ayu-theme/ayu-vim"
+#hook_add = '''
+#set termguicolors     " enable true colors support
+#let ayucolor="light"  " for light version of theme
+#let ayucolor="mirage" " for mirage version of theme
+#let ayucolor="dark"   " for dark version of theme
+#colorscheme ayu
+#'''

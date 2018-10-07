@@ -31,11 +31,11 @@ URxvt.fading:               10
 !URxvt.bolditalicFont:    xft:Ricty\ Discord\ for\ Powerline:style=BoldItalic:size=12:antialiase=true:hinting=true
 
 !using font for vim-powerline
-URxvt*font: xft:Ricty\ Diminished\ for\ Powerline:style=Regular:size=12:antialias=true
-URxvt.font:              xft:Ricty\ Diminished\ for\ Powerline:size=12:antialiase=true:hinting=true
-URxvt.boldFont:          xft:Ricty\ Diminished\ for\ Powerline:bold:size=12:antialiase=true:hinting=true
-URxvt.italicFont:        xft:Ricty\ Diminished\ for\ Powerline:italic:size=12:antialiase=true:hinting=true
-URxvt.bolditalicFont:    xft:Ricty\ Diminished\ for\ Powerline:bold:italic:size=12:antialiase=true:hinting=true
+URxvt*font: xft:Ricty\ Diminished\ for\ Powerline:style=Regular:size=14:antialias=true
+URxvt.font:              xft:Ricty\ Diminished\ for\ Powerline:size=14:antialiase=true:hinting=true
+URxvt.boldFont:          xft:Ricty\ Diminished\ for\ Powerline:bold:size=14:antialiase=true:hinting=true
+URxvt.italicFont:        xft:Ricty\ Diminished\ for\ Powerline:italic:size=14:antialiase=true:hinting=true
+URxvt.bolditalicFont:    xft:Ricty\ Diminished\ for\ Powerline:bold:italic:size=14:antialiase=true:hinting=true
 
 !URxvt*font: xft:Ricty\ Diminished:style=Regular:size=12:antialias=true
 !URxvt.font:              xft:Ricty\ Diminished:size=12:antialiase=true:hinting=true
@@ -143,33 +143,33 @@ URxvt.lineSpace:            0
 ! https://github.com/chriskempson/tomorrow-theme/blob/master/vim/colors/Tomorrow-Night.vim
 ! vim: ft=xdefaults
 
-!URxvt.background: #1D1F21
-URxvt.background: #000000
-URxvt.foreground: #C5C8C6
-! black
-URxvt.color0: #282A2E
-URxvt.color8: #373B41
-! red
-URxvt.color1: #A54242
-URxvt.color9: #CC6666
-! green
-URxvt.color2: #8C9440
-URxvt.color10: #B5BD68
-! yellow
-URxvt.color3: #DE935F
-URxvt.color11: #F0C674
-! blue
-URxvt.color4: #5F819D
-URxvt.color12: #81A2BE
-! magenta
-URxvt.color5: #85678F
-URxvt.color13: #B294BB
-! cyan
-URxvt.color6: #5E8D87
-URxvt.color14: #8ABEB7
-! white
-URxvt.color7: #707880
-URxvt.color15: #C5C8C6
+!!URxvt.background: #1D1F21
+!URxvt.background: #000000
+!URxvt.foreground: #C5C8C6
+!! black
+!URxvt.color0: #282A2E
+!URxvt.color8: #373B41
+!! red
+!URxvt.color1: #A54242
+!URxvt.color9: #CC6666
+!! green
+!URxvt.color2: #8C9440
+!URxvt.color10: #B5BD68
+!! yellow
+!URxvt.color3: #DE935F
+!URxvt.color11: #F0C674
+!! blue
+!URxvt.color4: #5F819D
+!URxvt.color12: #81A2BE
+!! magenta
+!URxvt.color5: #85678F
+!URxvt.color13: #B294BB
+!! cyan
+!URxvt.color6: #5E8D87
+!URxvt.color14: #8ABEB7
+!! white
+!URxvt.color7: #707880
+!URxvt.color15: #C5C8C6
 
 ! Hybrid Terminal Colours. Uses the palette from Tomorrow-Night:
 ! https://github.com/chriskempson/tomorrow-theme/blob/master/vim/colors/Tomorrow-Night.vim and the reduced contrast background color from Codecademy's online editor:
@@ -203,3 +203,116 @@ URxvt.color15: #C5C8C6
 !! white
 !URxvt.color7: #6C7A80
 !URxvt.color15: #C5C8C6
+
+
+! Ayu https://github.com/ayu-theme/ayu-vim
+
+!URxvt.background: #212733
+!URxvb.foreground: #D9D7CE
+!URxvt.color0: #151a1e
+!URxvt.color1: #FF3333
+!URxvt.color2: #B8CC52 
+!URxvt.color3: #E7C547
+!URxvt.color4: #36A3D9
+!URxvt.color5: #A37ACC
+!URxvt.color6: #95E6CB
+!URxvt.color7: #3f4e5a
+!URxvt.color8: #1c2328
+!URxvt.color9: #FF7733
+!URxvt.color10: #232b32
+!URxvt.color11: #313d46
+!URxvt.color12: #2a343c
+!URxvt.color13: #F07178
+!URxvt.color14: #384550
+!URxvt.color15: #465764
+
+
+!https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/Xresources/ayu
+! Generated with :
+! XRDB2Xreources.py
+
+*.foreground:  #e6e1cf
+*.background:  #0f1419
+*.cursorColor: #f29718
+!
+! Black
+*.color0:      #000000
+*.color8:      #323232
+!
+! Red
+*.color1:      #ff3333
+*.color9:      #ff6565
+!
+! Green
+*.color2:      #b8cc52
+*.color10:     #eafe84
+!
+! Yellow
+*.color3:      #e7c547
+*.color11:     #fff779
+!
+! Blue
+*.color4:      #36a3d9
+*.color12:     #68d5ff
+!
+! Magenta
+*.color5:      #f07178
+*.color13:     #ffa3aa
+!
+! Cyan
+*.color6:      #95e6cb
+*.color14:     #c7fffd
+!
+! White
+*.color7:      #ffffff
+*.color15:     #ffffff
+!
+! Bold, Italic, Underline
+*.colorBD:     #e6e1cf
+!*.colorIT:
+!*.colorUL:
+
+!!https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/Xresources/ayu_light
+!! Generated with :
+!! XRDB2Xreources.py
+!!
+!*.foreground:  #5c6773
+!*.background:  #fafafa
+!*.cursorColor: #ff6a00
+!!
+!! Black
+!*.color0:      #000000
+!*.color8:      #323232
+!!
+!! Red
+!*.color1:      #ff3333
+!*.color9:      #ff6565
+!!
+!! Green
+!*.color2:      #86b300
+!*.color10:     #b8e532
+!!
+!! Yellow
+!*.color3:      #f29718
+!*.color11:     #ffc94a
+!!
+!! Blue
+!*.color4:      #41a6d9
+!*.color12:     #73d8ff
+!!
+!! Magenta
+!*.color5:      #f07178
+!*.color13:     #ffa3aa
+!!
+!! Cyan
+!*.color6:      #4dbf99
+!*.color14:     #7ff1cb
+!!
+!! White
+!*.color7:      #ffffff
+!*.color15:     #ffffff
+!!
+!! Bold, Italic, Underline
+!*.colorBD:     #5c6773
+!!*.colorIT:
+!!*.colorUL:

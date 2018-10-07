@@ -123,5 +123,7 @@ function MakeCompilationDatabase()
   echo system('echo ''[{"directory": " ' . dir . '","command": "/usr/bin/c++  ' . temp . ' -std=c++11","file": "' . temp . '"}]'' > compile_commands.json')
 endfunction
 
+set hidden
+
 
 "runtime! userautoload/*.vim
