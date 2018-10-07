@@ -83,8 +83,8 @@ inoremap [ []<Left>
 inoremap " ""<Left>
 inoremap ' ''<Left>
 inoremap {<Enter> {}<Left><CR><ESC><S-o>
-nnoremap <C-b> :wall<Enter>:copen<Enter>:make<Enter>
-nnoremap <C-u> :copen<Enter>:make run<Enter>
+"nnoremap <C-b> :wall<Enter>:copen<Enter>:make<Enter>
+"nnoremap <C-u> :copen<Enter>:make run<Enter>
 hi Comment ctermfg=gray
 nnoremap ; :
 nnoremap : ;
