@@ -7,25 +7,25 @@ repo='prabirshrestha/async.vim'
 repo='prabirshrestha/vim-lsp'
 hook_add = '''
 "cqueryは保存してから出ないとシンタックスチェックが動かない
-"if executable('cquery')
+if executable('cquery')
+   au User lsp_setup call lsp#register_server({
+      \ 'name': 'cquery',
+      \ 'cmd': {server_info->['cquery']},
+      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery/cache' },
+      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc' ,'hpp'],
+      \ })
+endif
+" Register ccls C++ lanuage server.
+"if executable('ccls')
 "   au User lsp_setup call lsp#register_server({
-"      \ 'name': 'cquery',
-"      \ 'cmd': {server_info->['cquery']},
+"      \ 'name': 'ccls',
+"      \ 'cmd': {server_info->['ccls']},
 "      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-"      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery/cache' },
+"      \ 'initialization_options': { 'cacheDirectory': '/tmp/ccls/cache' },
 "      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
 "      \ })
 "endif
-" Register ccls C++ lanuage server.
-if executable('ccls')
-   au User lsp_setup call lsp#register_server({
-      \ 'name': 'ccls',
-      \ 'cmd': {server_info->['ccls']},
-      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      \ 'initialization_options': { 'cacheDirectory': '/tmp/ccls/cache' },
-      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-      \ })
-endif
 "if executable('clangd')
 "    au User lsp_setup call lsp#register_server({
 "        \ 'name': 'clangd',
@@ -45,6 +45,9 @@ let g:asyncomplete_completion_delay=1
 
 [[plugins]]
 repo='prabirshrestha/asyncomplete.vim'
+hook_add = '''
+"let g:asyncomplete_remove_duplicates = 1
+'''
 
 [[plugins]]
 repo='Shougo/neosnippet.vim'
@@ -103,7 +106,14 @@ if !has('gui_runnig')
 	set t_Co=256
 endif
 let g:lightline = {
-\   'colorscheme': 'ayu',
+\   'colorscheme': 'molokai',
+\   'active': {
+\     'left': [ [ 'mode', 'paste' ],
+\                [ 'gitbranch', 'readonly', 'filename','modified']]
+\   },
+\   'component_function': {
+\      'gitbranch': 'fugitive#head'
+\   },
 " powerline用
 \   'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
 \   'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"}
