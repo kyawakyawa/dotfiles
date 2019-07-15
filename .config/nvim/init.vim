@@ -77,17 +77,17 @@ set noincsearch
 set nobackup
 set backspace=indent,eol,start
 "set mouse=a
-inoremap { {}<Left>
-inoremap ( ()<Left>
-inoremap [ []<Left>
-inoremap " ""<Left>
-inoremap ' ''<Left>
-inoremap {<Enter> {}<Left><CR><ESC><S-o>
+"inoremap { {}<Left>
+"inoremap ( ()<Left>
+"inoremap [ []<Left>
+"inoremap " ""<Left>
+"inoremap ' ''<Left>
+"inoremap {<Enter> {}<Left><CR><ESC><S-o>
 "nnoremap <C-b> :wall<Enter>:copen<Enter>:make<Enter>
 "nnoremap <C-u> :copen<Enter>:make run<Enter>
 hi Comment ctermfg=gray
-nnoremap ; :
-nnoremap : ;
+"nnoremap ; :
+"nnoremap : ;
 
 "htmlのカッコ補間
 "augroup fileTypeIndent
