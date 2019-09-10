@@ -23,8 +23,9 @@ if dein#load_state('~/.cache/dein/')
   let g:dein_dir = expand('~/.config/nvim')
   "let s:toml = g:dein_dir . '/ycm_dein.toml'
   "let s:toml = g:dein_dir . '/dein.toml'
-  let s:toml = g:dein_dir . '/vim_lsp_dein.toml'
+  "let s:toml = g:dein_dir . '/vim_lsp_dein.toml'
   "let s:toml = g:dein_dir . '/LanguageClient-neovim_dein.toml'
+  let s:toml = g:dein_dir . '/deoplete.toml'
   let s:lazy_toml = g:dein_dir . '/dein_lazy.toml'
 
   " You can specify revision/branch/tag.
@@ -77,15 +78,15 @@ set noincsearch
 set nobackup
 set backspace=indent,eol,start
 "set mouse=a
-"inoremap { {}<Left>
-"inoremap ( ()<Left>
-"inoremap [ []<Left>
-"inoremap " ""<Left>
-"inoremap ' ''<Left>
-"inoremap {<Enter> {}<Left><CR><ESC><S-o>
+inoremap { {}<Left>
+inoremap ( ()<Left>
+inoremap [ []<Left>
+inoremap " ""<Left>
+inoremap ' ''<Left>
+inoremap {<Enter> {}<Left><CR><ESC><S-o>
 "nnoremap <C-b> :wall<Enter>:copen<Enter>:make<Enter>
 "nnoremap <C-u> :copen<Enter>:make run<Enter>
-hi Comment ctermfg=gray
+"hi Comment ctermfg=gray
 "nnoremap ; :
 "nnoremap : ;
 
@@ -125,5 +126,14 @@ endfunction
 
 set hidden
 
+set termguicolors
+colorscheme NeoSolarized
+let g:neosolarized_contrast = "normal"
+let g:neosolarized_visibility = "normal"
+let g:neosolarized_vertSplitBgTrans = 1
+let g:neosolarized_bold = 1
+let g:neosolarized_underline = 1
+let g:neosolarized_italic = 0
 
-"runtime! userautoload/*.vim
+autocmd FileType c ClangFormatAutoEnable
+autocmd FileType cpp ClangFormatAutoEnable
