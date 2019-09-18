@@ -8,7 +8,7 @@ repo = 'Shougo/context_filetype.vim'
 repo = 'Shougo/deoplete.nvim'
 hook_add = '''
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_start_length = 1
+let g:deoplete#auto_complete_start_length = 2
 '''
 
 [[plugins]]
@@ -68,8 +68,12 @@ depends = ['deoplete.nvim']
 hook_add = '''
 set hidden
 let g:LanguageClient_serverCommands = {
-    \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
-    \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
+"    \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
+"    \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
+"    \ 'c': ['ccls', '--log-file=/tmp/cc.log'],
+"    \ 'cpp': ['ccls', '--log-file=/tmp/cc.log'],
+    \ 'c': ['clangd'],
+    \ 'cpp': ['clangd'],
     \ }
 
 let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
