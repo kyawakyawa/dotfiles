@@ -162,7 +162,7 @@ font:
     # The `style` can be specified to pick a specific face.
  
   # Point size
-  size: 6.7
+  size: 6.4
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -336,7 +336,8 @@ visual_bell:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 1.0
+#background_opacity: 1.0
+background_opacity: 0.95
 
 # Mouse bindings
 #
