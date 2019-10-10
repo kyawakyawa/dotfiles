@@ -1,5 +1,10 @@
 [user]
 	name = kyawakyawa
-	email = ikaairplanef15@yahoo.co.jp
+	email = kyawashell@gmail.com
 [credential]
 	helper = cache
+[alias]
+	st = status
+	pl = pull
+	b  = branch 
+  co = checkout
