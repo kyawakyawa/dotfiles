@@ -26,13 +26,13 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 "imap <expr><TAB>
 " \ pumvisible() ? "\<C-n>" :
 " \ neosnippet#expandable_or_jumpable() ?
 " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+"\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " For conceal markers.
 if has('conceal')
@@ -63,28 +63,37 @@ let g:lightline = {
 [[plugins]]
 repo = 'autozimu/LanguageClient-neovim'
 rev = 'next'
-build = ['./install.sh']
+build = ['bash install.sh']
 depends = ['deoplete.nvim']
 hook_add = '''
 set hidden
 let g:LanguageClient_serverCommands = {
-"    \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
-"    \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
-"    \ 'c': ['ccls', '--log-file=/tmp/cc.log'],
-"    \ 'cpp': ['ccls', '--log-file=/tmp/cc.log'],
-    \ 'c': ['clangd'],
-    \ 'cpp': ['clangd'],
+    \ 'cpp': ['cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory" : "/tmp/cquery/"}'],
+    \ 'c': ['cquery', '--log-file=/tmp/cq.log', '--init={"cacheDirectory" : "/tmp/cquery/"}'],
+"    \ 'cpp': ['ccls', '--log-file=/tmp/cc.log',
+"    \                 '--init={
+"    \                           "cache.directory" : "/tmp/ccls-cache/",
+"    \                           "client.snippetSupport" : "false"
+"    \                         }'
+"    \        ],
+"    \ 'c': ['ccls', '--log-file=/tmp/cc.log',
+"    \               '--init={
+"    \                         "cache.directory" : "/tmp/ccls-cache/",
+"    \                         "client.snippetSupport" : "false"
+"    \                       }'
+"    \      ],
+"    \ 'c': ['clangd'],
+"    \ 'cpp': ['clangd'],
     \ }
 
-let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
-let g:LanguageClient_settingsPath = '/home/kai/.config/nvim/settings.json'
-set formatexpr=LanguageClient_textDocument_rangeFormatting()
-set completefunc=LanguageClient#complete
+call deoplete#custom#source('LanguageClient',
+                          \ 'min_pattern_length',
+                          \ 2)
 
-nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
-nnoremap <silent> gs :call LanguageClient#textDocument_documentSymbol()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 '''
 
