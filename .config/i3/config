@@ -158,7 +158,7 @@ bar {
 }
 
 #wallpaper--2017-05-28
-exec --no-startup-id "feh --bg-scale $HOME/Pictures/8qQ4WVxK3MI4e2D1506993079_1506993087.jpg"#background-papers-archlinuxbg-scottscreations-archlinux-wallpapers-59401.jpg "#wHCYt.jpg"
+exec --no-startup-id "feh --bg-fill --randomize $HOME/Pictures/wallpapers/*.jpg $HOME/Pictures/wallpapers/*.png"
 #fcitx
 exec --no-startup-id fcitx
 #NetworkManager
@@ -167,6 +167,8 @@ exec --no-startup-id nm-applet
 exec --no-startup-id compton -cbm 1.00
 #conky
 exec --no-startup-id conky -p 5
+#slack
+exec --no-startup-id slack -u
 #load .Xresources
 exec --no-startup-id xrdb -merge ~/.Xresources
 
@@ -181,3 +183,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightnes
 
 #screenshot
 #bindsym XF86MonBrightnessDown exec import -window root /tmp/screenshot.jpg
+
+#change wallpaper
+bindsym $mod+Tab exec feh --bg-fill --randomize $HOME/Pictures/wallpapers/*.jpg $HOME/Pictures/wallpapers/*.png
