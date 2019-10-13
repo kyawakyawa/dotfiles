@@ -2,3 +2,4 @@
 .vim/.netrwhist
 .config/nvim/.netrwhist
 *.snip
+.config/nvim/colors
