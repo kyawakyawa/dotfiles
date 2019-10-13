@@ -110,6 +110,8 @@ set path+=/usr/include/c++/7.1.1/x86_64-pc-linux-gnu/
 
 autocmd BufNewFile,BufRead *.vue set filetype=html
 
+autocmd BufNewFile,BufRead *.inc set filetype=cpp
+
 "インサートから抜けるときにIMEがOFFになる https://qiita.com/hoshitocat/items/a80d613ef73b7a06ec50
 function! ImInActivate()
   call system('fcitx-remote -c')
