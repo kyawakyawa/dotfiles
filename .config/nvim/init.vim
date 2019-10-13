@@ -14,22 +14,13 @@ if dein#load_state('~/.cache/dein/')
   " Required:
   "call dein#add('~/.cache/dein//repos/github.com/Shougo/dein.vim')
 
-  " Add or remove your plugins here:
-  "call dein#add('Shougo/neosnippet.vim')
-  "call dein#add('Shougo/neosnippet-snippets')
-  "call dein#add('Shougo/deoplete.nvim')
-  "call dein#add('zchee/deoplete-clang')
-
   let g:dein_dir = expand('~/.config/nvim')
-  "let s:toml = g:dein_dir . '/ycm_dein.toml'
   "let s:toml = g:dein_dir . '/dein.toml'
   "let s:toml = g:dein_dir . '/vim_lsp_dein.toml'
-  "let s:toml = g:dein_dir . '/LanguageClient-neovim_dein.toml'
   let s:toml = g:dein_dir . '/deoplete.toml'
   let s:lazy_toml = g:dein_dir . '/dein_lazy.toml'
 
   " You can specify revision/branch/tag.
-  ""call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
   call dein#load_toml(s:toml, {'lazy': 0})
   call dein#load_toml(s:lazy_toml,{'lazy': 1})
@@ -86,9 +77,6 @@ inoremap ' ''<Left>
 inoremap {<Enter> {}<Left><CR><ESC><S-o>
 "nnoremap <C-b> :wall<Enter>:copen<Enter>:make<Enter>
 "nnoremap <C-u> :copen<Enter>:make run<Enter>
-"hi Comment ctermfg=gray
-"nnoremap ; :
-"nnoremap : ;
 
 "htmlのカッコ補間
 "augroup fileTypeIndent
