@@ -1,8 +1,0 @@
-{
-  "initializationOptions": {
-    "cacheDirectory": "/tmp/cquery/cache",
-    "cache": {
-      "directory": "/tmp/ccls-cache"
-    }
-  }
-}
