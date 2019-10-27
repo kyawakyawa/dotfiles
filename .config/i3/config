@@ -186,3 +186,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightnes
 
 #change wallpaper
 bindsym $mod+Tab exec feh --bg-fill --randomize $HOME/Pictures/wallpapers/*.jpg $HOME/Pictures/wallpapers/*.png
+
+# Disable window title
+for_window [class="^.*"] border pixel 1
