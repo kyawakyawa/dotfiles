@@ -32,3 +32,8 @@ if [ -f /usr/share/git/completion/git-prompt.sh ]; then
 else
     export PS1='\[\033[01;32m\]\u@\h\[\033[01;33m\] \w \n \[\033[01;34m\]\$\[\033[00m\] '
 fi
+
+if [ -d "$HOME/bin" ]; then
+    export PATH="$PATH":"$HOME/bin"
+fi
+
