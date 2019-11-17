@@ -1,0 +1,44 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+rev = 'release'
+merge = 0
+hook_add = '''
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+'''
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+on_i = 1
+hook_add = '''
+" START: settings for lightline ------------------------------------------
+if !has('gui_runnig')
+	set t_Co=256
+endif
+let g:lightline = {
+\   'colorscheme': 'wombat',
+\   'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
+\   'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"}
+\}
+" END: settings for lightline --------------------------------------------
+'''
+
+[[plugins]]
+repo = 'kana/vim-operator-user'
+
+[[plugins]]
+repo = 'rhysd/vim-clang-format'
