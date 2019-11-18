@@ -17,7 +17,8 @@ if dein#load_state('~/.cache/dein/')
   let g:dein_dir = expand('~/.config/nvim')
   "let s:toml = g:dein_dir . '/dein.toml'
   "let s:toml = g:dein_dir . '/vim_lsp_dein.toml'
-  let s:toml = g:dein_dir . '/deoplete.toml'
+  "let s:toml = g:dein_dir . '/deoplete.toml'
+  let s:toml = g:dein_dir . '/coc-nvim.toml'
   let s:lazy_toml = g:dein_dir . '/dein_lazy.toml'
 
   " You can specify revision/branch/tag.
