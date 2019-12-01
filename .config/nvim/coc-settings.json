@@ -2,9 +2,12 @@
    "languageserver": {
         "clangd": {
             "command": "clangd",
-            "args": ["--background-index"],
+            "args": ["--background-index","--header-insertion=never", "--pch-storage=memory" ,"--clang-tidy"],
             "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
             "filetypes": ["c", "cpp", "objc", "objcpp"]
         }
-    }
+    },
+    "suggest.autoTrigger": "always",
+    "suggest.triggerAfterInsertEnter": true,
+    "suggest.snippetIndicator": "►"
 }
