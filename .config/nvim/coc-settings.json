@@ -1,10 +1,22 @@
 {
+  // "languageserver": {
+  //   "clangd": {
+  //     "command": "clangd",
+  //     "args": ["--background-index","--header-insertion=never", "--pch-storage=memory" ,"--clang-tidy"],
+  //     "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+  //     "filetypes": ["c", "cpp", "objc", "objcpp"]
+  //   }
+  // },
   "languageserver": {
-    "clangd": {
-      "command": "clangd",
-      "args": ["--background-index","--header-insertion=never", "--pch-storage=memory" ,"--clang-tidy"],
-      "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["c", "cpp", "objc", "objcpp"]
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+      "rootPatterns": [".ccls-root", "compile_commands.json"],
+      "initializationOptions": {
+         "cache": {
+           "directory": "/tmp/ccls-cache"
+         }
+       }
     }
   },
   "suggest.autoTrigger": "always",
