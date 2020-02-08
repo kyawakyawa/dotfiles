@@ -36,12 +36,22 @@ merged = 0
 
 # snippet
 [[plugins]]
-repo='SirVer/ultisnips'
+repo='Shougo/neosnippet.vim'
 merged = 0
 hook_add = '''
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+imap <expr> <Tab> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
+smap <expr> <Tab> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 '''
 
 # snippet
@@ -49,8 +59,9 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 repo='thomasfaingnaert/vim-lsp-snippets'
 merged = 0
 
+# snippet
 [[plugins]]
-repo='thomasfaingnaert/vim-lsp-ultisnips'
+repo='thomasfaingnaert/vim-lsp-neosnippet'
 merged = 0
 
 [[plugins]]
