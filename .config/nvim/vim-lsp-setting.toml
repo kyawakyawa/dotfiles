@@ -1,0 +1,77 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo='prabirshrestha/async.vim'
+merged = 0
+
+[[plugins]]
+repo='prabirshrestha/vim-lsp'
+merged = 0
+hook_add = '''
+set foldmethod=expr
+  \ foldexpr=lsp#ui#vim#folding#foldexpr()
+  \ foldtext=lsp#ui#vim#folding#foldtext()
+'''
+
+# setting
+[[plugins]]
+repo='mattn/vim-lsp-settings'
+merged = 0
+hook_add = '''
+let g:lsp_settings = {
+\  'clangd': {'cmd': ['clangd', '-background-index', '-clang-tidy', '-header-insertion=never']}
+\}
+'''
+
+# auto complete
+[[plugins]]
+repo='prabirshrestha/asyncomplete.vim'
+merged = 0
+
+# auto complete
+[[plugins]]
+repo='prabirshrestha/asyncomplete-lsp.vim'
+merged = 0
+
+# snippet
+[[plugins]]
+repo='SirVer/ultisnips'
+merged = 0
+hook_add = '''
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+'''
+
+# snippet
+[[plugins]]
+repo='thomasfaingnaert/vim-lsp-snippets'
+merged = 0
+
+[[plugins]]
+repo='thomasfaingnaert/vim-lsp-ultisnips'
+merged = 0
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+on_i = 1
+hook_add = '''
+" START: settings for lightline ------------------------------------------
+if !has('gui_runnig')
+	set t_Co=256
+endif
+let g:lightline = {
+\   'colorscheme': 'wombat',
+\   'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
+\   'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"}
+\}
+" END: settings for lightline --------------------------------------------
+'''
+
+[[plugins]]
+repo = 'kana/vim-operator-user'
+
+[[plugins]]
+repo = 'rhysd/vim-clang-format'
+
