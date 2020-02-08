@@ -12,6 +12,10 @@ hook_add = '''
 set foldmethod=expr
   \ foldexpr=lsp#ui#vim#folding#foldexpr()
   \ foldtext=lsp#ui#vim#folding#foldtext()
+
+nmap <silent> gd :<C-u>LspDefinition<CR>
+nmap <silent> gr :<C-u>LspReferences<CR>
+nmap <silent> gi :<C-u>LspImplementation<CR>
 '''
 
 # setting
@@ -63,6 +67,10 @@ merged = 0
 [[plugins]]
 repo='thomasfaingnaert/vim-lsp-neosnippet'
 merged = 0
+
+# git
+[[plugins]]
+repo='airblade/vim-gitgutter'
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
