@@ -21,5 +21,7 @@
   },
   "suggest.autoTrigger": "always",
   "suggest.triggerAfterInsertEnter": true,
-  "suggest.snippetIndicator": "►"
+  "suggest.snippetIndicator": "►",
+  // https://github.com/neoclide/coc.nvim/issues/746
+  "coc.preferences.formatOnSaveFiletypes": ["python"]
 }
