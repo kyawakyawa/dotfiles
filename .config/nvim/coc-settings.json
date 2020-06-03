@@ -1,27 +1,30 @@
 {
-  // "languageserver": {
-  //   "clangd": {
-  //     "command": "clangd",
-  //     "args": ["--background-index","--header-insertion=never", "--pch-storage=memory" ,"--clang-tidy"],
-  //     "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-  //     "filetypes": ["c", "cpp", "objc", "objcpp"]
-  //   }
-  // },
   "languageserver": {
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-      "rootPatterns": [".ccls-root", "compile_commands.json"],
-      "initializationOptions": {
-         "cache": {
-           "directory": "/tmp/ccls-cache"
-         }
-       }
+    "clangd": {
+      "command": "clangd",
+      "args": ["--background-index","--header-insertion=never", "--pch-storage=memory" ,"--clang-tidy"],
+      "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["c", "cpp", "objc", "objcpp"]
     }
   },
+  // "languageserver": {
+  //   "ccls": {
+  //     "command": "ccls",
+  //     "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+  //     "rootPatterns": [".ccls-root", "compile_commands.json"],
+  //     "initializationOptions": {
+  //        "cache": {
+  //          "directory": "/tmp/ccls-cache"
+  //        }
+  //      }
+  //   }
+  // },
   "suggest.autoTrigger": "always",
   "suggest.triggerAfterInsertEnter": true,
   "suggest.snippetIndicator": "►",
   // https://github.com/neoclide/coc.nvim/issues/746
-  "coc.preferences.formatOnSaveFiletypes": ["python"]
+  "coc.preferences.formatOnSaveFiletypes": ["python", "rust"],
+  "python.formatting.provider": "black",
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
 }
