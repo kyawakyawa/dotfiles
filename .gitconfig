@@ -8,3 +8,7 @@
 	pl = pull
 	b  = branch 
   co = checkout
+[merge]
+	ff = false
+[pull]
+	ff = only
