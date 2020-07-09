@@ -54,3 +54,9 @@ repo = 'kana/vim-operator-user'
 [[plugins]]
 repo = 'rhysd/vim-clang-format'
 
+[[plugins]]
+repo = 'dracula/vim'
+hook_add = '''
+colorscheme dracula
+let g:colorscheme_bg = "dark"
+'''
