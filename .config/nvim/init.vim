@@ -70,6 +70,7 @@ set noincsearch
 set nobackup
 set backspace=indent,eol,start
 set cursorline
+set smartindent
 "set mouse=a
 inoremap { {}<Left>
 inoremap ( ()<Left>
