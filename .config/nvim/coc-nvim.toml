@@ -43,8 +43,18 @@ endif
 let g:lightline = {
 \   'colorscheme': 'wombat',
 \   'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
-\   'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"}
+\   'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"},
+\   'active': {
+\     'left': [ [ 'mode', 'paste'],
+\               ['gitbranch', 'readonly', 'filename', 'modified'] ]
+\   },
+\   'component_function': {
+\     'gitbranch': 'LightlineGitBranch',
+\   }
 \}
+function! LightlineGitBranch()
+  return get(g:,'coc_git_status','')
+endfunction
 " END: settings for lightline --------------------------------------------
 '''
 
