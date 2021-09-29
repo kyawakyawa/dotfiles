@@ -49,16 +49,16 @@ call ddc#enable()
 '''
 
 [[plugins]]
-repo = 'Shougo/ddc-around.vim'
+repo = 'Shougo/ddc-around'
+on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/ddc-matcher_head.vim'
+repo = 'Shougo/ddc-matcher_head'
+on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/ddc-sorter_rank.vim'
-
-[[plugins]]
-repo = 'Shougo/ddc-around.vim'
+repo = 'Shougo/ddc-sorter_rank'
+on_source = 'ddc.vim'
 
 [[plugins]]
 repo = "vim-denops/denops.vim"
