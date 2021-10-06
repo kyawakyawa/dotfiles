@@ -369,27 +369,37 @@ URxvt.lineSpace:            0
 !
 ! URxvt*background:            S_base03
 
-*background:              S_base03
-*foreground:              S_base0
+URxvt.depth: 32
+*background:              [90]S_base03
+*foreground:              [90]S_base0
 *fading:                  40
-*fadeColor:               S_base03
-*cursorColor:             S_base1
-*pointerColorBackground:  S_base01
-*pointerColorForeground:  S_base1
+*fadeColor:               [90]S_base03
+*cursorColor:             [90]S_base1
+*pointerColorBackground:  [90]S_base01
+*pointerColorForeground:  [90]S_base1
 
-*color0:                  S_base02
-*color1:                  S_red
-*color2:                  S_green
-*color3:                  S_yellow
-*color4:                  S_blue
-*color5:                  S_magenta
-*color6:                  S_cyan
-*color7:                  S_base2
-*color9:                  S_orange
-*color8:                  S_base03
-*color10:                 S_base01
-*color11:                 S_base00
-*color12:                 S_base0
-*color13:                 S_violet
-*color14:                 S_base1
-*color15:                 S_base3
+*color0:                  [90]S_base02
+*color1:                  [90]S_red
+*color2:                  [90]S_green
+*color3:                  [90]S_yellow
+*color4:                  [90]S_blue
+*color5:                  [90]S_magenta
+*color6:                  [90]S_cyan
+*color7:                  [90]S_base2
+*color9:                  [90]S_orange
+*color8:                  [90]S_base03
+*color10:                 [90]S_base01
+*color11:                 [90]S_base00
+*color12:                 [90]S_base0
+*color13:                 [90]S_violet
+*color14:                 [90]S_base1
+*color15:                 [90]S_base3
+
+! Perl 拡張の設定
+! fullscreen: fullscreenに対応
+URxvt.perl-ext-common: fullscreen
+
+! フルスクリーンの設定
+! https://wiki.archlinux.jp/index.php/Rxvt-unicode#.E3.83.95.E3.83.AB.E3.82.B9.E3.82.AF.E3.83.AA.E3.83.BC.E3.83.B3
+URxvt.keysym.F11: perl:fullscreen:switch
+
