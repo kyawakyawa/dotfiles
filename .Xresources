@@ -214,7 +214,7 @@ URxvt.lineSpace:            0
 ! Ayu https://github.com/ayu-theme/ayu-vim
 
 !URxvt.background: #212733
-!URxvb.foreground: #D9D7CE
+!URxvt.foreground: #D9D7CE
 !URxvt.color0: #151a1e
 !URxvt.color1: #FF3333
 !URxvt.color2: #B8CC52 
@@ -396,8 +396,13 @@ URxvt.depth: 32
 *color15:                 [90]S_base3
 
 ! Perl 拡張の設定
+! matcher: URLをクリックで開けるようになる
 ! fullscreen: fullscreenに対応
-URxvt.perl-ext-common: fullscreen
+URxvt.perl-ext-common: default, matcher, fullscreen
+
+! URLをクリックで開けるようになる設定
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
 
 ! フルスクリーンの設定
 ! https://wiki.archlinux.jp/index.php/Rxvt-unicode#.E3.83.95.E3.83.AB.E3.82.B9.E3.82.AF.E3.83.AA.E3.83.BC.E3.83.B3
