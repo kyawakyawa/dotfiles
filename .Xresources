@@ -31,17 +31,23 @@ URxvt.fading:               10
 !URxvt.bolditalicFont:    xft:Ricty\ Discord\ for\ Powerline:style=BoldItalic:size=12:antialiase=true:hinting=true
 
 !using font for vim-powerline
-URxvt*font: xft:Ricty\ Diminished\ for\ Powerline:style=Regular:size=14:antialias=true
-URxvt.font:              xft:Ricty\ Diminished\ for\ Powerline:size=14:antialiase=true:hinting=true
-URxvt.boldFont:          xft:Ricty\ Diminished\ for\ Powerline:bold:size=14:antialiase=true:hinting=true
-URxvt.italicFont:        xft:Ricty\ Diminished\ for\ Powerline:italic:size=14:antialiase=true:hinting=true
-URxvt.bolditalicFont:    xft:Ricty\ Diminished\ for\ Powerline:bold:italic:size=14:antialiase=true:hinting=true
+! URxvt*font: xft:Ricty\ Diminished\ for\ Powerline:style=Regular:size=14:antialias=true
+! URxvt.font:              xft:Ricty\ Diminished\ for\ Powerline:size=14:antialiase=true:hinting=true
+! URxvt.boldFont:          xft:Ricty\ Diminished\ for\ Powerline:bold:size=14:antialiase=true:hinting=true
+! URxvt.italicFont:        xft:Ricty\ Diminished\ for\ Powerline:italic:size=14:antialiase=true:hinting=true
+! URxvt.bolditalicFont:    xft:Ricty\ Diminished\ for\ Powerline:bold:italic:size=14:antialiase=true:hinting=true
 
 !URxvt*font: xft:Ricty\ Diminished:style=Regular:size=12:antialias=true
 !URxvt.font:              xft:Ricty\ Diminished:size=12:antialiase=true:hinting=true
 !URxvt.boldFont:          xft:Ricty\ Diminished:bold:size=12:antialiase=true:hinting=true
 !URxvt.italicFont:        xft:Ricty\ Diminished:italic:size=12:antialiase=true:hinting=true
 !URxvt.bolditalicFont:    xft:Ricty\ Diminished:bold:italic:size=12:antialiase=true:hinting=true
+
+URxvt*font: xft:PlemolJP35\ Console\ NF:style=Regular:size=14:antialias=true
+URxvt.font:              xft:PlemolJP35\ Console\ NF:size=14:antialiase=true:hinting=true
+URxvt.boldFont:          xft:PlemolJP35\ Console\ NF:bold:size=14:antialiase=true:hinting=true
+URxvt.italicFont:        xft:PlemolJP35\ Console\ NF:italic:size=14:antialiase=true:hinting=true
+URxvt.bolditalicFont:    xft:PlemolJP35\ Console\ NF:bold:italic:size=14:antialiase=true:hinting=true
 
 !!文字間 小さい程狭い マイナスもオーケー
 URxvt.letterSpace:          0
