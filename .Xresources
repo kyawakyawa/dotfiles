@@ -398,7 +398,10 @@ URxvt.depth: 32
 ! Perl 拡張の設定
 ! matcher: URLをクリックで開けるようになる
 ! fullscreen: fullscreenに対応
-URxvt.perl-ext-common: default, matcher, fullscreen
+! URxvt.perl-ext-common: default, matcher, fullscreen
+URxvt.perl-ext-common: default
+URxvt.perl-ext-common: matcher
+URxvt.perl-ext-common: fullscreen
 
 ! URLをクリックで開けるようになる設定
 URxvt.url-launcher: /usr/bin/xdg-open
