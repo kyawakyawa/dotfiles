@@ -18,12 +18,14 @@ let g:dein_dir = expand('~/.config/nvim')
 let s:vim_denops_toml = g:dein_dir . '/vim-denops.toml'
 let s:ddc_toml = g:dein_dir . '/ddc.toml'
 let s:git_toml = g:dein_dir . '/git.toml'
-let s:vim_airline = g:dein_dir . '/vim-airline.toml'
+let s:vim_airline_toml = g:dein_dir . '/vim-airline.toml'
+let s:fzf_toml = g:dein_dir . '/fzf.toml'
 
 call dein#load_toml(s:vim_denops_toml, {'lazy': 1})
 call dein#load_toml(s:ddc_toml, {'lazy': 1})
 call dein#load_toml(s:git_toml, {'lazy': 0})
-call dein#load_toml(s:vim_airline, {'lazy': 0})
+call dein#load_toml(s:vim_airline_toml, {'lazy': 0})
+call dein#load_toml(s:fzf_toml, {'lazy': 1})
 
 " Required:
 call dein#end()

@@ -1,0 +1,8 @@
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+on_cmd = [
+    'Files',
+    'GFiles',
+    'Colors',
+    'Ag',
+] # TODO
