@@ -22,8 +22,8 @@ let s:vim_airline = g:dein_dir . '/vim-airline.toml'
 
 call dein#load_toml(s:vim_denops_toml, {'lazy': 1})
 call dein#load_toml(s:ddc_toml, {'lazy': 1})
-call dein#load_toml(s:git_toml, {'lazy': 1})
-call dein#load_toml(s:vim_airline, {'lazy': 1})
+call dein#load_toml(s:git_toml, {'lazy': 0})
+call dein#load_toml(s:vim_airline, {'lazy': 0})
 
 " Required:
 call dein#end()
