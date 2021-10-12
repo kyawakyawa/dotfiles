@@ -35,6 +35,7 @@ syntax enable
 
 "End dein Scripts-------------------------
 
+" Essential
 set nocompatible
 filetype plugin on
 set number
@@ -46,3 +47,11 @@ set cindent
 set hlsearch
 set cursorline
 set smartindent
+
+" For plugins
+
+" for vim-gitgutter
+set updatetime=100 
+set signcolumn=yes 
+" hightlightの色を消したい https://github.com/airblade/vim-gitgutter/issues/696
+highlight! link SignColumn LineNr

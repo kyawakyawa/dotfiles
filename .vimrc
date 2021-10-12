@@ -17,9 +17,11 @@ let g:dein_dir = expand('~/.vim')
 
 let s:vim_denops_toml = g:dein_dir . '/vim-denops.toml'
 let s:ddc_toml = g:dein_dir . '/ddc.toml'
+let s:git_toml = g:dein_dir . '/git.toml'
 
 call dein#load_toml(s:vim_denops_toml, {'lazy': 0})
 call dein#load_toml(s:ddc_toml, {'lazy': 1})
+call dein#load_toml(s:git_toml, {'lazy': 0})
 
 " Required:
 call dein#end()
@@ -35,6 +37,7 @@ syntax enable
 
 "End dein Scripts-------------------------
 
+" Essential
 set nocompatible
 filetype plugin on
 set number
@@ -46,3 +49,11 @@ set cindent
 set hlsearch
 set cursorline
 set smartindent
+
+" For plugins
+
+" for vim-gitgutter
+set updatetime=100 
+set signcolumn=yes 
+" hightlightの色を消したい https://github.com/airblade/vim-gitgutter/issues/696
+highlight! link SignColumn LineNr
