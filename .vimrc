@@ -16,16 +16,18 @@ call dein#add('~/.cache/dein_for_vim/repos/github.com/Shougo/dein.vim')
 let g:dein_dir = expand('~/.vim')
 
 let s:vim_denops_toml = g:dein_dir . '/vim-denops.toml'
-let s:ddc_toml = g:dein_dir . '/ddc.toml'
+"let s:ddc_toml = g:dein_dir . '/ddc.toml'
 let s:git_toml = g:dein_dir . '/git.toml'
 let s:vim_airline_toml = g:dein_dir . '/vim-airline.toml'
 let s:fzf_toml = g:dein_dir . '/fzf.toml'
+let s:ddc_vim_lsp_toml = g:dein_dir . '/ddc-vim-lsp.toml'
 
-call dein#load_toml(s:vim_denops_toml, {'lazy': 1})
-call dein#load_toml(s:ddc_toml, {'lazy': 1})
+call dein#load_toml(s:vim_denops_toml, {'lazy': 0})
+"call dein#load_toml(s:ddc_toml, {'lazy': 1})
 call dein#load_toml(s:git_toml, {'lazy': 0})
 call dein#load_toml(s:vim_airline_toml, {'lazy': 0})
 call dein#load_toml(s:fzf_toml, {'lazy': 1})
+call dein#load_toml(s:ddc_vim_lsp_toml, {'lazy': 1})
 
 " Required:
 call dein#end()

@@ -1,0 +1,76 @@
+[[plugins]]
+repo='prabirshrestha/vim-lsp'
+hook_add = '''
+if executable('ccls')
+   au User lsp_setup call lsp#register_server({
+      \ 'name': 'ccls',
+      \ 'cmd': {server_info->['ccls']},
+      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+      \ 'initialization_options': { 'cacheDirectory': '/tmp/ccls/cache' },
+      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+      \ })
+
+let g:lsp_signs_enabled = 1         " enable signs
+let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+let g:lsp_signs_error = {'text': '×'}
+let g:lsp_signs_warning = {'text': '!'}
+'''
+
+[[plugins]]
+repo = 'Shougo/ddc.vim'
+on_event = 'VimEnter'
+hook_source = '''
+
+" Customize global settings
+
+" Set sources used.
+call ddc#custom#patch_global('sources', ['vim-lsp', 'around'])
+
+" Change source options
+call ddc#custom#patch_global('sourceOptions', {
+    \ 'vim-lsp': {
+    \   'matchers': ['matcher_head'],
+    \   'sorters': ['sorter_rank'],
+    \   'mark': 'lsp',
+    \ },
+    \ 'around': {
+    \   'matchers': ['matcher_head'],
+    \   'sorters': ['sorter_rank'],
+    \   'mark': 'A',
+    \ },
+    \ })
+
+" Change source params
+call ddc#custom#patch_global('sourceOptions', {
+    \ '_': {
+    \   'maxSize': 50,
+    \ }
+    \ })
+
+" Mappings
+" <TAB>: completion.
+inoremap <silent><expr> <TAB>
+\ pumvisible() ? '<C-n>' :
+\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+\ '<TAB>' : ddc#manual_complete()
+" <S-TAB>: completion back.
+inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
+" Use ddc.
+call ddc#enable()
+'''
+
+[[plugins]]
+repo = 'Shougo/ddc-around'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-matcher_head'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-sorter_rank'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'shun/ddc-vim-lsp'
+on_source = 'ddc.vim'
