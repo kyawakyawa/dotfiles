@@ -9,4 +9,8 @@ if executable('ccls')
       \ 'initialization_options': { 'cache': { 'directory': '/tmp/ccls-cache'} },
       \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
       \ })
+endif
+
+autocmd BufWritePre <buffer> LspDocumentFormatSync
+
 '''
