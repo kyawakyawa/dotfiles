@@ -18,6 +18,7 @@ hook_source = '''
 " Set sources used.
 call ddc#custom#patch_global('sources', ['nvim-lsp', 'around'])
 
+" Set Completion Menu
 call ddc#custom#patch_global('completionMenu', 'pum.vim')
 
 " Change source options
