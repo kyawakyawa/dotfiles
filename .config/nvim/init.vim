@@ -22,6 +22,7 @@ let s:git_toml = g:dein_dir . '/git.toml'
 let s:vim_airline_toml = g:dein_dir . '/vim-airline.toml'
 let s:fzf_toml = g:dein_dir . '/fzf.toml'
 let s:solarized_toml = g:dein_dir . '/solarized.toml'
+let s:brackets_toml = g:dein_dir . '/brackets.toml'
 
 call dein#load_toml(s:vim_denops_toml, {'lazy': 1})
 "call dein#load_toml(s:ddc_toml, {'lazy': 1})
@@ -30,6 +31,7 @@ call dein#load_toml(s:git_toml, {'lazy': 0})
 call dein#load_toml(s:vim_airline_toml, {'lazy': 0})
 call dein#load_toml(s:fzf_toml, {'lazy': 1})
 call dein#load_toml(s:solarized_toml, {'lazy': 0})
+call dein#load_toml(s:brackets_toml, {'lazy': 0})
 
 " Required:
 call dein#end()

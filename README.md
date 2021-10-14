@@ -40,3 +40,9 @@ In NeoVim
 ```
 :call dein#install()
 ```
+
+#### プラグインの動作がおかしくなったとき
+キャッシュを消してみる
+```
+:call dein#recache_runtimepath()
+```
