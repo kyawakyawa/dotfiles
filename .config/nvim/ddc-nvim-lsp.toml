@@ -18,6 +18,8 @@ hook_source = '''
 " Set sources used.
 call ddc#custom#patch_global('sources', ['nvim-lsp', 'around'])
 
+call ddc#custom#patch_global('completionMenu', 'pum.vim')
+
 " Change source options
 call ddc#custom#patch_global('sourceOptions', {
     \ 'nvim-lsp': {
@@ -89,5 +91,20 @@ let g:ddc_nvim_lsp_doc_config = {
       \ }
 
 call ddc_nvim_lsp_doc#enable()
+
+'''
+
+[[plugins]]
+repo = 'Shougo/pum.vim'
+hook_source = '''
+
+inoremap <Tab>   <Cmd>call pum#map#insert_relative(+1)<CR>
+inoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
+inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
+inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
+inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
+inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
+inoremap <PageDown> <Cmd>call pum#map#insert_relative_page(+1)<CR>
+inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
 
 '''
