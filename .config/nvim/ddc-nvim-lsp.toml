@@ -1,4 +1,14 @@
 [[plugins]]
+repo = 'neovim/nvim-lspconfig'
+on_event = 'VimEnter'
+hook_source = '''
+lua require('nvim_lsp')
+
+autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+
+'''
+
+[[plugins]]
 repo = 'Shougo/ddc.vim'
 on_event = 'VimEnter'
 hook_source = '''
@@ -6,14 +16,15 @@ hook_source = '''
 " Customize global settings
 
 " Set sources used.
-call ddc#custom#patch_global('sources', ['vim-lsp', 'around'])
+call ddc#custom#patch_global('sources', ['nvim-lsp', 'around'])
 
 " Change source options
 call ddc#custom#patch_global('sourceOptions', {
-    \ 'vim-lsp': {
+    \ 'nvim-lsp': {
     \   'matchers': ['matcher_head'],
     \   'sorters': ['sorter_rank'],
     \   'mark': 'lsp',
+    \   'forceCompletionPattern': '\.\w*|:\w*|->\w*'
     \ },
     \ 'around': {
     \   'matchers': ['matcher_head'],
@@ -57,5 +68,26 @@ repo = 'Shougo/ddc-sorter_rank'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'shun/ddc-vim-lsp'
+repo = 'Shougo/ddc-nvim-lsp'
 on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'matsui54/ddc-nvim-lsp-doc'
+on_source = 'ddc.vim'
+hook_source = '''
+
+let g:ddc_nvim_lsp_doc_config = {
+      \ 'documentation': {
+      \   'enable': v:true,
+      \   'border': 'rounded',
+      \   'maxWidth': 60,
+      \   'maxHeight': 30,
+      \ },
+      \ 'signature': {
+      \   'border': 'rounded',
+      \ },
+      \ }
+
+call ddc_nvim_lsp_doc#enable()
+
+'''
