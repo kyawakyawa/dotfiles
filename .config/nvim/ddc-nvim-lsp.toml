@@ -53,7 +53,6 @@ call ddc#custom#patch_global('sourceParams', {
     \ },
     \ })
 
-inoremap <expr><C-p>  pumvisible() ? '<C-p>' : '<C-p>'
 " Use ddc.
 call ddc#enable()
 '''
