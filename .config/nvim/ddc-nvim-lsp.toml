@@ -4,6 +4,8 @@ on_event = 'VimEnter'
 hook_source = '''
 lua require('nvim_lsp')
 
+set completeopt-=preview " Previewを出さない
+
 autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
 
 '''
@@ -16,10 +18,10 @@ hook_source = '''
 " Customize global settings
 
 " Set sources used.
-call ddc#custom#patch_global('sources', ['nvim-lsp', 'around'])
+call ddc#custom#patch_global('sources', ['nvim-lsp', 'around', 'vsnip'])
 
 " Set Completion Menu
-call ddc#custom#patch_global('completionMenu', 'pum.vim')
+call ddc#custom#patch_global('completionMenu', 'native') " TODO pum.vim
 
 " Change source options
 call ddc#custom#patch_global('sourceOptions', {
@@ -34,6 +36,11 @@ call ddc#custom#patch_global('sourceOptions', {
     \   'sorters': ['sorter_rank'],
     \   'mark': 'A',
     \ },
+    \ 'vsnip': {
+    \   'matchers': ['matcher_head'],
+    \   'sorters': ['sorter_rank'],
+    \   'mark': 'snip',
+    \ },
     \ })
 
 " Change source params
@@ -46,14 +53,7 @@ call ddc#custom#patch_global('sourceParams', {
     \ },
     \ })
 
-" Mappings
-" <TAB>: completion.
-inoremap <silent><expr> <TAB>
-\ pumvisible() ? '<C-n>' :
-\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
-\ '<TAB>' : ddc#manual_complete()
-" <S-TAB>: completion back.
-inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
+inoremap <expr><C-p>  pumvisible() ? '<C-p>' : '<C-p>'
 " Use ddc.
 call ddc#enable()
 '''
@@ -83,8 +83,7 @@ let g:ddc_nvim_lsp_doc_config = {
       \ 'documentation': {
       \   'enable': v:true,
       \   'border': 'rounded',
-      \   'maxWidth': 60,
-      \   'maxHeight': 30,
+      \   'maxWidth': 100,
       \ },
       \ 'signature': {
       \   'border': 'rounded',
@@ -96,16 +95,17 @@ call ddc_nvim_lsp_doc#enable()
 '''
 
 [[plugins]]
-repo = 'Shougo/pum.vim'
-hook_source = '''
+repo = 'hrsh7th/vim-vsnip'
+on_source = 'ddc.vim'
+depends = ['vim-vsnip-integ']
+hook_add = '''
+imap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
+smap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
 
-inoremap <Tab>   <Cmd>call pum#map#insert_relative(+1)<CR>
-inoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
-inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
-inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
-inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
-inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
-inoremap <PageDown> <Cmd>call pum#map#insert_relative_page(+1)<CR>
-inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
-
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 '''
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip-integ'
+on_source = 'ddc.vim'

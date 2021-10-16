@@ -33,6 +33,11 @@ local on_attach = function(client, bufnr)
 
 end
 
+-- Set capabilities
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+
 -- Set up language servers
 
 -- ccls
@@ -46,4 +51,5 @@ nvim_lsp['ccls'].setup {
       directory = "/tmp/ccls-cache";
     },
   },
+  capabilities = capabilities,
 }
