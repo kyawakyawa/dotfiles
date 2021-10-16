@@ -105,7 +105,7 @@ autocmd BufNewFile,BufRead *.inc set filetype=cpp
 
 "インサートから抜けるときにIMEがOFFになる https://qiita.com/hoshitocat/items/a80d613ef73b7a06ec50
 function! ImInActivate()
-  call system('fcitx-remote -c')
+  call system('fcitx5-remote -c')
 endfunction
 inoremap <silent> <C-[> <ESC>:call ImInActivate()<CR>
 inoremap <silent> <C-c> <ESC>:call ImInActivate()<CR>
