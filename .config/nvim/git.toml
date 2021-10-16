@@ -7,4 +7,4 @@ set signcolumn=yes " 常に左の列を表示
 '''
 
 [[plugins]]
-repo = 'tpope/vim-fugitive'
+repo = 'lambdalisue/gina.vim'
