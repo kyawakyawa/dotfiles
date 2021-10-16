@@ -41,7 +41,9 @@ nvim_lsp['ccls'].setup {
   flags = {
     debounce_text_changes = 150,
   },
-  cache = {
-    directory = "/tmp/ccls-cache";
-  };
+  init_options = {
+    cache = {
+      directory = "/tmp/ccls-cache";
+    },
+  },
 }
