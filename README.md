@@ -11,9 +11,16 @@
 
 #### Install common dependencies
 
+##### Common
+
 - unzip (for deno install)
 - deno
 - Git
+- The Silver Searcher Ag (optional)
+
+##### C++
+
+- ccls
 
 #### Install dein for Vim
 
@@ -42,7 +49,9 @@ In NeoVim
 ```
 
 #### プラグインの動作がおかしくなったとき
+
 キャッシュを消してみる
+
 ```
 :call dein#recache_runtimepath()
 ```
