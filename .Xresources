@@ -1,0 +1,88 @@
+!! ~/.Xresources
+
+!!
+!! rxvt-unicode (urxvt)
+!!
+
+!!スクロールバーを右側
+URxvt.scrollBar_right:      true
+!!レールを消す
+URxvt.scrollBar_floating:   true
+!!rxvt plain next xterm
+URxvt.scrollstyle:          plain
+!!カーソル点滅
+URxvt.cursorBlink:          true
+!!カーソル形状
+URxvt.cursorUnderline:      true
+!!キーボード入力するとマウスポインタが消える
+URxvt.pointerBlank:         true
+!!ヴィジュアルベル
+URxvt.visualBell:           true
+!!バックスクロール出来る最大行数
+URxvt.saveLines:            3000
+!!アウトオブフォーカス時に画面を暗くする(%)
+URxvt.fading:               10
+
+!!Font
+!
+URxvt.font:              xft:PlemolJP35\ Console\ NF:style=Regular:size=12:antialiase=true:hinting=true
+URxvt.boldFont:          xft:PlemolJP35\ Console\ NF:style=Bold:size=12:antialiase=true:hinting=true
+URxvt.italicFont:        xft:PlemolJP35\ Console\ NF:style=Italic:size=12:antialiase=true:hinting=true
+URxvt.bolditalicFont:    xft:PlemolJP35\ Console\ NF:style=Bold\ Italic:size=12:antialiase=true:hinting=true
+
+!!文字間 小さい程狭い マイナスもオーケー
+URxvt.letterSpace:          0
+!!行間
+URxvt.lineSpace:            0
+
+
+! Solarized color scheme 
+!
+! https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/Xresources/Solarized%20Dark%20-%20Patched
+! https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/LICENSE
+!
+
+!
+! Generated with :
+! XRDB2Xreources.py
+!
+*.foreground:  #708284
+*.background:  #001e27
+*.cursorColor: #708284
+!
+! Black
+*.color0:      #002831
+*.color8:      #475b62
+!
+! Red
+*.color1:      #d11c24
+*.color9:      #bd3613
+!
+! Green
+*.color2:      #738a05
+*.color10:     #475b62
+!
+! Yellow
+*.color3:      #a57706
+*.color11:     #536870
+!
+! Blue
+*.color4:      #2176c7
+*.color12:     #708284
+!
+! Magenta
+*.color5:      #c61c6f
+*.color13:     #5956ba
+!
+! Cyan
+*.color6:      #259286
+*.color14:     #819090
+!
+! White
+*.color7:      #eae3cb
+*.color15:     #fcf4dc
+!
+! Bold, Italic, Underline
+*.colorBD:     #819090
+!*.colorIT:
+!*.colorUL:
