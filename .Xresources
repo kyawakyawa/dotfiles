@@ -43,11 +43,12 @@ URxvt.fading:               10
 !URxvt.italicFont:        xft:Ricty\ Diminished:italic:size=12:antialiase=true:hinting=true
 !URxvt.bolditalicFont:    xft:Ricty\ Diminished:bold:italic:size=12:antialiase=true:hinting=true
 
-URxvt*font: xft:PlemolJP35\ Console\ NF:style=Regular:size=14:antialias=true
-URxvt.font:              xft:PlemolJP35\ Console\ NF:style=Regular:size=14:antialiase=true:hinting=true
-URxvt.boldFont:          xft:PlemolJP35\ Console\ NF:style=Bold:size=14:antialiase=true:hinting=true
-URxvt.italicFont:        xft:PlemolJP35\ Console\ NF:style=Italic:size=14:antialiase=true:hinting=true
-URxvt.bolditalicFont:    xft:PlemolJP35\ Console\ NF:style=Bold\ Italic:size=14:antialiase=true:hinting=true
+!URxvt*font: xft:PlemolJP35\ Console\ NF:style=Regular:size=14:antialias=true
+!URxvt*font: xft:DroidSansMono\ Nerd\ Font:size=14:antialiase=true
+URxvt.font:              xft:PlemolJP35\ Console\ NF:style=Regular:size=12:antialiase=true:hinting=true
+URxvt.boldFont:          xft:PlemolJP35\ Console\ NF:style=Bold:size=12:antialiase=true:hinting=true
+URxvt.italicFont:        xft:PlemolJP35\ Console\ NF:style=Italic:size=12:antialiase=true:hinting=true
+URxvt.bolditalicFont:    xft:PlemolJP35\ Console\ NF:style=Bold\ Italic:size=12:antialiase=true:hinting=true
 
 !!文字間 小さい程狭い マイナスもオーケー
 URxvt.letterSpace:          0
@@ -370,30 +371,30 @@ URxvt.lineSpace:            0
 ! URxvt*background:            S_base03
 
 URxvt.depth: 32
-*background:              [90]S_base03
-*foreground:              [90]S_base0
+*background:              [93]S_base03
+*foreground:              [93]S_base0
 *fading:                  40
-*fadeColor:               [90]S_base03
-*cursorColor:             [90]S_base1
-*pointerColorBackground:  [90]S_base01
-*pointerColorForeground:  [90]S_base1
+*fadeColor:               [93]S_base03
+*cursorColor:             [93]S_base1
+*pointerColorBackground:  [93]S_base01
+*pointerColorForeground:  [93]S_base1
 
-*color0:                  [90]S_base02
-*color1:                  [90]S_red
-*color2:                  [90]S_green
-*color3:                  [90]S_yellow
-*color4:                  [90]S_blue
-*color5:                  [90]S_magenta
-*color6:                  [90]S_cyan
-*color7:                  [90]S_base2
-*color9:                  [90]S_orange
-*color8:                  [90]S_base03
-*color10:                 [90]S_base01
-*color11:                 [90]S_base00
-*color12:                 [90]S_base0
-*color13:                 [90]S_violet
-*color14:                 [90]S_base1
-*color15:                 [90]S_base3
+*color0:                  [93]S_base02
+*color1:                  [93]S_red
+*color2:                  [93]S_green
+*color3:                  [93]S_yellow
+*color4:                  [93]S_blue
+*color5:                  [93]S_magenta
+*color6:                  [93]S_cyan
+*color7:                  [93]S_base2
+*color9:                  [93]S_orange
+*color8:                  [93]S_base03
+*color10:                 [93]S_base01
+*color11:                 [93]S_base00
+*color12:                 [93]S_base0
+*color13:                 [93]S_violet
+*color14:                 [93]S_base1
+*color15:                 [93]S_base3
 
 ! Perl 拡張の設定
 ! matcher: URLをクリックで開けるようになる
