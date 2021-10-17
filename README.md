@@ -17,6 +17,7 @@
 - deno
 - Git
 - The Silver Searcher Ag (optional)
+- '/usr/share/dict/words' (optional) (Ex. `sudo pacman -S words`)
 
 ##### C++
 

@@ -1,12 +1,12 @@
 [[plugins]]
 repo = 'Shougo/ddc.vim'
-on_event = 'VimEnter'
+on_event = 'InsertEnter'
 hook_source = '''
 
 " Customize global settings
 
 " Set sources used.
-call ddc#custom#patch_global('sources', ['vim-lsp', 'around', 'vsnip', 'buffer'])
+call ddc#custom#patch_global('sources', ['vim-lsp', 'around', 'vsnip', 'buffer', 'dictionary'])
 
 " Set Completion Menu
 call ddc#custom#patch_global('completionMenu', 'native') " TODO pum.vim
@@ -14,8 +14,9 @@ call ddc#custom#patch_global('completionMenu', 'native') " TODO pum.vim
 " Change source options
 call ddc#custom#patch_global('sourceOptions', {
     \ 'vim-lsp': {
-    \   'matchers': ['matcher_head'],
-    \   'sorters': ['sorter_rank'],
+    \   'matchers': ['matcher_fuzzy'],
+    \   'sorters': ['sorter_fuzzy'],
+    \   'converters': ['converter_fuzzy'],
     \   'mark': 'lsp',
     \ },
     \ 'around': {
@@ -33,6 +34,14 @@ call ddc#custom#patch_global('sourceOptions', {
     \   'sorters': ['sorter_rank'],
     \   'mark': 'B',
     \ },
+    \ 'dictionary': {
+    \   'matchers': ['matcher_fuzzy'],
+    \   'sorters': ['sorter_fuzzy'],
+    \   'converters': ['converter_fuzzy'],
+    \   'maxCandidates': 16, 
+    \   'mark': 'D', 
+    \   'minAutoCompleteLength': 3,
+    \ },
     \ })
 
 " Change source params
@@ -49,6 +58,11 @@ call ddc#custom#patch_global('sourceParams', {
     \   'fromAltBuf': v:true,
     \   'forceCollect': v:true,
     \ },
+    \ 'dictionary': {
+    \   'dictPaths': ['/usr/share/dict/words'],
+    \   'smartCase': v:true,
+    \   'showMenu': v:false
+    \ },
     \ })
 
 " Use ddc.
@@ -60,11 +74,19 @@ repo = 'Shougo/ddc-around'
 on_source = 'ddc.vim'
 
 [[plugins]]
+repo = 'matsui54/ddc-dictionary'
+on_source = 'ddc.vim'
+
+[[plugins]]
 repo = 'matsui54/ddc-buffer'
 on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-matcher_head'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'tani/ddc-fuzzy'
 on_source = 'ddc.vim'
 
 [[plugins]]
