@@ -1,0 +1,22 @@
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+merged = 0
+on_event = 'VimEnter'
+hook_source = '''
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    disable = {
+      -- 'vue',
+    }
+  },
+  -- indent = {
+  --   enable = true,
+  -- },
+  -- ensure_installed = 'maintained', -- 言語ごとのパーサーファイルをインストールする
+}
+EOF
+
+'''

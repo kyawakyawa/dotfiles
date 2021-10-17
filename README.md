@@ -48,6 +48,47 @@ In NeoVim
 :call dein#install()
 ```
 
+##### for Tree Sitter
+```
+:TSUpdate
+```
+
+`C/C++`
+```
+:TSInstall c cpp cmake cuda glsl
+```
+
+`Rust`
+```
+:TSInstall rust
+```
+
+`Python`
+```
+:TSInstall python
+```
+
+`Lua`
+```
+:TSInstall lua
+```
+
+`Web`
+```
+:TSInstall html css javascript typescript json jsonc json5 tsx
+```
+
+`TOML/YAML` 
+```
+:TSInstall toml yaml
+```
+
+`Vim`
+```
+:TSInstall vim
+```
+
+
 #### プラグインの動作がおかしくなったとき
 
 キャッシュを消してみる

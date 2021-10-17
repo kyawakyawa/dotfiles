@@ -24,6 +24,7 @@ let s:fzf_toml = g:dein_dir . '/fzf.toml'
 let s:solarized_toml = g:dein_dir . '/solarized.toml'
 let s:brackets_toml = g:dein_dir . '/brackets.toml'
 let s:file_explorer_toml = g:dein_dir . '/file-explorer.toml'
+let s:syntax_hightlight_toml = g:dein_dir . '/syntax-highlight.toml'
 
 call dein#load_toml(s:vim_denops_toml, {'lazy': 1})
 "call dein#load_toml(s:ddc_toml, {'lazy': 1})
@@ -34,6 +35,7 @@ call dein#load_toml(s:fzf_toml, {'lazy': 1})
 call dein#load_toml(s:solarized_toml, {'lazy': 0})
 call dein#load_toml(s:brackets_toml, {'lazy': 0})
 call dein#load_toml(s:file_explorer_toml, {'lazy': 0})
+call dein#load_toml(s:syntax_hightlight_toml, {'lazy': 1})
 
 " Required:
 call dein#end()
