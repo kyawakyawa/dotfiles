@@ -65,6 +65,12 @@ set cursorline
 set smartindent
 set hidden
 
+" For IME
+function! ImeOff()
+  call system('fcitx5-remote -c')
+endfunction
+autocmd InsertLeave * call ImeOff()
+
 " For plugins
 
 " for vim-gitgutter
