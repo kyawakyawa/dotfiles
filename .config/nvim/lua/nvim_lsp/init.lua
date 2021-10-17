@@ -53,3 +53,6 @@ nvim_lsp['ccls'].setup {
   },
   capabilities = capabilities,
 }
+
+-- cmake-language-server
+require'lspconfig'.cmake.setup{}

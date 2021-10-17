@@ -22,6 +22,7 @@
 ##### C++
 
 - ccls
+- cmake-language-server (pip install --user cmake-language-server)
 
 #### Install dein for Vim
 
