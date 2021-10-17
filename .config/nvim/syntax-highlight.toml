@@ -19,4 +19,29 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
+function! MyTSInstall()
+  TSUpdate
+
+  echo "C/C++"
+  TSInstall c cpp cmake cuda glsl
+
+  echo "Rust"
+  TSInstall rust
+
+  echo "Python"
+  TSInstall python
+
+  echo "Lua"
+  TSInstall lua
+
+  echo "Web"
+  TSInstall html css javascript typescript json jsonc json5 tsx
+
+  echo "TOML/YAML"
+  TSInstall toml yaml
+
+  echo "Vim"
+  TSInstall vim
+endfunction
+
 '''

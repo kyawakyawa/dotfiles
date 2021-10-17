@@ -17,7 +17,7 @@
 - deno
 - Git
 - The Silver Searcher Ag (optional)
-- '/usr/share/dict/words' (optional) (Ex. `sudo pacman -S words`)
+- `/usr/share/dict/words` (optional) (Ex. `sudo pacman -S words` )
 
 ##### C++
 
@@ -89,6 +89,12 @@ In NeoVim
 :TSInstall vim
 ```
 
+or
+
+'MyTSInstall'
+```
+:call MyTSInstall()
+```
 
 #### プラグインの動作がおかしくなったとき
 
