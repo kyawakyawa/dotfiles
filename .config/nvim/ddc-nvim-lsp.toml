@@ -18,7 +18,7 @@ hook_source = '''
 " Customize global settings
 
 " Set sources used.
-call ddc#custom#patch_global('sources', ['nvim-lsp', 'around', 'vsnip'])
+call ddc#custom#patch_global('sources', ['nvim-lsp', 'around', 'vsnip', 'buffer'])
 
 " Set Completion Menu
 call ddc#custom#patch_global('completionMenu', 'native') " TODO pum.vim
@@ -41,6 +41,11 @@ call ddc#custom#patch_global('sourceOptions', {
     \   'sorters': ['sorter_rank'],
     \   'mark': 'snip',
     \ },
+    \ 'buffer': {
+    \   'matchers': ['matcher_head'],
+    \   'sorters': ['sorter_rank'],
+    \   'mark': 'B',
+    \ },
     \ })
 
 " Change source params
@@ -51,6 +56,12 @@ call ddc#custom#patch_global('sourceParams', {
     \ 'around': {
     \   'maxSize': 100,
     \ },
+    \ 'buffer': {
+    \   'requireSameFiletype': v:false,
+    \   'limitBytes': 5000000,
+    \   'fromAltBuf': v:true,
+    \   'forceCollect': v:true,
+    \ },
     \ })
 
 " Use ddc.
@@ -59,6 +70,10 @@ call ddc#enable()
 
 [[plugins]]
 repo = 'Shougo/ddc-around'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'matsui54/ddc-buffer'
 on_source = 'ddc.vim'
 
 [[plugins]]
