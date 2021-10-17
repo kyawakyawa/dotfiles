@@ -2,7 +2,7 @@
 repo = 'lambdalisue/fern.vim'
 hook_add = '''
 
-let g:fern#renderer = "devicons"
+let g:fern#renderer = "nerdfont"
 let g:fern#default_hidden=1 " 隠しファイルを表示
 
 nnoremap <silent> <space>e :<c-u>Fern . -drawer -stay -keep -toggle -reveal=%<cr>
@@ -12,8 +12,8 @@ nnoremap <silent> <space>e :<c-u>Fern . -drawer -stay -keep -toggle -reveal=%<cr
 [[plugins]]
 repo = 'lambdalisue/fern-git-status.vim'
 
-[[plugins]] # TODO: Is this needed?
-repo = 'lambdalisue/fern-renderer-nerdfont.vim'
+[[plugins]]
+repo = 'lambdalisue/nerdfont.vim'
 
 [[plugins]]
-repo = 'lambdalisue/fern-renderer-devicons.vim'
+repo = 'lambdalisue/fern-renderer-nerdfont.vim'
