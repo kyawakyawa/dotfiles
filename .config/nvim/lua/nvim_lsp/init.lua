@@ -1,4 +1,5 @@
 local nvim_lsp = require('lspconfig')
+local util = require('lspconfig/util')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -52,6 +53,10 @@ nvim_lsp['ccls'].setup {
     },
   },
   capabilities = capabilities,
+  root_dir = function(fname)
+    return util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt')(fname)
+      or util.path.dirname(fname)
+  end,
 }
 
 -- cmake-language-server
