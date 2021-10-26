@@ -41,7 +41,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- Set up language servers
 
--- ccls
+---- ccls
 nvim_lsp['ccls'].setup {
   on_attach = on_attach,
   flags = {
@@ -59,5 +59,14 @@ nvim_lsp['ccls'].setup {
   end,
 }
 
--- cmake-language-server
-require'lspconfig'.cmake.setup{}
+---- cmake-language-server
+nvim_lsp['cmake'].setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+---- typescript language server
+nvim_lsp['tsserver'].setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
