@@ -57,7 +57,7 @@ In NeoVim
 
 `C/C++`
 ```
-:TSInstall c cpp cmake cuda glsl
+:TSInstall c cpp cmake make cuda glsl
 ```
 
 `Rust`
