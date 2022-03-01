@@ -77,6 +77,7 @@ autocmd InsertLeave * call ImeOff()
 
 "" gitgutter
 
-""" solarizedを導入したときにこちらに移動しないとだめだった
-let g:gitgutter_override_sign_column_highlight=0
-highlight! link SignColumn LineNr " Sign Columnのハイライトを無効化
+" TODO(kyawakyawa) Delete
+" "" solarizedを導入したときにこちらに移動しないとだめだった
+" let g:gitgutter_override_sign_column_highlight=0
+" highlight! link SignColumn LineNr " Sign Columnのハイライトを無効化
