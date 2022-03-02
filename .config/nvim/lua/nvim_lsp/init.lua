@@ -53,6 +53,7 @@ nvim_lsp['ccls'].setup {
     },
   },
   capabilities = capabilities,
+  filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
   root_dir = function(fname)
     return util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt')(fname)
       or util.path.dirname(fname)
