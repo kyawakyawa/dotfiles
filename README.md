@@ -90,6 +90,10 @@ In NeoVim
 :TSInstall vim
 ```
 
+`Bash`
+```
+TSInstall bash
+```
 or
 
 'MyTSInstall'
