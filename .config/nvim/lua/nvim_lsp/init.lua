@@ -66,6 +66,11 @@ nvim_lsp['cmake'].setup{
   capabilities = capabilities,
 }
 
+---- efm-langserver
+nvim_lsp['efm'].setup{
+  filetypes = {'python'},
+}
+
 ---- typescript language server
 nvim_lsp['tsserver'].setup{
   on_attach = on_attach,

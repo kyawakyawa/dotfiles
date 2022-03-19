@@ -6,7 +6,10 @@ lua require('nvim_lsp')
 
 set completeopt-=preview " Previewを出さない
 
-autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+" 保存時にフォーマットする
+" 10000ms(10s) でtimeoutする
+" フォーマットしたくないときは :noautocmd w と打つ
+autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync({}, 10000)
 
 '''
 
