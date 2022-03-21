@@ -24,6 +24,14 @@
 - ccls
 - cmake-language-server (pip install --user cmake-language-server)
 
+##### Python
+- pyright
+- efm-langserver
+- flake8
+- black
+- mypy
+- isort
+
 #### Install dein for Vim
 
 ```bash
