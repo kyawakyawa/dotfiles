@@ -83,6 +83,17 @@ nvim_lsp['pyright'].setup{
   capabilities = capabilities,
 }
 
+
+---- float window  diagnostic (ref https://stackoverflow.com/questions/69290794/nvim-lsp-change-lspconfig-diagnostic-message-location)
+vim.diagnostic.config({
+  virtual_text = false
+})
+
+-- Show line diagnostics automatically in hover window
+vim.o.updatetime = 250
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+
+
 ---- lsp_signature.nvim
 cfg = {
   debug = false, -- set to true to enable debug logging
