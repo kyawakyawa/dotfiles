@@ -73,6 +73,9 @@ function! ImeOff()
 endfunction
 autocmd InsertLeave * call ImeOff()
 
+" For OpenCL
+autocmd BufNewFile,BufRead *.cl  set filetype=cl
+
 " For plugins
 
 "" gitgutter

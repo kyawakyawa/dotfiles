@@ -60,6 +60,24 @@ nvim_lsp['ccls'].setup {
   end,
 }
 
+---- clangd (OpenCL)
+nvim_lsp['clangd'].setup {
+  on_attach = on_attach,
+  cmd = {
+    "clangd",
+    "--background-index",
+    "--header-insertion=never",
+    "--pch-storage=memory",
+    "--clang-tidy"
+  },
+  capabilities = capabilities,
+  filetypes = { 'cl' },
+  root_dir = function(fname)
+    return util.root_pattern('compile_commands.json', '.cache', 'compile_flags.txt')(fname)
+      or util.path.dirname(fname)
+  end,
+}
+
 ---- cmake-language-server
 nvim_lsp['cmake'].setup{
   on_attach = on_attach,
@@ -86,7 +104,7 @@ nvim_lsp['pyright'].setup{
 
 ---- float window  diagnostic (ref https://stackoverflow.com/questions/69290794/nvim-lsp-change-lspconfig-diagnostic-message-location)
 vim.diagnostic.config({
-  virtual_text = false
+  virtual_text = true
 })
 
 -- Show line diagnostics automatically in hover window
