@@ -95,6 +95,15 @@ nvim_lsp['tsserver'].setup{
   capabilities = capabilities,
 }
 
+-- ---- deno language server
+-- nvim_lsp['denols'].setup{
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   root_dir = function(fname)
+--     return util.root_pattern('deno.json', 'deno.jsonc')(fname)
+--   end,
+-- }
+
 ---- python language server
 nvim_lsp['pyright'].setup{
   on_attach = on_attach,
