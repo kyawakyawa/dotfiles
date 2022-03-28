@@ -109,6 +109,15 @@ or
 :call MyTSInstall()
 ```
 
+#### OpenCLのシンタックスハイライト
+
+```bash
+mkdir -p ./.vim/syntax
+mkdir -p ./.config/nvim/syntax
+curl -L https://raw.githubusercontent.com/petRUShka/vim-opencl/master/syntax/opencl.vim -o ./.vim/syntax/cl.vim
+curl -L https://raw.githubusercontent.com/petRUShka/vim-opencl/master/syntax/opencl.vim -o ./.config/nvim/syntax/cl.vim
+```
+
 #### プラグインの動作がおかしくなったとき
 
 キャッシュを消してみる
