@@ -76,6 +76,10 @@ autocmd InsertLeave * call ImeOff()
 " For OpenCL
 autocmd BufNewFile,BufRead *.cl  set filetype=cl
 
+" Terminal
+" TerminalモードでEscでエスケープ [参考] https://neovim.io/doc/user/nvim_terminal_emulator.html
+tnoremap <Esc> <C-\><C-n>
+
 " For plugins
 
 "" gitgutter
