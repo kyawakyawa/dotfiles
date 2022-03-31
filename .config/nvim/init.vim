@@ -80,6 +80,19 @@ autocmd BufNewFile,BufRead *.cl  set filetype=cl
 " TerminalモードでEscでエスケープ [参考] https://neovim.io/doc/user/nvim_terminal_emulator.html
 tnoremap <Esc> <C-\><C-n>
 
+" quickfix-windowのデフォルトの表示位置を左端に変更
+" 参考 https://zenn.dev/tmrekk/articles/4380961a754287
+autocmd FileType qf wincmd H
+" quickfix-windowを開き、modifiableに設定し、Windowサイズを調整
+function! OpenQuickfixWindow()
+        cw
+        set modifiable
+        vertical resize 70
+endfunction
+
+autocmd QuickfixCmdPost vimgrep call OpenQuickfixWindow()
+autocmd QuickfixCmdPost make call OpenQuickfixWindow()
+
 " For plugins
 
 "" gitgutter
