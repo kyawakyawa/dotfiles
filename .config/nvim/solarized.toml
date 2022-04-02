@@ -7,22 +7,40 @@
 # let g:solarized_termtrans=1 " 透過を有効にする(たぶん)
 # '''
 
-[[plugins]]
-repo = 'shaunsingh/solarized.nvim'
-hook_add = '''
+# [[plugins]]
+# repo = 'shaunsingh/solarized.nvim'
+# hook_add = '''
+# 
+# lua << EOF
+# 
+# vim.g.solarized_italic_comments = true
+# vim.g.solarized_italic_keywords = true
+# vim.g.solarized_italic_functions = true
+# vim.g.solarized_italic_variables = false
+# vim.g.solarized_contrast = true
+# vim.g.solarized_borders = false
+# vim.g.solarized_disable_background = true
+# 
+# require('solarized').set()
+# 
+# EOF
+# 
+# '''
 
+[[plugins]]
+repo = 'RRethy/nvim-base16'
+hook_add = '''
 lua << EOF
 
-vim.g.solarized_italic_comments = true
-vim.g.solarized_italic_keywords = true
-vim.g.solarized_italic_functions = true
-vim.g.solarized_italic_variables = false
-vim.g.solarized_contrast = true
-vim.g.solarized_borders = false
-vim.g.solarized_disable_background = false
-
-require('solarized').set()
+vim.cmd('colorscheme base16-solarized-dark')
 
 EOF
+'''
 
+[[plugins]]
+repo = 'miyakogi/seiya.vim'
+depends = ['nvim-base16']
+hook_add = '''
+let g:seiya_auto_enable=1
+let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
 '''
