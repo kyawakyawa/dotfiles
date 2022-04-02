@@ -30,17 +30,18 @@
 [[plugins]]
 repo = 'RRethy/nvim-base16'
 hook_add = '''
+
 lua << EOF
 
-vim.cmd('colorscheme base16-solarized-dark')
+-- vim.cmd('colorscheme base16-solarized-dark')
+
+require('base16-colorscheme').setup({
+    base00 = 'none', base01 = '#073642', base02 = '#586e75', base03 = '#657b83',
+    base04 = '#839496', base05 = '#93a1a1', base06 = '#eee8d5', base07 = '#fdf6e3',
+    base08 = '#dc322f', base09 = '#cb4b16', base0A = '#b58900', base0B = '#859900',
+    base0C = '#2aa198', base0D = '#268bd2', base0E = '#6c71c4', base0F = '#d33682',
+})
 
 EOF
-'''
 
-[[plugins]]
-repo = 'miyakogi/seiya.vim'
-depends = ['nvim-base16']
-hook_add = '''
-let g:seiya_auto_enable=1
-let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
 '''
