@@ -15,6 +15,7 @@ autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync({}, 10000)
 
 [[plugins]]
 repo = 'Shougo/ddc.vim'
+depends = ['pum.vim']
 on_event = 'InsertEnter'
 hook_source = '''
 
@@ -24,7 +25,8 @@ hook_source = '''
 call ddc#custom#patch_global('sources', ['nvim-lsp', 'around', 'vsnip', 'buffer', 'dictionary'])
 
 " Set Completion Menu
-call ddc#custom#patch_global('completionMenu', 'native') " TODO pum.vim
+" call ddc#custom#patch_global('completionMenu', 'native')
+call ddc#custom#patch_global('completionMenu', 'pum.vim')
 
 " Change source options
 call ddc#custom#patch_global('sourceOptions', {
@@ -135,8 +137,25 @@ repo = 'hrsh7th/vim-vsnip'
 on_source = 'ddc.vim'
 depends = ['vim-vsnip-integ']
 hook_add = '''
-imap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
-smap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
+
+" pum.vimとvsnipを合わせて使うときに必要 Tabでスニペットの展開とジャンプができるようになる
+function s:trigger_completedone()
+  let info = pum#complete_info()
+  let complete_item = info.items[info.selected]
+  call vsnip_integ#on_complete_done(complete_item)
+  if vsnip#available(1)
+    return "\<Plug>(vsnip-expand-or-jump)"
+  else
+    return "\<Tab>"
+
+  "return "\<Ignore>"
+endfunction
+
+imap <expr> <Tab> <SID>trigger_completedone()
+smap <expr> <Tab> <SID>trigger_completedone()
+
+" imap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
+" smap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
 
 imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
@@ -145,3 +164,14 @@ smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 [[plugins]]
 repo = 'hrsh7th/vim-vsnip-integ'
 on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/pum.vim'
+hook_add = '''
+inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
+inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
+inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
+inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
+inoremap <PageDown> <Cmd>call pum#map#insert_relative_page(+1)<CR>
+inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
+'''
