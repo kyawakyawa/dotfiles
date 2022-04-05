@@ -166,7 +166,7 @@ repo = 'hrsh7th/vim-vsnip-integ'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/pum.vim'
+repo = 'kyawakyawa/pum.vim'
 hook_source = '''
 inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
 inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
@@ -177,8 +177,8 @@ inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
 
 hi NoneBg guibg=none
 
-" TODO denops-popup-preview.vimとかぶってしまうのを直す
-"call pum#set_option('border', 'rounded') 
+" TODO denops-popup-preview.vimとかぶってしまうのを直す -> Done
+call pum#set_option('border', 'rounded') 
 
 call pum#set_option('highlight_normal_menu', "NoneBg")
 '''
