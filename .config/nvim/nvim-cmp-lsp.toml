@@ -1,0 +1,45 @@
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+on_event = 'VimEnter'
+hook_source = '''
+"lua require('nvim_lsp_cfg')
+
+set completeopt-=preview " Previewを出さない
+
+" 保存時にフォーマットする
+" 10000ms(10s) でtimeoutする
+" フォーマットしたくないときは :noautocmd w と打つ
+autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync({}, 10000)
+
+'''
+
+[[plugins]]
+repo = 'hrsh7th/nvim-cmp'
+on_source = 'nvim-lspconfig'
+hook_source = '''
+lua require('nvim_cmp_cfg')
+'''
+
+[[plugins]]
+repo = 'hrsh7th/cmp-nvim-lsp'
+on_source = 'nvim-cmp'
+
+[[plugins]]
+repo = 'hrsh7th/cmp-buffer'
+on_source = 'nvim-cmp'
+
+[[plugins]]
+repo = 'hrsh7th/cmp-path'
+on_source = 'nvim-cmp'
+
+[[plugins]]
+repo = 'hrsh7th/cmp-cmdline'
+on_source = 'nvim-cmp'
+
+[[plugins]]
+repo = 'hrsh7th/cmp-vsnip'
+on_source = 'nvim-cmp'
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+on_source = 'nvim-cmp'
