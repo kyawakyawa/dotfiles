@@ -86,6 +86,7 @@ nvim_lsp['cmake'].setup{
 
 ---- efm-langserver
 nvim_lsp['efm'].setup{
+  on_attach = on_attach,
   filetypes = {'python'},
 }
 
