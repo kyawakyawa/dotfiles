@@ -4,7 +4,7 @@ return {
   -- Font
   font_size = 10.0,
   font = wezterm.font_with_fallback({
-    "Delugia Nerd Font",
+    "Delugia",
     "HackGenNerd",
   }),
   -- IME
