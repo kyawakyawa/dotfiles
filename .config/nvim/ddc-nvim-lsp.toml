@@ -131,6 +131,9 @@ hook_source = '''
 repo = 'ray-x/lsp_signature.nvim'
 if = "has('nvim')"
 on_source = 'nvim-lspconfig'
+hook_source= '''
+lua require('lsp_signature_cfg')
+'''
 
 [[plugins]]
 repo = 'hrsh7th/vim-vsnip'
