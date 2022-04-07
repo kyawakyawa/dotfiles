@@ -2,7 +2,7 @@
 repo = 'neovim/nvim-lspconfig'
 on_event = 'VimEnter'
 hook_source = '''
-lua require('nvim_lsp')
+lua require('nvim_lsp_cfg')
 
 set completeopt-=preview " Previewを出さない
 
