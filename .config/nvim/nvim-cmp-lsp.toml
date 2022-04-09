@@ -43,3 +43,11 @@ on_source = 'nvim-cmp'
 [[plugins]]
 repo = 'hrsh7th/vim-vsnip'
 on_source = 'nvim-cmp'
+
+[[plugins]]
+repo = 'ray-x/lsp_signature.nvim'
+if = "has('nvim')"
+on_source = 'nvim-lspconfig'
+hook_source= '''
+lua require('lsp_signature_cfg')
+'''
