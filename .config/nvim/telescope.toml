@@ -13,6 +13,7 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>fq <cmd>lua require('telescope.builtin').quickfix()<cr>
 nnoremap <leader>fd <cmd>lua require('telescope.builtin').diagnostics()<cr>
+nmap gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
 '''
 
 [[plugins]]
