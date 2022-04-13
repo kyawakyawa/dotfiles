@@ -7,9 +7,11 @@ depends = ['plenary.nvim']
 hook_source= '''
 " Using Lua functions
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fgr <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fgs <cmd>lua require('telescope.builtin').git_status()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>fq <cmd>lua require('telescope.builtin').quickfix()<cr>
 nnoremap <leader>fd <cmd>lua require('telescope.builtin').diagnostics()<cr>
 '''
 
