@@ -22,6 +22,7 @@ let s:ddc_nvim_lsp_toml = g:dein_dir . '/ddc-nvim-lsp.toml'
 let s:git_toml = g:dein_dir . '/git.toml'
 let s:vim_airline_toml = g:dein_dir . '/vim-airline.toml'
 let s:fzf_toml = g:dein_dir . '/fzf.toml'
+"let s:telescope_toml = g:dein_dir . '/telescope.toml'
 let s:solarized_toml = g:dein_dir . '/solarized.toml'
 let s:brackets_toml = g:dein_dir . '/brackets.toml'
 let s:file_explorer_toml = g:dein_dir . '/file-explorer.toml'
@@ -36,6 +37,7 @@ call dein#load_toml(s:ddc_nvim_lsp_toml, {'lazy': 1})
 call dein#load_toml(s:git_toml, {'lazy': 0})
 call dein#load_toml(s:vim_airline_toml, {'lazy': 0})
 call dein#load_toml(s:fzf_toml, {'lazy': 1})
+"call dein#load_toml(s:telescope_toml, {'lazy': 0})
 call dein#load_toml(s:solarized_toml, {'lazy': 0})
 call dein#load_toml(s:brackets_toml, {'lazy': 0})
 call dein#load_toml(s:file_explorer_toml, {'lazy': 0})
