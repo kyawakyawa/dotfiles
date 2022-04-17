@@ -134,6 +134,13 @@ cmp.setup({
       winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
       scrollbar = "║",
     },
+    completion = {
+      -- border = 'rounded',
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+      -- winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+      -- winhighlight = "NormalFloat:NoneBg",
+      winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None',
+    },
   },
   experimental = {
     ghost_text = true,
