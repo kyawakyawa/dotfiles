@@ -1,0 +1,13 @@
+[[plugins]]
+repo = 'nvim-lualine/lualine.nvim'
+hook_source = '''
+lua << END
+require('lualine_cfg')
+END
+'''
+
+[[plugins]]
+repo = 'romgrk/barbar.nvim'
+
+# [[plugins]]
+# repo = 'kyazdani42/nvim-web-devicons'
