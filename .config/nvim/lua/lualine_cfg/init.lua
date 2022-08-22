@@ -173,7 +173,7 @@ ins_left {
 --   color = { fg = colors.magenta, gui = 'bold' },
 -- }
 ins_left {
-  'NearestMethodOrFunction'
+  'ShowSymbol'
 }
 
 ins_left { 'location' }

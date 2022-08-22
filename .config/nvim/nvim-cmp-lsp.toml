@@ -19,6 +19,9 @@ on_source = 'nvim-lspconfig'
 branch = 'main'
 hook_source = '''
 lua require('lspsaga_cfg')
+function! ShowSymbol() abort
+  return v:lua.symbol_string()
+endfunction
 '''
 
 [[plugins]]
