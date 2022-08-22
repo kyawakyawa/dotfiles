@@ -154,7 +154,9 @@ require('lualine').setup {
         end,
       },
     },
-    lualine_c = {},
+    lualine_c = {
+      'NearestMethodOrFunction'
+    },
     lualine_x = {},
     lualine_y = { search_result, 'filetype' },
     lualine_z = { '%l:%c', '%p%%/%L' },
