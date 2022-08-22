@@ -14,6 +14,14 @@ autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync({}, 10000)
 '''
 
 [[plugins]]
+repo = 'glepnir/lspsaga.nvim'
+on_source = 'nvim-lspconfig'
+branch = 'main'
+hook_source = '''
+lua require('lspsaga_cfg')
+'''
+
+[[plugins]]
 repo = 'hrsh7th/nvim-cmp'
 on_source = 'nvim-lspconfig'
 hook_source = '''
