@@ -21,3 +21,6 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead"}, {
 })
 
 vim.api.nvim_set_keymap('t', '<ESC>', '<C-\\><C-n>', { noremap = true })
+
+-- Plugins
+require('plugins')
