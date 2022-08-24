@@ -191,14 +191,14 @@ local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  -- use lspsaga.nvim -- buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
   buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  -- use lspsaga.nvim -- buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   -- use Telescope.nvim -- buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   buf_set_keymap('n', '<space>E', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
@@ -218,24 +218,24 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Set up language servers
 
----- ccls
-nvim_lsp['ccls'].setup {
-  on_attach = on_attach,
-  flags = {
-    debounce_text_changes = 150,
-  },
-  init_options = {
-    cache = {
-      directory = "/tmp/ccls-cache";
-    },
-  },
-  capabilities = capabilities,
-  filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
-  root_dir = function(fname)
-    return util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt')(fname)
-      or util.path.dirname(fname)
-  end,
-}
+-- ---- ccls
+-- nvim_lsp['ccls'].setup {
+--   on_attach = on_attach,
+--   flags = {
+--     debounce_text_changes = 150,
+--   },
+--   init_options = {
+--     cache = {
+--       directory = "/tmp/ccls-cache";
+--     },
+--   },
+--   capabilities = capabilities,
+--   filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
+--   root_dir = function(fname)
+--     return util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt')(fname)
+--       or util.path.dirname(fname)
+--   end,
+-- }
 
 ---- clangd (OpenCL)
 nvim_lsp['clangd'].setup {
@@ -248,7 +248,8 @@ nvim_lsp['clangd'].setup {
     "--clang-tidy"
   },
   capabilities = capabilities,
-  filetypes = { 'cl' },
+  -- filetypes = { 'cl' },
+  filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'cl' },
   root_dir = function(fname)
     return util.root_pattern('compile_commands.json', '.cache', 'compile_flags.txt')(fname)
       or util.path.dirname(fname)
