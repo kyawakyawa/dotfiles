@@ -1,7 +1,4 @@
 [[plugins]]
-repo = 'nvim-lua/plenary.nvim'
-
-[[plugins]]
 repo = 'nvim-telescope/telescope.nvim'
 depends = ['plenary.nvim']
 hook_source= '''
@@ -15,6 +12,3 @@ nnoremap <leader>fq <cmd>lua require('telescope.builtin').quickfix()<cr>
 nnoremap <leader>fd <cmd>lua require('telescope.builtin').diagnostics()<cr>
 nmap gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
 '''
-
-[[plugins]]
-repo = 'kyazdani42/nvim-web-devicons'

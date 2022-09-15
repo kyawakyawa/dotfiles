@@ -8,3 +8,7 @@ set signcolumn=yes " 常に左の列を表示
 
 [[plugins]]
 repo = 'lambdalisue/gina.vim'
+
+[[plugins]]
+repo = 'sindrets/diffview.nvim'
+
