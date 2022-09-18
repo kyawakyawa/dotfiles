@@ -1,2 +1,3 @@
 /.vim/syntax/cl.vim
 /.config/nvim/syntax/cl.vim
+/.config/nvim/plugin/packer_compiled.lua

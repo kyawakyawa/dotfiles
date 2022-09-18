@@ -17,5 +17,30 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- dependencies
-  require('deps').setup(use)
+  require('packer_deps').setup(use)
+
+  -- nvim lsp
+  require('packer_nvim_lsp').setup(use)
+
+  -- complement
+  require('packer_complement').setup(use)
+
+  -- fuzzy finder
+  require('packer_fuzzy_finder').setup(use)
+
+  -- file explorer
+  require('packer_file_explorer').setup(use)
+
+  -- line
+  require('packer_line').setup(use)
+
+  -- git
+  require('packer_git').setup(use)
+
+  -- brackets
+  require('packer_brackets').setup(use)
+
+  -- syntax highlight
+  require('packer_syntax_highlight').setup(use)
+
 end)
