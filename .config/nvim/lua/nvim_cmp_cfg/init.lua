@@ -115,7 +115,7 @@ local on_attach = function(client, bufnr)
   -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { sync = true } end, bufopts)
 end
 
 
@@ -124,9 +124,19 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local lspconfig = require('lspconfig')
 require('mason-lspconfig').setup_handlers {
   function(server_name)
-    lspconfig[server_name].setup {
+    local setting = {
       capabilities = capabilities,
       on_attach = on_attach,
     }
+
+    if server_name == 'efm' then
+
+      setting.cmd = {
+        "efm-langserver", -- masonでインストールしたやつだと何故かconfig.yamlを読まない？ので手動で入れたやつを使う
+      }
+      setting.filetypes = {'python'}
+    end
+
+    lspconfig[server_name].setup (setting)
   end,
 }
