@@ -2,24 +2,21 @@ local nvim_lsp = {}
 
 nvim_lsp.setup = function(use)
 
-  -- nvim-lspconfig
-  use 'neovim/nvim-lspconfig'
+  -- nvim-lspconfig & mason.nvim
+  use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+  }
 
   -- lspsage.nvim
   use({
     "glepnir/lspsaga.nvim",
     branch = "main",
     config = function()
-        local saga = require("lspsaga")
-
-        saga.init_lsp_saga({
-            -- your configuration
-        })
+      require('lspsaga_cfg')
     end,
   })
-
-  -- mason.nvim
-  use "williamboman/mason.nvim"
 
 end
 

@@ -35,6 +35,26 @@ saga.init_lsp_saga({
 else
 saga.init_lsp_saga()
 end
+
+-- Settings
+
+local opts = { noremap=true, silent=true }
+
+-- Rename
+keymap("n", "<space>rn", "<cmd>Lspsaga rename<CR>", opts)
+
+-- Hover Doc
+keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
+
+-- Finder
+keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", opts)
+
+
+-- Show line diagnostics
+keymap("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
+
+-- Show cursor diagnostic
+keymap("n", "<leader>cd", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
  
 -- TODO(kyawakyawa)
 -- -- Lsp finder find the symbol definition implmement reference
