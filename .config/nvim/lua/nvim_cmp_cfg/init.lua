@@ -122,6 +122,8 @@ end
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local lspconfig = require('lspconfig')
+local lspconfig_util = require('lspconfig/util')
+
 require('mason-lspconfig').setup_handlers {
   function(server_name)
     local setting = {
@@ -130,11 +132,25 @@ require('mason-lspconfig').setup_handlers {
     }
 
     if server_name == 'efm' then
-
       setting.cmd = {
-        "efm-langserver", -- masonでインストールしたやつだと何故かconfig.yamlを読まない？ので手動で入れたやつを使う
+        "efm-langserver", -- 何故かconfig.yamlを読まない？のでこちらを追加
       }
-      setting.filetypes = {'python'}
+      setting.filetypes = { 'python' }
+    end
+
+    if server_name == 'clangd' then
+      setting.cmd = {
+        "clangd",
+        "--background-index",
+        "--header-insertion=never",
+        "--pch-storage=memory",
+        "--clang-tidy"
+      }
+      setting.filetypes =  { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'cl' }
+      setting.root_dir = function(fname)
+        return lspconfig_util.root_pattern('compile_commands.json', '.cache', 'compile_flags.txt')(fname)
+          or lspconfig_util.path.dirname(fname)
+      end
     end
 
     lspconfig[server_name].setup (setting)
