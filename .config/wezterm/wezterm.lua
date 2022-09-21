@@ -10,7 +10,9 @@ return {
   -- IME
   use_ime = true,
   -- Colorscheme etc
-  color_scheme = "Solarized Dark Higher Contrast",
+  -- color_scheme = "Solarized Dark Higher Contrast",
+  -- color_scheme = "tokyonight-strom",
+  color_scheme = "terafox",
   window_background_opacity=0.8,
   -- Key
   keys = {
