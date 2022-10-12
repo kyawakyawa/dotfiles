@@ -42,34 +42,66 @@ font:
     x: 0
     y: 0
 
-# Colors (Solarized Dark)
+# # Colors (Solarized Dark)
+# colors:
+#   # Default colors
+#   primary:
+#     background: "0x002b36"
+#     foreground: "0x839496"
+# 
+#   # Normal colors
+#   normal:
+#     black: "0x073642"
+#     red: "0xdc322f"
+#     green: "0x859900"
+#     yellow: "0xb58900"
+#     blue: "0x268bd2"
+#     magenta: "0xd33682"
+#     cyan: "0x2aa198"
+#     white: "0xeee8d5"
+# 
+#   # Bright colors
+#   bright:
+#     black: "0x002b36"
+#     red: "0xcb4b16"
+#     green: "0x586e75"
+#     yellow: "0x657b83"
+#     blue: "0x839496"
+#     magenta: "0x6c71c4"
+#     cyan: "0x93a1a1"
+#     white: "0xfdf6e3"
+
+# Nightfox Alacritty Colors
+# Style: terafox
+# Upstream: https://github.com/edeneast/nightfox.nvim/raw/main/extra/terafox/nightfox_alacritty.yml
 colors:
   # Default colors
   primary:
-    background: "0x002b36"
-    foreground: "0x839496"
-
+    background: '0x152528'
+    foreground: '0xe6eaea'
   # Normal colors
   normal:
-    black: "0x073642"
-    red: "0xdc322f"
-    green: "0x859900"
-    yellow: "0xb58900"
-    blue: "0x268bd2"
-    magenta: "0xd33682"
-    cyan: "0x2aa198"
-    white: "0xeee8d5"
-
+    black:   '0x2f3239'
+    red:     '0xe85c51'
+    green:   '0x7aa4a1'
+    yellow:  '0xfda47f'
+    blue:    '0x5a93aa'
+    magenta: '0xad5c7c'
+    cyan:    '0xa1cdd8'
+    white:   '0xebebeb'
   # Bright colors
   bright:
-    black: "0x002b36"
-    red: "0xcb4b16"
-    green: "0x586e75"
-    yellow: "0x657b83"
-    blue: "0x839496"
-    magenta: "0x6c71c4"
-    cyan: "0x93a1a1"
-    white: "0xfdf6e3"
+    black:   '0x4e5157'
+    red:     '0xeb746b'
+    green:   '0x8eb2af'
+    yellow:  '0xfdb292'
+    blue:    '0x73a3b7'
+    magenta: '0xb97490'
+    cyan:    '0xafd4de'
+    white:   '0xeeeeee'
+  indexed_colors:
+    - { index: 16, color: '0xff8349' }
+    - { index: 17, color: '0xcb7985' }
 
 # Visual Bell
 #
