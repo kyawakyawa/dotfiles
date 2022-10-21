@@ -111,15 +111,11 @@ cmp.setup.cmdline(':', {
   })
 })
 
+-- lsp config
+
 -- mason.nvim
 require("mason").setup()
 require("mason-lspconfig").setup()
-
--- lsp config
-
--- Set capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -147,8 +143,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { sync = false } end, bufopts)
 end
 
-
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local lspconfig = require('lspconfig')
 local lspconfig_util = require('lspconfig/util')
