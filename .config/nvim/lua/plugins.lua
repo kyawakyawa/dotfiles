@@ -49,4 +49,6 @@ return require('packer').startup(function(use)
   -- nightfox colorscheme
   require('packer_nightfox').setup(use)
 
+  -- codewindow
+  require('packer_codewindow').setup(use)
 end)
