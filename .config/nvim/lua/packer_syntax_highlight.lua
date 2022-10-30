@@ -30,6 +30,14 @@ syntax_highlight.setup = function(use)
               -- 'vue',
             }
           },
+          rainbow = {
+            enable = true,
+            -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+            extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+            max_file_lines = nil, -- Do not enable for files with more than n lines, int
+            -- colors = {}, -- table of hex strings
+            -- termcolors = {} -- table of colour name strings
+          }
         }
 
         my_ts_install = function()
@@ -61,6 +69,24 @@ syntax_highlight.setup = function(use)
 
         end,
         vim.api.nvim_command('command MyTSInstall lua my_ts_install()')
+      end,
+    })
+
+    -- nvim-ts-rainbow
+    use ({
+      "p00f/nvim-ts-rainbow"
+    })
+
+    -- todo-comments.nvim
+    use ({
+      'folke/todo-comments.nvim',
+      requires = "nvim-lua/plenary.nvim",
+      config = function()
+        require("todo-comments").setup {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        }
       end,
     })
 end

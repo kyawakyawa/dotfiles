@@ -13,6 +13,7 @@ fuzzy_finder.setup = function(use)
       vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, bufopts)
       vim.keymap.set('n', '<leader>fq', require('telescope.builtin').quickfix, bufopts)
       vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, bufopts)
+      vim.keymap.set('n', '<leader>fnot', require('telescope').extensions.notify.notify, bufopts)
       vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, {
         noremap=true, silent=true
       })

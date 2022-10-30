@@ -7,6 +7,9 @@ vim.opt.hlsearch = true
 vim.opt.cursorline = true
 vim.opt.smartindent = true
 vim.opt.hidden = true
+vim.opt.termguicolors = true
+vim.opt.updatetime = 250
+vim.opt.laststatus = 3 -- https://wed.dev/blog/posts/neovim-statuline
 
 -- For IME
 vim.api.nvim_create_autocmd({ "InsertLeave" }, {

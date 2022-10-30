@@ -11,7 +11,20 @@ file_explorer.setup = function(use)
       vim.g.loaded_netrwPlugin = 1
 
       -- empty setup using defaults
-      require("nvim-tree").setup()
+      require("nvim-tree").setup{
+        actions = {
+          open_file = {
+            window_picker = {
+              enable = false, -- FIXME
+              -- chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+              -- exclude = {
+              --   filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
+              --   buftype = { "nofile", "terminal", "help" },
+              -- },
+            },
+          }
+        }
+      }
 
       local nt_api = require("nvim-tree.api")
       vim.keymap.set('n', '<space>e', nt_api.tree.toggle, { noremap=true, silent=true })

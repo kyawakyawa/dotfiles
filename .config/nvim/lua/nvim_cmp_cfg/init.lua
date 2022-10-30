@@ -64,6 +64,7 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' }, -- For luasnip users.
+    { name = 'nvim_lsp_signature_help' },
   }, {
     { name = 'buffer' },
   }),
@@ -96,9 +97,11 @@ cmp.setup.filetype('gitcommit', {
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = {
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp_document_symbol' }
+  }, {
     { name = 'buffer' }
-  }
+  })
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
@@ -141,6 +144,22 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { sync = false } end, bufopts)
+
+  -- ref https://zenn.dev/link/comments/fd67dab010b7d5
+  -- ref https://github.com/haskell/haskell-language-server/issues/1148#issuecomment-887858195
+  -- keymap setting ...
+  local cap = client.server_capabilities
+
+  -- Only highlight if compatible with the language
+  if cap.documentHighlightProvider then
+    vim.cmd [[
+      augroup lsp_document_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold,CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+    ]]
+  end
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()

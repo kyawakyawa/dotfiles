@@ -46,6 +46,28 @@ nvim_lsp.setup = function(use)
     end
   }
 
+  -- lsp_line.nvim
+  use ({
+    'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+    config = function()
+      require("lsp_lines").setup()
+
+      -- for lualine.nvim
+      vim.diagnostic.config({
+        virtual_text = true,
+        virtual_lines = { only_current_line = true }
+      })
+    end,
+  })
+
+  -- fidget.nvim
+  use ({
+    'j-hui/fidget.nvim',
+    config = function()
+      require("fidget").setup()
+    end,
+  })
+
 
 end
 

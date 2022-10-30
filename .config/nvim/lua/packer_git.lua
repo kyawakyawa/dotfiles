@@ -13,6 +13,14 @@ git.setup = function(use)
   -- diffview.nvim
   use 'sindrets/diffview.nvim'
 
+  -- vgit.nvim
+  use ({
+    'tanvirtin/vgit.nvim',
+    config = function()
+      require('vgit').setup()
+    end,
+  })
+
 end
 
 return git

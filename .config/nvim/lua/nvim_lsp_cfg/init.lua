@@ -111,12 +111,12 @@ nvim_lsp['pyright'].setup{
   capabilities = capabilities,
 }
 
-
----- float window  diagnostic (ref https://stackoverflow.com/questions/69290794/nvim-lsp-change-lspconfig-diagnostic-message-location)
-vim.diagnostic.config({
-  virtual_text = true
-})
-
--- Show line diagnostics automatically in hover window
-vim.o.updatetime = 250
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+-- lspline.nvimを使うので廃止
+-- ---- float window  diagnostic (ref https://stackoverflow.com/questions/69290794/nvim-lsp-change-lspconfig-diagnostic-message-location)
+-- vim.diagnostic.config({
+--   virtual_text = true
+-- })
+-- 
+-- -- Show line diagnostics automatically in hover window
+-- vim.o.updatetime = 250
+-- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]

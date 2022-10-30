@@ -8,6 +8,9 @@ deps.setup = function(use)
   -- nvim-web-devicons
   use 'kyazdani42/nvim-web-devicons'
 
+  -- nui.nvim
+  use 'MunifTanjim/nui.nvim'
+
 end
 
 return deps

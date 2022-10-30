@@ -49,6 +49,19 @@ return require('packer').startup(function(use)
   -- nightfox colorscheme
   require('packer_nightfox').setup(use)
 
+  -- dap
+  require('packer_dap').setup(use)
+
+  -- term
+  require('packer_term').setup(use)
+
   -- codewindow
   require('packer_codewindow').setup(use)
+
+  -- notify
+  require('packer_notify').setup(use)
+
+  -- noice
+  require('packer_noice').setup(use)
+
 end)
