@@ -14,8 +14,7 @@ require'dap'.listeners.before['event_initialized']['custom'] = function(session,
 end
 
 -- -- UIの自動消去
--- require'dap'.listeners.before['event_terminated']['custom'] = function(session, body)
---   require'dapui'.close()
+-- require'dap'.listeners.before['event_terminated']['custom'] = function(session, body) require'dapui'.close()
 -- end
 
 require("dapui").setup()
@@ -52,6 +51,11 @@ dap.adapters.lldb = {
     -- detached = false,
   }
 }
+
+-- Python
+require('dap-python').setup(nil, { 
+  include_configs = false,  -- デフォルトのconfigurations.python は使わない
+})
 
 -- virtual text
 require("nvim-dap-virtual-text").setup()

@@ -10,10 +10,16 @@ dap.setup = function(use)
     end,
   })
 
+  -- nvim-dap-ui
   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
   use ({
     'theHamsta/nvim-dap-virtual-text',
+  })
+
+  -- nvim-dap-python
+  use ({
+    'mfussenegger/nvim-dap-python'
   })
 
 end
