@@ -167,6 +167,8 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
 local lspconfig_util = require('lspconfig/util')
 
+local use_ccls = false -- cclsを使う場合はここをtrueにする
+
 require('mason-lspconfig').setup_handlers {
   function(server_name)
     local setting = {
@@ -182,6 +184,10 @@ require('mason-lspconfig').setup_handlers {
     end
 
     if server_name == 'clangd' then
+      if use_ccls then
+        return
+      end
+
       setting.cmd = {
         "clangd",
         "--background-index",
@@ -199,6 +205,27 @@ require('mason-lspconfig').setup_handlers {
     lspconfig[server_name].setup (setting)
   end,
 }
+
+if use_ccls then
+  ---- ccls
+  lspconfig['ccls'].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    },
+    init_options = {
+      cache = {
+        directory = "/tmp/ccls-cache";
+      },
+    },
+    capabilities = capabilities,
+    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
+    root_dir = function(fname)
+      return require('lspconfig/util').root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt')(fname)
+        or require('lspconfig/util').path.dirname(fname)
+    end,
+  }
+end
 
 -- format on save
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
