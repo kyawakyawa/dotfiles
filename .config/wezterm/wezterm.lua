@@ -2,7 +2,7 @@ local wezterm = require 'wezterm';
 
 return {
   -- Font
-  font_size = 10.0,
+  font_size = 12.0,
   font = wezterm.font_with_fallback({
     "Delugia",
     "HackGenNerd",
@@ -33,4 +33,5 @@ return {
   colors = {
     visual_bell = "#202020"
   },
+  term = 'wezterm', -- TERM=weztermになる
 }
