@@ -43,11 +43,11 @@ return require('packer').startup(function(use)
   -- syntax highlight
   require('packer_syntax_highlight').setup(use)
 
-  -- -- tokyonight colorscheme
-  -- require('packer_tokyonight').setup(use)
+  -- tokyonight colorscheme
+  require('packer_tokyonight').setup(use)
 
-  -- nightfox colorscheme
-  require('packer_nightfox').setup(use)
+  -- -- nightfox colorscheme
+  -- require('packer_nightfox').setup(use)
 
   -- dap
   require('packer_dap').setup(use)
