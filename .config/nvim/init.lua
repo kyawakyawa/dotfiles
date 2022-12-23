@@ -24,17 +24,16 @@ require('plugins')
 
 -- Macの時
 if require('util').OSX() then
--- For IME
-vim.api.nvim_create_autocmd({ "InsertLeave" }, {
-  pattern = { "*" },
-  callback = function() vim.fn.system('im-select com.apple.inputmethod.Kotoeri.RomajiTyping.Roman') end,
-})
-
+  -- For IME
+  vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+    pattern = { "*" },
+    callback = function() vim.fn.system('im-select com.apple.inputmethod.Kotoeri.RomajiTyping.Roman') end,
+  })
 -- Linuxのとき
 else
--- For IME
-vim.api.nvim_create_autocmd({ "InsertLeave" }, {
-  pattern = { "*" },
-  callback = function() vim.fn.system('fcitx5-remote -c') end,
-})
+  -- For IME
+  vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+    pattern = { "*" },
+    callback = function() vim.fn.system('fcitx5-remote -c') end,
+  })
 end
