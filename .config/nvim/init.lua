@@ -10,17 +10,20 @@ vim.opt.hidden = true
 vim.opt.termguicolors = true
 vim.opt.updatetime = 250
 vim.opt.laststatus = 3 -- https://wed.dev/blog/posts/neovim-statuline
-
--- For OpenCL
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead"}, {
-  pattern = { "*.cl" },
-  callback = function() vim.opt.filetype=cl end,
-})
-
-vim.api.nvim_set_keymap('t', '<ESC>', '<C-\\><C-n>', { noremap = true })
+  
+if not vim.g.vscode then
+  -- For OpenCL
+  vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead"}, {
+    pattern = { "*.cl" },
+    callback = function() vim.opt.filetype=cl end,
+  })
+  
+  vim.api.nvim_set_keymap('t', '<ESC>', '<C-\\><C-n>', { noremap = true })
 
 -- Plugins
-require('plugins')
+  require('plugins') -- プラグインの読み込み
+  require("packer_compiled") --コンパイルされた設定
+end
 
 -- Macの時
 if require('util').OSX() then

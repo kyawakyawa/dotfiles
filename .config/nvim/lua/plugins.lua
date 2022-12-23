@@ -1,3 +1,9 @@
+local packer = require("packer")
+-- コンパイルしたファイル./lua以下に置く
+-- (VSCode Neovimで読まないようにするため)
+-- (参考: https://github.com/wbthomason/packer.nvim/issues/933)
+packer.init({ compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua"  })
+
 -- packer.nvim
 -- ~/.local/share/nvim/site/pack/packer/start
 -- か
@@ -12,7 +18,7 @@
 
 -- vim.cmd [[packadd packer.nvim]]
 
-return require('packer').startup(function(use)
+return packer.startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
