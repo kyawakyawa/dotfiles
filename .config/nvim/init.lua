@@ -22,22 +22,19 @@ vim.api.nvim_set_keymap('t', '<ESC>', '<C-\\><C-n>', { noremap = true })
 -- Plugins
 require('plugins')
 
--- Linuxのとき
-if (require("util").OSX() == 0) then
-
--- For IME
-vim.api.nvim_create_autocmd({ "InsertLeave" }, {
-  pattern = { "*" },
-  callback = function() vim.fn.system('fcitx5-remote -c') end,
-})
-
 -- Macの時
-else
-
+if require('util').OSX() then
 -- For IME
 vim.api.nvim_create_autocmd({ "InsertLeave" }, {
   pattern = { "*" },
   callback = function() vim.fn.system('im-select com.apple.inputmethod.Kotoeri.RomajiTyping.Roman') end,
 })
 
+-- Linuxのとき
+else
+-- For IME
+vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+  pattern = { "*" },
+  callback = function() vim.fn.system('fcitx5-remote -c') end,
+})
 end
