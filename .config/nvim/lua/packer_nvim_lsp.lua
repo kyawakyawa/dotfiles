@@ -16,6 +16,7 @@ nvim_lsp.setup = function(use)
     config = function()
       require('lspsaga_cfg')
     end,
+    requires = { {"nvim-tree/nvim-web-devicons"} }
   })
 
   -- trouble.nvim
