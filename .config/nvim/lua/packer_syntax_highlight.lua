@@ -67,6 +67,8 @@ syntax_highlight.setup = function(use)
           vim.api.nvim_command('echo "Bash"')
           vim.api.nvim_command('TSInstall bash')
 
+          vim.api.nvim_command('echo "Regex"')
+          vim.api.nvim_command('TSInstall regex')
         end,
         vim.api.nvim_command('command MyTSInstall lua my_ts_install()')
       end,
