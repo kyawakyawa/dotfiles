@@ -69,6 +69,9 @@ syntax_highlight.setup = function(use)
 
           vim.api.nvim_command('echo "Regex"')
           vim.api.nvim_command('TSInstall regex')
+
+          vim.api.nvim_command('echo "Markdown"')
+          vim.api.nvim_command("TSInstall markdown markdown_inline")
         end,
         vim.api.nvim_command('command MyTSInstall lua my_ts_install()')
       end,
