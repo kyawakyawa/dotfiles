@@ -25,11 +25,14 @@ return packer.startup(function(use)
   -- dependencies
   require('packer_deps').setup(use)
 
-  -- nvim lsp
-  require('packer_nvim_lsp').setup(use)
+  -- -- nvim lsp
+  -- require('packer_nvim_lsp').setup(use)
 
-  -- complement
-  require('packer_complement').setup(use)
+  -- -- complement
+  -- require('packer_complement').setup(use)
+
+  -- coc
+  require('packer_coc').setup(use)
 
   -- fuzzy finder
   require('packer_fuzzy_finder').setup(use)
