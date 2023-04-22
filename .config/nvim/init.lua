@@ -22,7 +22,6 @@ if not vim.g.vscode then
 
 -- Plugins
   require('plugins') -- プラグインの読み込み
-  require("packer_compiled") --コンパイルされた設定
 end
 
 -- Macの時
