@@ -1,3 +1,6 @@
+-- cacheの設定 (https://zenn.dev/kawarimidoll/articles/19bfc63e1c218c)
+if vim.loader then vim.loader.enable() end
+
 vim.opt.number = true
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
