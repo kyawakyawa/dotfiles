@@ -18,6 +18,9 @@ local plugins = {}
 -- deps
 plugins = require('plugins_deps').setup(plugins)
 
+-- fuzzy finder
+plugins = require('plugins_fuzzy_finder').setup(plugins)
+
 -- notify
 plugins = require('plugins_notify').setup(plugins)
 
