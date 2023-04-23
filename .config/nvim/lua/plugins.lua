@@ -38,6 +38,10 @@ plugins = require('plugins_brackets').setup(plugins)
 
 -- syntax highlight
 plugins = require('plugins_syntax_highlight').setup(plugins)
+
+-- tokyonight colorscheme
+plugins= require('plugins_tokyonight').setup(plugins)
+
 -- notify
 plugins = require('plugins_notify').setup(plugins)
 
