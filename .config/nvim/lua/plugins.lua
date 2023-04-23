@@ -60,6 +60,9 @@ plugins = require('plugins_noice').setup(plugins)
 -- animation
 plugins = require("plugins_animation").setup(plugins)
 
+-- greeter
+plugins = require("plugins_greeter").setup(plugins)
+
 require("lazy").setup(plugins, opts)
 
 --- local packer = require("packer")
