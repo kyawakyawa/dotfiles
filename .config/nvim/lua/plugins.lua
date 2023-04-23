@@ -27,6 +27,9 @@ plugins = require('plugins_fuzzy_finder').setup(plugins)
 -- file explorer
 plugins = require('plugins_file_explorer').setup(plugins)
 
+ -- line
+plugins = require('plugins_line').setup(plugins)
+
 -- notify
 plugins = require('plugins_notify').setup(plugins)
 
@@ -57,9 +60,6 @@ require("lazy").setup(plugins, opts)
 ---   -- Packer can manage itself
 ---   use 'wbthomason/packer.nvim'
 -- 
----   -- file explorer
----   require('packer_file_explorer').setup(use)
---- 
 ---   -- line
 ---   require('packer_line').setup(use)
 --- 
