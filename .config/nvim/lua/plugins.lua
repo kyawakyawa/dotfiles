@@ -45,6 +45,9 @@ plugins = require('plugins_tokyonight').setup(plugins)
 -- dap
 plugins =  require('plugins_dap').setup(plugins)
 
+-- term
+plugins = require('plugins_term').setup(plugins)
+
 -- notify
 plugins = require('plugins_notify').setup(plugins)
 
