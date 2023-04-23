@@ -54,6 +54,8 @@ plugins = require('plugins_scrollview').setup(plugins)
 -- notify
 plugins = require('plugins_notify').setup(plugins)
 
+-- noice
+plugins = require('plugins_noice').setup(plugins)
 
 require("lazy").setup(plugins, opts)
 
@@ -83,15 +85,4 @@ require("lazy").setup(plugins, opts)
 --- 
 ---   -- -- nightfox colorscheme
 ---   -- require('packer_nightfox').setup(use)
---- 
----   -- term
----   require('packer_term').setup(use)
---- 
---- 
----   -- notify
----   require('packer_notify').setup(use)
---- 
----   -- noice
----   require('packer_noice').setup(use)
---- 
 --- end)
