@@ -4,7 +4,6 @@ fuzzy_finder.setup = function(plugins)
 
   table.insert(plugins, {
     'nvim-telescope/telescope.nvim',branch = '0.1.x',
-    dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       local bufopts = { noremap=true }
       vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, bufopts)
@@ -28,6 +27,9 @@ fuzzy_finder.setup = function(plugins)
       --nnoremap <leader>fd <cmd>lua require('telescope.builtin').diagnostics()<cr>
       --nnoremap gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
     end,
+    lazy = true,
+    keys = { "<leader>" },
+    dependencies = { 'nvim-lua/plenary.nvim' },
   })
 
   return plugins

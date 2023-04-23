@@ -2,15 +2,22 @@ local nvim_lsp = {}
 
 nvim_lsp.setup = function(plugins)
 
-  -- nvim-lspconfig & mason.nvim
-  table.insert(plugins, {
-    "williamboman/mason.nvim",
-  })
-  table.insert(plugins, {
-    "williamboman/mason-lspconfig.nvim",
-  })
   table.insert(plugins, {
     "neovim/nvim-lspconfig",
+    lazy = true,
+    config = function() 
+      require("nvim_lsp_cfg")
+    end,
+    event = { "BufReadPost", "BufAdd", "BufNewFile" },
+    dependencies = {
+		  { "williamboman/mason.nvim" } ,
+		  { "williamboman/mason-lspconfig.nvim" },
+      { "j-hui/fidget.nvim",
+        config = function()
+          require("fidget").setup()
+        end
+     },
+	  },
   })
 
   -- -- lspsage.nvim
@@ -50,15 +57,6 @@ nvim_lsp.setup = function(plugins)
   --     require("lsp_signature").setup(signature_config)
   --   end
   -- }
-
-  -- fidget.nvim
-  table.insert(plugins, {
-    'j-hui/fidget.nvim',
-    config = function()
-      require("fidget").setup()
-    end,
-  })
-
   return plugins
 end
 

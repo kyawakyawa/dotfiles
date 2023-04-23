@@ -8,8 +8,12 @@ file_explorer.setup = function(plugins)
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
-    }
+    },
     -- TODO config
+    lazy = true,
+    cmd = {
+		  "Neotree",
+	  },
   })
 
   return plugins

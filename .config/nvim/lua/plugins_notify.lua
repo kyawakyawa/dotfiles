@@ -19,6 +19,11 @@ notify.setup = function(plugins)
       --   augroup END
       -- ]]
     end,
+    lazy = true,
+    event = "VeryLazy",
+    dependencies = {
+      'nvim-lua/plenary.nvim'
+    }
   })
 
   return plugins

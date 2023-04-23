@@ -15,9 +15,6 @@ local plugins = {}
 
 -- plugins = require("hoge").setup(plugins)
 
--- deps
-plugins = require('plugins_deps').setup(plugins)
-
  -- nvim lsp
 plugins = require('plugins_nvim_lsp').setup(plugins)
 
