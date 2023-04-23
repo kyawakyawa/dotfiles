@@ -9,7 +9,7 @@ deps.setup = function(plugins)
 
   -- nvim-web-devicons
   table.insert(plugins, {
-    'kyazdani42/nvim-web-devicons'
+    'nvim-tree/nvim-web-devicons'
   })
 
   -- nui.nvim

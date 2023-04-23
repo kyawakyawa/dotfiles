@@ -6,7 +6,7 @@ deps.setup = function(use)
   use 'nvim-lua/plenary.nvim'
 
   -- nvim-web-devicons
-  use 'kyazdani42/nvim-web-devicons'
+  use 'nvim-tree/nvim-web-devicons'
 
   -- nui.nvim
   use 'MunifTanjim/nui.nvim'
