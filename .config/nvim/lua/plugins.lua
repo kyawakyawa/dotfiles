@@ -33,6 +33,9 @@ plugins = require('plugins_line').setup(plugins)
 -- git
 plugins = require('plugins_git').setup(plugins)
 
+-- brackets
+plugins = require('plugins_brackets').setup(plugins)
+
 -- notify
 plugins = require('plugins_notify').setup(plugins)
 
@@ -63,14 +66,7 @@ require("lazy").setup(plugins, opts)
 ---   -- Packer can manage itself
 ---   use 'wbthomason/packer.nvim'
 -- 
----   -- line
----   require('packer_line').setup(use)
 --- 
----   -- git
----   require('packer_git').setup(use)
---- 
----   -- brackets
----   require('packer_brackets').setup(use)
 --- 
 ---   -- syntax highlight
 ---   require('packer_syntax_highlight').setup(use)
