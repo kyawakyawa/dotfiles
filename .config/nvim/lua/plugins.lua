@@ -57,6 +57,9 @@ plugins = require('plugins_notify').setup(plugins)
 -- noice
 plugins = require('plugins_noice').setup(plugins)
 
+-- animation
+plugins = require("plugins_animation").setup(plugins)
+
 require("lazy").setup(plugins, opts)
 
 --- local packer = require("packer")
