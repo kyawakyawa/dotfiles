@@ -36,6 +36,8 @@ plugins = require('plugins_git').setup(plugins)
 -- brackets
 plugins = require('plugins_brackets').setup(plugins)
 
+-- syntax highlight
+plugins = require('plugins_syntax_highlight').setup(plugins)
 -- notify
 plugins = require('plugins_notify').setup(plugins)
 
@@ -65,11 +67,6 @@ require("lazy").setup(plugins, opts)
 --- return packer.startup(function(use)
 ---   -- Packer can manage itself
 ---   use 'wbthomason/packer.nvim'
--- 
---- 
---- 
----   -- syntax highlight
----   require('packer_syntax_highlight').setup(use)
 --- 
 ---   -- tokyonight colorscheme
 ---   require('packer_tokyonight').setup(use)
