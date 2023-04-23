@@ -28,6 +28,17 @@ brackets.setup = function(plugins)
 	  event = "BufReadPost", 
   })
 
+  -- mini.indentscope.nvim
+  table.insert(plugins, { 
+    'echasnovski/mini.indentscope', 
+    version = '*',
+    config = function()
+      require('mini.indentscope').setup()
+    end,
+    lazy = true,
+	  event = "BufReadPost", 
+  })
+
   -- -- nvim-autopairs
   -- use {
 	 --  "windwp/nvim-autopairs",
