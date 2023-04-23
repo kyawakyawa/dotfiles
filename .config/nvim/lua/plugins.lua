@@ -40,7 +40,10 @@ plugins = require('plugins_brackets').setup(plugins)
 plugins = require('plugins_syntax_highlight').setup(plugins)
 
 -- tokyonight colorscheme
-plugins= require('plugins_tokyonight').setup(plugins)
+plugins = require('plugins_tokyonight').setup(plugins)
+
+-- dap
+plugins =  require('plugins_dap').setup(plugins)
 
 -- notify
 plugins = require('plugins_notify').setup(plugins)
@@ -72,14 +75,8 @@ require("lazy").setup(plugins, opts)
 ---   -- Packer can manage itself
 ---   use 'wbthomason/packer.nvim'
 --- 
----   -- tokyonight colorscheme
----   require('packer_tokyonight').setup(use)
---- 
 ---   -- -- nightfox colorscheme
 ---   -- require('packer_nightfox').setup(use)
---- 
----   -- dap
----   require('packer_dap').setup(use)
 --- 
 ---   -- term
 ---   require('packer_term').setup(use)
