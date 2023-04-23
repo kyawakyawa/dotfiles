@@ -30,6 +30,9 @@ plugins = require('plugins_file_explorer').setup(plugins)
  -- line
 plugins = require('plugins_line').setup(plugins)
 
+-- git
+plugins = require('plugins_git').setup(plugins)
+
 -- notify
 plugins = require('plugins_notify').setup(plugins)
 
