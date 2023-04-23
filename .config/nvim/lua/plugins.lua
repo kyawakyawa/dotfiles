@@ -48,6 +48,9 @@ plugins =  require('plugins_dap').setup(plugins)
 -- term
 plugins = require('plugins_term').setup(plugins)
 
+-- scrollview
+plugins = require('plugins_scrollview').setup(plugins)
+
 -- notify
 plugins = require('plugins_notify').setup(plugins)
 
@@ -84,8 +87,6 @@ require("lazy").setup(plugins, opts)
 ---   -- term
 ---   require('packer_term').setup(use)
 --- 
----   -- codewindow
----   require('packer_codewindow').setup(use)
 --- 
 ---   -- notify
 ---   require('packer_notify').setup(use)
