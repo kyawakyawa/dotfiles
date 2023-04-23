@@ -18,6 +18,12 @@ local plugins = {}
 -- deps
 plugins = require('plugins_deps').setup(plugins)
 
+ -- nvim lsp
+plugins = require('plugins_nvim_lsp').setup(plugins)
+
+-- complement
+plugins = require('plugins_complement').setup(plugins)
+
 -- fuzzy finder
 plugins = require('plugins_fuzzy_finder').setup(plugins)
 
