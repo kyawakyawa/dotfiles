@@ -27,7 +27,7 @@ local on_attach = function(client, bufnr)
   -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { sync = false, timeout_ms=5000  } end, bufopts)
+  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { sync = false, timeout_ms=20000  } end, bufopts)
 
   -- ref https://zenn.dev/link/comments/fd67dab010b7d5
   -- ref https://github.com/haskell/haskell-language-server/issues/1148#issuecomment-887858195
@@ -114,5 +114,5 @@ end
 -- format on save
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
   pattern = {"*"},
-  callback = function() vim.lsp.buf.format { sync = false } end,
+  callback = function() vim.lsp.buf.format { sync = false, timeout_ms=20000 } end,
 })
