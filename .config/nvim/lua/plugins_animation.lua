@@ -94,6 +94,17 @@ animation.setup = function(plugins)
 
         vim.api.nvim_set_keymap('n', 'gg', 'gg:lua require("specs").show_specs( {width = 50, winhl = "Search", delay_ms = 0, inc_ms = 10} )<CR>', { noremap = true, silent = true })
         vim.api.nvim_set_keymap('n', '<S-G>', '<S-G>:lua require("specs").show_specs( {width = 50, winhl = "Search", delay_ms = 0, inc_ms = 10} )<CR>', { noremap = true, silent = true })
+
+        settings = { width=24, winhl = "Search", inc_ms=20 }
+        vim.api.nvim_set_keymap('n', '<C-w><C-w>', '<C-w><C-w>:lua require("specs").show_specs(settings)<CR>', { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', '<C-w><C-j>', '<C-w><C-j>:lua require("specs").show_specs(settings)<CR>', { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', '<C-w><C-k>', '<C-w><C-k>:lua require("specs").show_specs(settings)<CR>', { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', '<C-w><C-h>', '<C-w><C-h>:lua require("specs").show_specs(settings)<CR>', { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', '<C-w><C-l>', '<C-w><C-l>:lua require("specs").show_specs(settings)<CR>', { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', '<C-w>j', '<C-w>j:lua require("specs").show_specs(settings)<CR>', { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', '<C-w>k', '<C-w>k:lua require("specs").show_specs(settings)<CR>', { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', '<C-w>h', '<C-w>h:lua require("specs").show_specs(settings)<CR>', { noremap = true, silent = true })
+        vim.api.nvim_set_keymap('n', '<C-w>l', '<C-w>l:lua require("specs").show_specs(settings)<CR>', { noremap = true, silent = true })
       end,
       lazy = true,
       event = "BufReadPost", 
