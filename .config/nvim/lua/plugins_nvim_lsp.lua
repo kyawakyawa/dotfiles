@@ -19,7 +19,20 @@ nvim_lsp.setup = function(plugins)
      },
 	  },
   })
-
+  -- lspsage.nvim
+  table.insert(plugins, {
+    "glepnir/lspsaga.nvim",
+    branch = "main",
+    config = function()
+      require('lspsaga_cfg')
+    end,
+    dependencies = {
+      { "nvim-tree/nvim-web-devicons" },
+    },
+    lazy=true,
+    event = { "BufReadPost", "BufAdd", "BufNewFile" },
+  })
+ 
   -- -- lspsage.nvim
   -- use({
   --   "glepnir/lspsaga.nvim",
