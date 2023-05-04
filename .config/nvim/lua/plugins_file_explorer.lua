@@ -250,7 +250,7 @@ file_explorer.setup = function(plugins)
           }
         }
       })
-      vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
+      -- vim.cmd([[nnoremap \ :Neotree reveal<cr>]]) -- Telescopeと競合するのでDisable
     end,
   })
 
