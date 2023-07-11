@@ -21,13 +21,14 @@ PS1="\[\033[1;32m\]\$(date +%Y/%m/%d_%H:%M:%S)\[\033[0m\] \[\033[33m\]\H:\w\n\[\
 
 RUN_SSH_AGENT=$(pidof ssh-agent | wc -l)
 if [ $RUN_SSH_AGENT -eq 1 ]; then
-  # 起動している場合は↓のファイルを読む
-  . $HOME/.keychain/$(hostname)-sh
+  # 起動している場合は `$HOME/.keychain/$(hostname)-sh` をsource
+  :
 else
-  # 起動してない場合はssh-agent起動し，内容をファイルに保存．
+  # 起動してない場合はssh-agent起動し，内容をファイルに保存したうえでsource．
   # ssh-addもやってくれる
   /usr/bin/keychain -q --nogui $HOME/.ssh/id_rsa
 fi
+. $HOME/.keychain/$(hostname)-sh
 
 if [ -e ~/.setup-envs ]; then
     . ~/.setup-envs
