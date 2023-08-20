@@ -13,10 +13,11 @@ nvim_lsp.setup = function(plugins)
 		  { "williamboman/mason.nvim" } ,
 		  { "williamboman/mason-lspconfig.nvim" },
       { "j-hui/fidget.nvim",
+        tag = "legacy",
         config = function()
           require("fidget").setup()
         end
-     },
+      },
 	  },
   })
   -- lspsage.nvim
