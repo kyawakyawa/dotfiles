@@ -61,10 +61,27 @@ require('mason-lspconfig').setup_handlers {
     }
 
     if server_name == 'efm' then
-      setting.cmd = {
-        "efm-langserver", -- 何故かconfig.yamlを読まない？のでこちらを追加
+      setting = {
+          init_options = {documentFormatting = true},
+          settings = {
+              rootMarkers = {".git/"},
+              languages = {
+                  lua = {
+                      {formatCommand = "lua-format -i", formatStdin = true}
+                  },
+                  python = {
+                    {formatCommand = "black", formatStdin = true}
+                  }
+              },
+              commands = {
+                -- 何故かconfig.yamlを読まない？のでこちらを追加
+                command = "efm-langserver",
+                arguments = { "-c", "~/.config/efm-langserver/config.yaml" } -- TODO: Windows用の設定
+              }
+          },
+          capabilities = capabilities,
+          filetypes = { 'python' },
       }
-      setting.filetypes = { 'python' }
     end
 
     if server_name == 'clangd' then
@@ -110,6 +127,27 @@ if use_ccls then
     end,
   }
 end
+
+-- lspconfig.efm.setup {
+--     init_options = {documentFormatting = true},
+--     settings = {
+--         rootMarkers = {".git/"},
+--         languages = {
+--             lua = {
+--                 {formatCommand = "lua-format -i", formatStdin = true}
+--             },
+--             python = {
+--               {formatCommand = "black", formatStdin = true}
+--             }
+--         },
+--         commands = {
+--           command = "efm-langserver",
+--           arguments = { "-c", "~/.config/efm-langserver/config.yaml" }
+--         }
+--     },
+--     capabilities = capabilities,
+--     filetypes = { 'python' },
+-- }
 
 -- format on save
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
