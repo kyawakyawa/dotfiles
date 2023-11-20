@@ -17,6 +17,9 @@ fuzzy_finder.setup = function(plugins)
       vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, {
         noremap=true, silent=true
       })
+      vim.keymap.set('n', '<leader>gr', require('telescope.builtin').lsp_references, {
+        noremap=true, silent=true
+      })
 
       --nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
       --nnoremap <leader>fgr <cmd>lua require('telescope.builtin').live_grep()<cr>
