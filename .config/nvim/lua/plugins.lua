@@ -63,6 +63,9 @@ plugins = require("plugins_animation").setup(plugins)
 -- greeter
 plugins = require("plugins_greeter").setup(plugins)
 
+-- window
+plugins = require("plugins_window").setup(plugins)
+
 require("lazy").setup(plugins, opts)
 
 --- local packer = require("packer")
