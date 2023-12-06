@@ -12,17 +12,6 @@ git.setup = function(plugins)
 	  event = { "CursorHold", "CursorHoldI" },
   })
 
-  -- -- diffview.nvim
-  -- use 'sindrets/diffview.nvim'
-
-  -- -- vgit.nvim
-  -- use ({
-  --   'tanvirtin/vgit.nvim',
-  --   config = function()
-  --     require('vgit').setup()
-  --   end,
-  -- })
-
   return plugins
 end
 
