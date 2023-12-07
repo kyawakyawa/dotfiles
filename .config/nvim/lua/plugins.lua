@@ -66,6 +66,9 @@ plugins = require("plugins_animation").setup(plugins)
 -- greeter
 plugins = require("plugins_greeter").setup(plugins)
 
+-- which-key.nvim
+plugins = require('plugins_which_key').setup(plugins)
+
 -- window
 plugins = require("plugins_window").setup(plugins)
 
