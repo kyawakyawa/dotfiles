@@ -39,6 +39,9 @@ plugins = require('plugins_brackets').setup(plugins)
 -- syntax highlight
 plugins = require('plugins_syntax_highlight').setup(plugins)
 
+-- nvim treesitter
+plugins = require('plugins_nvim_treesitter').setup(plugins)
+
 -- tokyonight colorscheme
 plugins = require('plugins_tokyonight').setup(plugins)
 
