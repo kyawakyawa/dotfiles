@@ -5,6 +5,18 @@ fuzzy_finder.setup = function(plugins)
   table.insert(plugins, {
     'nvim-telescope/telescope.nvim',branch = '0.1.x',
     config = function()
+      require("telescope").setup({
+        -- the rest of your telescope config goes here
+        extensions = {
+          undo = {
+            -- telescope-undo.nvim config, see below
+          },
+          -- other extensions:
+          -- file_browser = { ... }
+        },
+      })
+      require("telescope").load_extension("undo")
+
       local bufopts = { noremap=true }
       vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, bufopts)
       vim.keymap.set('n', '<leader>fgr', require('telescope.builtin').live_grep, bufopts)
@@ -20,6 +32,7 @@ fuzzy_finder.setup = function(plugins)
       vim.keymap.set('n', '<leader>gr', require('telescope.builtin').lsp_references, {
         noremap=true, silent=true
       })
+      vim.keymap.set("n", "<leader>u", require("telescope").extensions.undo.undo, bufopts)
 
       --nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
       --nnoremap <leader>fgr <cmd>lua require('telescope.builtin').live_grep()<cr>
@@ -32,7 +45,10 @@ fuzzy_finder.setup = function(plugins)
     end,
     lazy = true,
     keys = { "<leader>" },
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = { 
+      'nvim-lua/plenary.nvim' ,
+      "debugloop/telescope-undo.nvim",
+    },
   })
 
   return plugins
