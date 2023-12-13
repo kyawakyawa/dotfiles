@@ -27,7 +27,7 @@ plugins = require('plugins_fuzzy_finder').setup(plugins)
 -- file explorer
 plugins = require('plugins_file_explorer').setup(plugins)
 
- -- line
+-- line
 plugins = require('plugins_line').setup(plugins)
 
 -- git
@@ -47,6 +47,9 @@ plugins = require('plugins_tokyonight').setup(plugins)
 
 -- dap
 plugins =  require('plugins_dap').setup(plugins)
+
+-- rsync
+plugins = require('plugins_rsync').setup(plugins)
 
 -- term
 plugins = require('plugins_term').setup(plugins)
