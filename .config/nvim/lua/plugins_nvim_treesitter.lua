@@ -85,7 +85,11 @@ treesitter.setup = function(plugins)
     table.insert(plugins, {
       "nvim-treesitter/nvim-treesitter-context",
       config = function()
-        require("treesitter-context").setup()
+        require("treesitter-context").setup({
+          enable = true,
+          max_lines = 5,
+          min_window_height = 3,
+        })
       end,
       lazy = true,
       event = "BufReadPost",
