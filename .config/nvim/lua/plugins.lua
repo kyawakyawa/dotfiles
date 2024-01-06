@@ -42,8 +42,11 @@ plugins = require('plugins_syntax_highlight').setup(plugins)
 -- nvim treesitter
 plugins = require('plugins_nvim_treesitter').setup(plugins)
 
+-- -- tokyonight colorscheme
+-- plugins = require('plugins_tokyonight').setup(plugins)
+
 -- tokyonight colorscheme
-plugins = require('plugins_tokyonight').setup(plugins)
+plugins = require('plugins_solarized_osaka').setup(plugins)
 
 -- dap
 plugins =  require('plugins_dap').setup(plugins)
