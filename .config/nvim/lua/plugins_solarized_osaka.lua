@@ -11,7 +11,7 @@ solarized_osaka.setup = function(plugins)
         require("solarized-osaka").setup({
           transparent = true,
         })
-        vim.cmd[[colorscheme solarized-osak]]
+        vim.cmd[[colorscheme solarized-osaka]]
       end,
   })
 
