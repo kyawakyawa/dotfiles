@@ -13,6 +13,27 @@ vim.opt.hidden = true
 vim.opt.termguicolors = true
 vim.opt.updatetime = 250
 vim.opt.laststatus = 3 -- https://wed.dev/blog/posts/neovim-statuline
+
+function checkMicrosoftInProcVersion()
+    local file = io.open("/proc/version", "r")
+    
+    if file then
+        local content = file:read("*all")
+        file:close()
+
+        if content and string.find(content, "microsoft") then
+            return true
+        else
+            return false
+        end
+    else
+        return false
+    end
+end
+
+function isWSL()
+  return checkMicrosoftInProcVersion()
+end
   
 if not vim.g.vscode then
   -- For OpenCL
@@ -27,15 +48,26 @@ if not vim.g.vscode then
   require('plugins') -- プラグインの読み込み
 end
 
--- Macの時
-if require('util').OSX() then
+if isWSL() then
+  --WSLの時
+
+  -- Windows側にzenhan.exeを置き、WSL側にシンボリックリンク /usr/local/bin/zenhan を作成
+  -- For IME
+  vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+    pattern = { "*" },
+    callback = function()
+      vim.fn.system('zenhan 0')
+    end,
+  })
+elseif require('util').OSX() then
+  -- Macの時
   -- For IME
   vim.api.nvim_create_autocmd({ "InsertLeave" }, {
     pattern = { "*" },
     callback = function() vim.fn.system('im-select com.apple.inputmethod.Kotoeri.RomajiTyping.Roman') end,
   })
--- Linuxのとき
 else
+  -- Linuxのとき
   -- For IME
   vim.api.nvim_create_autocmd({ "InsertLeave" }, {
     pattern = { "*" },
