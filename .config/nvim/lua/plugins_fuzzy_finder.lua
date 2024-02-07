@@ -25,7 +25,7 @@ fuzzy_finder.setup = function(plugins)
       vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, bufopts)
       vim.keymap.set('n', '<leader>fq', require('telescope.builtin').quickfix, bufopts)
       vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, bufopts)
-      vim.keymap.set('n', '<leader>fnot', require('telescope').extensions.notify.notify, bufopts)
+      vim.keymap.set('n', '<leader>fnt', require('telescope').extensions.notify.notify, bufopts)
       vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, {
         noremap=true, silent=true
       })
@@ -33,6 +33,10 @@ fuzzy_finder.setup = function(plugins)
         noremap=true, silent=true
       })
       vim.keymap.set("n", "<leader>u", require("telescope").extensions.undo.undo, bufopts)
+
+      vim.keymap.set("n", "<leader>fre", require("telescope.builtin").registers, bufopts)
+
+      vim.keymap.set("n", "<leader>fw", require("telescope").extensions.windows.list, bufopts)
 
       --nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
       --nnoremap <leader>fgr <cmd>lua require('telescope.builtin').live_grep()<cr>
@@ -48,6 +52,7 @@ fuzzy_finder.setup = function(plugins)
     dependencies = { 
       'nvim-lua/plenary.nvim' ,
       "debugloop/telescope-undo.nvim",
+      "kyoh86/telescope-windows.nvim",
     },
   })
 
