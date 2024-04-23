@@ -66,8 +66,8 @@ vim.g.clipboard = {
 end
 
 
-if isWSL() then
-  --WSLの時
+if isWSL() or vim.fn.has("win32") then
+  --WSL or Windows の時
 
   -- Windows側にzenhan.exeを置き、WSL側にシンボリックリンク /usr/local/bin/zenhan を作成
   -- For IME
