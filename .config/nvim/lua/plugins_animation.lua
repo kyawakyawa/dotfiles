@@ -52,7 +52,8 @@ animation.setup = function(plugins)
     })
 
     table.insert(plugins, {
-      'edluffy/specs.nvim',
+      -- 'edluffy/specs.nvim',
+      'cxwx/specs.nvim',
       config = function()
         require('specs').setup{ 
             show_jumps  = true,
