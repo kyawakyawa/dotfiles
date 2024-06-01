@@ -21,6 +21,9 @@ plugins = require('plugins_nvim_lsp').setup(plugins)
 -- complement
 plugins = require('plugins_complement').setup(plugins)
 
+-- copilot
+plugins = require('plugins_copilot').setup(plugins)
+
 -- fuzzy finder
 plugins = require('plugins_fuzzy_finder').setup(plugins)
 
