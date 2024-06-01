@@ -90,6 +90,10 @@ config.audible_bell = "Disabled"
 config.colors = {
   visual_bell = "#202020",
 }
+if is_windows() then
+  config.term = 'xterm-256color' -- TERM=xterm-256colorになる
+else 
 config.term = 'wezterm' -- TERM=weztermになる
+end
 
 return config
