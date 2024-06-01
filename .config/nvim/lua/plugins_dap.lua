@@ -12,6 +12,7 @@ dap.setup = function(plugins)
       { "rcarriga/nvim-dap-ui" },
       { 'theHamsta/nvim-dap-virtual-text' },
       { 'mfussenegger/nvim-dap-python' },
+      { 'nvim-neotest/nvim-nio' },
     },
     lazy = true,
     keys = {
