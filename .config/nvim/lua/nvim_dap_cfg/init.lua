@@ -3,7 +3,8 @@
 
 
 require('dap.ext.vscode').load_launchjs(nil, { 
-  lldb = {'c', 'cpp'} -- dap.configurations.cpp の変わりにlaunch.jsonを使う
+  lldb = {'c', 'cpp'}, -- dap.configurations.cpp の変わりにlaunch.jsonを使う
+  debugpy = {'python'}
 })
 -- 参考
 -- - https://github.com/mfussenegger/nvim-dap/issues/20#issuecomment-1212214935
