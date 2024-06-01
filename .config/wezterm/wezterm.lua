@@ -16,8 +16,8 @@ end
 
 if is_linux() then
   config.default_prog = { "/bin/bash" }
-elseif is_darwin() then
-  config.default_prog = { "/bin/zsh" }
+-- elseif is_darwin() then
+--   config.default_prog = { "/bin/zsh" }
 elseif is_windows() then
   config.default_prog = { "wsl.exe", "--distribution", "Arch", "--cd", "~" }
 end
