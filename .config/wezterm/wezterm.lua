@@ -69,6 +69,9 @@ config.color_scheme = "Solarized Dark Higher Contrast"
 -- config.color_scheme = "tokyonight-storm",
 -- config.color_scheme = "terafox",
 config.window_background_opacity=0.8
+if is_linux() then
+  config.window_background_opacity=0.94
+end
 
 -- Key
 config.keys = {
