@@ -56,6 +56,10 @@ end
 
 -- Font
 config.font_size = 12.0
+if is_darwin() then
+  config.font_size = 10.5
+end
+
 config.font = wezterm.font_with_fallback({
   "Delugia",
   "HackGenNerd",
