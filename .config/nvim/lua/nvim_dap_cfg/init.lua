@@ -28,6 +28,7 @@ local function map(mode, lhs, rhs, opts)
 end
 
 map("n", "<leader>d", ":lua require'dapui'.toggle()<CR>", { silent = true})
+map("n", "<leader>w", ":lua require'dapui'.elements.watches.add()<CR>", { silent = true})
 map("n", "<leader><leader>df", ":lua require'dapui'.eval()<CR>", { silent = true})
 map("n", "<F5>", ":lua require'dap'.continue()<CR>", { silent = true})
 map("n", "<F10>", ":lua require'dap'.step_over()<CR>", { silent = true})

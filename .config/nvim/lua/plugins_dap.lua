@@ -15,8 +15,10 @@ dap.setup = function(plugins)
       { 'nvim-neotest/nvim-nio' },
     },
     lazy = true,
+    event = "VeryLazy",
     keys = {
       "<leader>d",
+      "<leader>w",
       "<leader><leader>df",
       "<F5>",
       "<F10>",
