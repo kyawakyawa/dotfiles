@@ -56,7 +56,7 @@ end
 
 -- Font
 config.font_size = 12.0
-if is_darwin() then
+if is_darwin() or is_windows() then
   config.font_size = 10.5
 end
 
@@ -75,6 +75,9 @@ config.color_scheme = "Solarized Dark Higher Contrast"
 config.window_background_opacity=0.8
 if is_linux() then
   config.window_background_opacity=0.94
+end
+if is_windows() then
+  config.window_background_opacity=0.95
 end
 
 -- Key
