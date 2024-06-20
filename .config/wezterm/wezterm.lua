@@ -56,8 +56,11 @@ end
 
 -- Font
 config.font_size = 12.0
-if is_darwin() or is_windows() then
+if is_darwin() then
   config.font_size = 10.5
+end
+if is_windows() then
+  config.font_size = 9.5
 end
 
 config.font = wezterm.font_with_fallback({
