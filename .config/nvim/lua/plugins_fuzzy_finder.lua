@@ -14,6 +14,12 @@ fuzzy_finder.setup = function(plugins)
           -- other extensions:
           -- file_browser = { ... }
         },
+        pickers = {
+          find_files = {
+            -- デフォルトではドットファイルを無視しますが、以下の設定で無視しないようにします
+            find_command = {'rg', '--files', '--hidden', '--glob', '!.git/*', '--glob', '!*.cache/*'}
+          },
+        },
       })
       require("telescope").load_extension("undo")
 
