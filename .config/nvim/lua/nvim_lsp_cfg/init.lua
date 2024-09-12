@@ -115,6 +115,14 @@ require('mason-lspconfig').setup_handlers {
       --   }
       -- end
       setting.before_init = function(_, config)
+
+        local venv_path = require("nvim_lsp_cfg/venv").search_venv_path(config.root_dir)
+        if venv_path ~= nil then
+          -- pythonPathをvenvに設定
+          config.settings.python.venvPath = venv_path
+          config.settings.python.pythonPath = venv_path .. '/bin/python'
+        end
+
         -- ワークスペースディレクトリがpoetryのプロジェクトか確認する
         local poetry_venv_path = require("nvim_lsp_cfg/poetry").get_poetry_venv_path(config.root_dir)
         if poetry_venv_path ~= nil then
