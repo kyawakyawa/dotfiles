@@ -104,6 +104,36 @@ require('mason-lspconfig').setup_handlers {
       end
     end
 
+    if server_name == 'pyright' then
+      -- local poetry_venv_path = require("nvim_lsp_cfg/poetry").get_poetry_venv_path()
+      -- if poetry_venv_path ~= nil then
+      --   setting.settings = {
+      --     python = {
+      --       venvPath = poetry_venv_path,
+      --       pythonPath = poetry_venv_path .. '/bin/python'
+      --     }
+      --   }
+      -- end
+      setting.before_init = function(_, config)
+
+        local venv_path = require("nvim_lsp_cfg/venv").search_venv_path(config.root_dir)
+        if venv_path ~= nil then
+          -- pythonPathをvenvに設定
+          config.settings.python.venvPath = venv_path
+          config.settings.python.pythonPath = venv_path .. '/bin/python'
+        end
+
+        -- ワークスペースディレクトリがpoetryのプロジェクトか確認する
+        local poetry_venv_path = require("nvim_lsp_cfg/poetry").get_poetry_venv_path(config.root_dir)
+        if poetry_venv_path ~= nil then
+          -- pythonPathをpoetryのvirtualenvに設定
+          config.settings.python.venvPath = poetry_venv_path
+          config.settings.python.pythonPath = poetry_venv_path .. '/bin/python'
+        end
+      end
+
+    end
+
     lspconfig[server_name].setup (setting)
   end,
 }
