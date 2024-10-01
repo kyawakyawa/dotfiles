@@ -81,6 +81,12 @@ plugins = require('plugins_which_key').setup(plugins)
 -- window
 plugins = require("plugins_window").setup(plugins)
 
+-- rest
+plugins = require("plugins_rest").setup(plugins)
+
+-- format
+plugins = require("plugins_format").setup(plugins)
+
 require("lazy").setup(plugins, opts)
 
 --- local packer = require("packer")
