@@ -150,7 +150,7 @@ treesitter.setup = function(plugins)
       end,
       dependencies = {
         'nvim-treesitter/nvim-treesitter',
-      }
+      },
       lazy = true,
     	event = "BufReadPost",
     })
