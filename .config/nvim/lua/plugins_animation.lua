@@ -14,28 +14,70 @@ animation.setup = function(plugins)
     table.insert(plugins, {
       'karb94/neoscroll.nvim',
       config = function()
-        require('neoscroll').setup({
-          easing_function = "quadratic" -- Default easing function
-          -- Set any other options as needed
+        neoscroll = require('neoscroll')
+
+        neoscroll.setup({
+          mappings = {                 -- Keys to be mapped to their corresponding default scrolling animation
+            '<C-u>', '<C-d>',
+            '<C-b>', '<C-f>',
+            '<C-y>', '<C-e>',
+            'zt', 'zz', 'zb',
+          },
+
         })
-        
-        local t = {}
-        -- Syntax: t[keys] = {function, {function arguments}}
-        -- Use the "sine" easing function
-        t['<C-u>'] = {'scroll', {'-vim.wo.scroll', 'true', '10', [['sine']]}}
-        t['<C-d>'] = {'scroll', { 'vim.wo.scroll', 'true', '10', [['sine']]}}
-        -- Use the "circular" easing function
-        t['<C-b>'] = {'scroll', {'-vim.api.nvim_win_get_height(0)', 'true', '15', [['circular']]}}
-        t['<C-f>'] = {'scroll', { 'vim.api.nvim_win_get_height(0)', 'true', '15', [['circular']]}}
-        -- Pass "nil" to disable the easing animation (constant scrolling speed)
-        t['<C-y>'] = {'scroll', {'-0.10', 'false', '10', nil}}
-        t['<C-e>'] = {'scroll', { '0.10', 'false', '10', nil}}
-        -- When no easing function is provided the default easing function (in this case "quadratic") will be used
-        t['zt']    = {'zt', {'10'}}
-        t['zz']    = {'zz', {'10'}}
-        t['zb']    = {'zb', {'10'}}
-        
-        require('neoscroll.config').set_mappings(t)
+
+        local get_rows = function()
+          local buf = vim.api.nvim_get_current_buf()
+          local line_count = vim.api.nvim_buf_line_count(buf)
+          local ui_info = vim.api.nvim_list_uis()[1]
+
+          -- 行数（高さ）を取得
+          local height = ui_info.height
+
+          -- vim.notify("現在のVim画面の行数: " .. height)
+          return height
+        end
+
+        local ctrl_udbf = function(callback, key, param)
+          rows = get_rows()
+
+          -- 行数が小さき時だけ
+          if rows <= 90 then
+            -- duration = math.floor(param / get_rows() * 30)
+            -- vim.notify("duration: " .. duration)
+            callback({ duration = param})
+          else
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, false, true), "n", false)
+          end
+        end
+
+        local limit_by_rows = function(callback, key)
+          local rows = get_rows()
+          -- vim.notify("rows: " .. tostring(rows))
+
+          -- 行数が小さき時だけ
+          if rows <= 75 then
+            callback()
+          else
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, false, true), "n", false)
+          end
+        end
+
+        local keymap = {
+          ["<C-u>"] = function() limit_by_rows(function() neoscroll.ctrl_u( { duration = 48 }) end, "<C-u>") end;
+          ["<C-d>"] = function() limit_by_rows(function() neoscroll.ctrl_d( { duration = 48 }) end, "<C-d>") end;
+          ["<C-b>"] = function() limit_by_rows(function() neoscroll.ctrl_b( { duration = 48 }) end, "<C-b>") end;
+          ["<C-f>"] = function() limit_by_rows(function() neoscroll.ctrl_f( { duration = 48 }) end, "<C-f>") end;
+          ["<C-y>"] = function() limit_by_rows(function() neoscroll.scroll(-0.1, { move_cursor=false; duration = 32 }) end, "<C-y>") end;
+          ["<C-e>"] = function() limit_by_rows(function() neoscroll.scroll(0.1, { move_cursor=false; duration = 32 }) end, "<C-e>") end;
+          ["zt"]    = function() limit_by_rows(function() neoscroll.zt({ half_win_duration = 48 }) end, "zt") end;
+          ["zz"]    = function() limit_by_rows(function() neoscroll.zz({ half_win_duration = 48 }) end, "zz") end;
+          ["zb"]    = function() limit_by_rows(function() neoscroll.zb({ half_win_duration = 48 }) end, "zb") end;
+        }
+        local modes = { 'n', 'v', 'x' }
+        for key, func in pairs(keymap) do
+          vim.keymap.set(modes, key, func)
+        end
       end,
       lazy = true,
       keys = {
