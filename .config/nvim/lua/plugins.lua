@@ -87,6 +87,9 @@ plugins = require("plugins_rest").setup(plugins)
 -- format
 plugins = require("plugins_format").setup(plugins)
 
+-- format
+plugins = require("plugins_json5").setup(plugins)
+
 require("lazy").setup(plugins, opts)
 
 --- local packer = require("packer")

@@ -54,6 +54,7 @@ fuzzy_finder.setup = function(plugins)
       --nnoremap gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
     end,
     lazy = true,
+    event = "VeryLazy",
     keys = { "<leader>" },
     dependencies = { 
       'nvim-lua/plenary.nvim' ,

@@ -1,7 +1,6 @@
 local dap = {}
 
 dap.setup = function(plugins)
-
   -- nvim-dap
   table.insert(plugins, {
     'mfussenegger/nvim-dap',

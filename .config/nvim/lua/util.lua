@@ -1,5 +1,22 @@
 local M = {}
 
+function checkMicrosoftInProcVersion()
+    local file = io.open("/proc/version", "r")
+    
+    if file then
+        local content = file:read("*all")
+        file:close()
+
+        if content and string.find(content, "microsoft") then
+            return true
+        else
+            return false
+        end
+    else
+        return false
+    end
+end
+
 function M.OSX()
 
   local has = function(x) 
@@ -15,5 +32,8 @@ function M.OSX()
   end
 end
 
-return M
+function M.isWSL()
+  return checkMicrosoftInProcVersion()
+end
 
+return M

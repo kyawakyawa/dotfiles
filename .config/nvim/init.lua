@@ -14,27 +14,6 @@ vim.opt.termguicolors = true
 vim.opt.updatetime = 250
 vim.opt.laststatus = 3 -- https://wed.dev/blog/posts/neovim-statuline
 
-function checkMicrosoftInProcVersion()
-    local file = io.open("/proc/version", "r")
-    
-    if file then
-        local content = file:read("*all")
-        file:close()
-
-        if content and string.find(content, "microsoft") then
-            return true
-        else
-            return false
-        end
-    else
-        return false
-    end
-end
-
-function isWSL()
-  return checkMicrosoftInProcVersion()
-end
-  
 if not vim.g.vscode then
   -- For OpenCL
   vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead"}, {
@@ -49,24 +28,24 @@ if not vim.g.vscode then
 end
 
 -- WSLの時の+/*レジスタの設定
-if isWSL() then
-vim.g.clipboard = {
-  -- Windows側にwin32yank.exeを置き、WSL側にシンボリックリンク /usr/local/bin/win32yank を作成
-  name = "win32yank-wsl",
-  copy = {
-    ["+"] = "win32yank -i --crlf",
-    ["*"] = "win32yank -i --crlf"
-  },
-  paste = {
-    ["+"] = "win32yank -o --lf",
-    ["*"] = "win32yank -o --lf"
-  },
-  cache_enable = 0,
-}
+if require('util').isWSL() then
+  vim.g.clipboard = {
+    -- Windows側にwin32yank.exeを置き、WSL側にシンボリックリンク /usr/local/bin/win32yank を作成
+    name = "win32yank-wsl",
+    copy = {
+      ["+"] = "win32yank -i --crlf",
+      ["*"] = "win32yank -i --crlf"
+    },
+    paste = {
+      ["+"] = "win32yank -o --lf",
+      ["*"] = "win32yank -o --lf"
+    },
+    cache_enable = 0,
+  }
 end
 
 
-if isWSL() or vim.fn.has("win32") then
+if require('util').isWSL() or vim.fn.has("win32") then
   --WSL or Windows の時
 
   -- Windows側にzenhan.exeを置き、WSL側にシンボリックリンク /usr/local/bin/zenhan を作成

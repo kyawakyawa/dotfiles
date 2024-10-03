@@ -1,11 +1,10 @@
 local window = {}
 
 window.setup = function(plugins)
-
     table.insert(plugins, {
         'anuvyklack/windows.nvim',
         requires = { 'anuvyklack/middleclass', 'anuvyklack/animation.nvim' },
-        config = function ()
+        config = function()
             vim.o.winwidth = 10
             vim.o.winminwidth = 10
             vim.o.equalalways = false
