@@ -11,4 +11,5 @@ vim.cmd([[
   set cursorline
   set smartindent
   set hidden
+  colorscheme vim
 ]])
