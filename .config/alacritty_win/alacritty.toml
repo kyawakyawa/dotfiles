@@ -1,0 +1,11 @@
+[shell]
+program = 'wsl'
+args = ['~']
+
+
+[font]
+normal = { family = "HackGen Console NF", style = "Regular" }
+bold = { family = "HackGen Console NF", style = "Bold" }
+italic = { family = "HackGen Console NF", style = "Italic" }
+bold_italic = { family = "HackGen Console NF", style = "Bold Italic" }
+size = 13.0

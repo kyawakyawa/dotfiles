@@ -1,0 +1,7 @@
+live_config_reload = true
+
+import = [
+  "~/dotfiles/.config/alacritty/alacritty-common.toml",
+  "~/dotfiles/.config/alacritty/alacritty-win.toml",
+  "~/dotfiles/.config/alacritty/alacritty-unix.toml",
+]
