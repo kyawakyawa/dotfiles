@@ -27,5 +27,5 @@ function Create-SymbolicLinkIfNotExists {
 }
 
 Create-SymbolicLinkIfNotExists -SourcePath $HOME\dotfiles\.config\wezterm -LinkPath $HOME\.config\wezterm
-Create-SymbolicLinkIfNotExists -SourcePath $HOME\dotfiles\.config\alacritty -LinkPath $HOME\.config\alacritty
+Create-SymbolicLinkIfNotExists -SourcePath $HOME\dotfiles\.config\alacritty -LinkPath $env:APPDATA\alacritty
 Create-SymbolicLinkIfNotExists -SourcePath $HOME\dotfiles\.config\kitty -LinkPath $HOME\.config\kitty
