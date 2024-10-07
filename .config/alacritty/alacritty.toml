@@ -1,0 +1,14 @@
+live_config_reload = true
+
+[window]
+
+[font]
+normal = { family = "HackGenNerd", style = "Regular" }
+bold = { family = "HackGenNerd", style = "Bold" }
+italic = { family = "HackGenNerd", style = "Italic" }
+bold_italic = { family = "HackGenNerd", style = "Bold Italic" }
+size = 13.0
+
+[colors.primary]
+background = '#000000'
+foreground = '#ffffff'
