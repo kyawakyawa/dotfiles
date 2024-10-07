@@ -52,6 +52,15 @@ if false then
   -- tokyonight colorscheme
   plugins = require('plugins_solarized_osaka').setup(plugins)
 else
+
+  -- colorschemeの設定が呼ばれるたびにSignColumnの背景色をNONEにする
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "*",
+    callback = function()
+      vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE", fg = "NONE" })
+    end,
+  })
+
   vim.cmd[[colorscheme vim]]
 end
 
