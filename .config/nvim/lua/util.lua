@@ -36,4 +36,9 @@ function M.isWSL()
   return checkMicrosoftInProcVersion()
 end
 
+function M.isSsh()
+  return vim.loop.os_getenv("SSH_CONNECTION") ~= nil or vim.loop.os_getenv("SSH_CLIENT") ~= nil
+end
+
+
 return M

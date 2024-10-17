@@ -83,7 +83,9 @@ plugins = require('plugins_notify').setup(plugins)
 plugins = require('plugins_noice').setup(plugins)
 
 -- animation
-plugins = require("plugins_animation").setup(plugins)
+if not require('util').isSsh() then
+  plugins = require("plugins_animation").setup(plugins)
+end
 
 -- greeter
 plugins = require("plugins_greeter").setup(plugins)
