@@ -36,8 +36,14 @@ local saga = require('lspsaga')
 -- saga.init_lsp_saga()
 -- end
 
-
-saga.setup({})
+saga.setup({
+  lightbulb = {
+    enable = false,
+    sign = false,
+    virtual_text = false,
+    enable_in_insert = false,
+  },
+})
 
 -- Settings
 
