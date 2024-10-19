@@ -40,5 +40,25 @@ function M.isSsh()
   return vim.loop.os_getenv("SSH_CONNECTION") ~= nil or vim.loop.os_getenv("SSH_CLIENT") ~= nil
 end
 
+function M.isVscode()
+  return vim.g.vscode
+end
+
+
+function M.add_plugin(plugins, obj, opts)
+
+  local default_opts = {
+    vscode = false,
+  }
+  opts = opts or {}
+  opts = vim.tbl_deep_extend("force", default_opts, opts)
+
+  if not opts.vscode and M.isVscode() then
+    return
+  end
+
+  table.insert(plugins, obj)
+end
+
 
 return M

@@ -105,6 +105,9 @@ plugins = require("plugins_format").setup(plugins)
 -- format
 plugins = require("plugins_json5").setup(plugins)
 
+--- hardtime
+plugins = require("plugins_hardtime").setup(plugins)
+
 require("lazy").setup(plugins, opts)
 
 --- local packer = require("packer")
