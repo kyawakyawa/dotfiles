@@ -93,8 +93,8 @@ plugins = require("plugins_greeter").setup(plugins)
 -- which-key.nvim
 plugins = require('plugins_which_key').setup(plugins)
 
--- window
-plugins = require("plugins_window").setup(plugins)
+-- -- window
+-- plugins = require("plugins_window").setup(plugins)
 
 -- rest
 plugins = require("plugins_rest").setup(plugins)
