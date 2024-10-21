@@ -11,7 +11,7 @@ rsync.setup = function(plugins)
         vim.api.nvim_create_autocmd({ "BufWritePost" }, {
           pattern = { "*" },
           callback = function()
-            print("has deployment.yaml?: ", vim.fn.filereadable(vim.fn.getcwd() .. "/.nvim/deployment.lua"))
+            -- print("has deployment.yaml?: ", vim.fn.filereadable(vim.fn.getcwd() .. "/.nvim/deployment.lua"))
             if vim.fn.filereadable(vim.fn.getcwd() .. "/.nvim/deployment.lua") == 1 then
               path = vim.fn.expand("%:p")
               require("transfer.transfer").upload_file(path)
