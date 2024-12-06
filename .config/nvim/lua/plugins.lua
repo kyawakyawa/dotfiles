@@ -11,6 +11,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local config = require('util').load_config()
+
 local plugins = {}
 
 -- plugins = require("hoge").setup(plugins)
@@ -22,7 +24,9 @@ plugins = require('plugins_nvim_lsp').setup(plugins)
 plugins = require('plugins_complement').setup(plugins)
 
 -- copilot
+if config['ai_assistant']['github_copilot']["enabled"] then
 plugins = require('plugins_copilot').setup(plugins)
+end
 
 -- fuzzy finder
 plugins = require('plugins_fuzzy_finder').setup(plugins)
@@ -45,14 +49,13 @@ plugins = require('plugins_syntax_highlight').setup(plugins)
 -- nvim treesitter
 plugins = require('plugins_nvim_treesitter').setup(plugins)
 
-if false then
-  -- -- tokyonight colorscheme
-  -- plugins = require('plugins_tokyonight').setup(plugins)
-  
+if config["colorscheme"]['name'] == 'tokyonight' then
   -- tokyonight colorscheme
+  plugins = require('plugins_tokyonight').setup(plugins)
+elseif config["colorscheme"]['name'] == 'solarized' then
+  -- soralized osaka colorscheme
   plugins = require('plugins_solarized_osaka').setup(plugins)
-else
-
+elseif config["colorscheme"]['name'] == 'vim' then
   -- colorschemeの設定が呼ばれるたびにSignColumnの背景色をNONEにする
   vim.api.nvim_create_autocmd("ColorScheme", {
     pattern = "*",

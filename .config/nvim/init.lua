@@ -14,6 +14,9 @@ vim.opt.termguicolors = true
 vim.opt.updatetime = 250
 vim.opt.laststatus = 3 -- https://wed.dev/blog/posts/neovim-statuline
 
+local init_dir = vim.fn.fnamemodify(vim.fn.expand("<sfile>:p"), ":h")
+require('util').set_default_config_path(init_dir .. "/default_config.json")
+
 if not vim.g.vscode then
   -- For OpenCL
   vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead"}, {
@@ -43,7 +46,6 @@ if require('util').isWSL() then
     cache_enable = 0,
   }
 end
-
 
 if require('util').isWSL() or vim.fn.has("win32") then
   --WSL or Windows の時

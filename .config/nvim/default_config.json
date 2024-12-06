@@ -1,0 +1,11 @@
+{
+  "ai_assistant": {
+    "github_copilot": {
+      "enabled": false
+    }
+  },
+  "colorscheme": {
+    "name": "vim",
+    "opt": {}
+  }
+}

@@ -80,4 +80,71 @@ function M.find_dir_upwards(start_path, target_dir)
     end
 end
 
+local config_path_loaded = nil
+local default_config_path = "~/.config/nvim/default_config.json"
+
+function M.set_default_config_path(path)
+  default_config_path = path
+end
+function M.get_default_config_path(path)
+  return default_config_path
+end
+
+local load_default_config = function()
+    local f = io.open(default_config_path, 'r')
+    if not f then
+        error("Failed to open default config file: " .. default_config_path)
+    end
+    local content = f:read("*all")
+    f:close()
+
+    -- デフォルトのconfigはjson5で書かれていないことを前提にする。
+    return vim.fn.json_decode(content)
+end
+
+local load_local_config = function() 
+  local config_dir = M.find_dir_upwards(nil, ".nvim")
+  if not config_dir then
+    return nil
+  end
+
+  config_path = config_dir .. "/config.json"
+
+  if vim.loop.fs_stat(config_path) then
+    json_decoder = vim.fn.json_decode
+
+    -- TODO: json5のサポートを追加する (lazy.nvimのload前に読む必要がある)
+    -- local ok, json5 = pcall(require, 'json5')
+    -- if ok then
+    --   json_decoder = require('json5').parse
+    -- end
+
+    local f = io.open(config_path, 'r')
+    if not f then
+        error("Failed to open local config file: " .. config_path)
+    end
+    local content = f:read("*all")
+    f:close()
+
+    json = json_decoder(content)
+
+    config_path_loaded = config_path
+
+    return json
+  else
+    return nil
+  end
+end
+
+function M.load_config()
+  local default_config = load_default_config()
+  local local_config = load_local_config()
+
+  return vim.tbl_deep_extend("force", default_config, local_config or {})
+end
+
+function M.get_config_path()
+  return config_path_loaded
+end
+
 return M
