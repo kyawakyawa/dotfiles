@@ -126,7 +126,7 @@ function get_file_name(include_path)
     if vim.fn.bufname '%' == '' then return '' end
     if include_path == false then return file_name end
     -- Else if include path: ./lsp/saga.lua -> lsp > saga.lua
-    local sep = vim.loop.os_uname().sysname == 'Windows' and '\\' or '/'
+    local sep = vim.uv.os_uname().sysname == 'Windows' and '\\' or '/'
     local path_list = vim.split(string.gsub(vim.fn.expand '%:~:.:h', '%%', ''), sep)
     local file_path = ''
     for _, cur in ipairs(path_list) do
@@ -145,7 +145,7 @@ end
 --     --     if vim.fn.bufname '%' == '' then return '' end
 --     --     if include_path == false then return file_name end
 --     --     -- Else if include path: ./lsp/saga.lua -> lsp > saga.lua
---     --     local sep = vim.loop.os_uname().sysname == 'Windows' and '\\' or '/'
+--     --     local sep = vim.uv.os_uname().sysname == 'Windows' and '\\' or '/'
 --     --     local path_list = vim.split(string.gsub(vim.fn.expand '%:~:.:h', '%%', ''), sep)
 --     --     local file_path = ''
 --     --     for _, cur in ipairs(path_list) do

@@ -3,7 +3,7 @@ local function getCurrentDir()
 end
 
 local function file_exists(path)
-  local stat = vim.loop.fs_stat(path)
+  local stat = vim.uv.fs_stat(path)
   return stat ~= nil
 end
 

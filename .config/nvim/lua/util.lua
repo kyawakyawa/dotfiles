@@ -37,7 +37,7 @@ function M.isWSL()
 end
 
 function M.isSsh()
-  return vim.loop.os_getenv("SSH_CONNECTION") ~= nil or vim.loop.os_getenv("SSH_CLIENT") ~= nil
+  return vim.uv.os_getenv("SSH_CONNECTION") ~= nil or vim.uv.os_getenv("SSH_CLIENT") ~= nil
 end
 
 function M.isVscode()
@@ -61,7 +61,7 @@ function M.add_plugin(plugins, obj, opts)
 end
 
 function M.find_dir_upwards(start_path, target_dir)
-    local uv = vim.loop
+    local uv = vim.uv
     local current_path = start_path or uv.cwd()
 
     while current_path do
@@ -110,7 +110,7 @@ local load_local_config = function()
 
   config_path = config_dir .. "/config.json"
 
-  if vim.loop.fs_stat(config_path) then
+  if vim.uv.fs_stat(config_path) then
     json_decoder = vim.fn.json_decode
 
     -- TODO: json5のサポートを追加する (lazy.nvimのload前に読む必要がある)
