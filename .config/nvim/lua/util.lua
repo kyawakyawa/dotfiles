@@ -60,5 +60,24 @@ function M.add_plugin(plugins, obj, opts)
   table.insert(plugins, obj)
 end
 
+function M.find_dir_upwards(start_path, target_dir)
+    local uv = vim.loop
+    local current_path = start_path or uv.cwd()
+
+    while current_path do
+        -- local target_path = uv.fs_realpath(current_path .. "/" .. target_dir) -- こっちにすると、シンボリックリンクの参照先を返すようになる
+        local target_path = current_path .. "/" .. target_dir
+        if target_path and uv.fs_stat(target_path) then
+            return target_path
+        end
+
+        local parent_path = uv.fs_realpath(current_path .. "/..")
+        if parent_path == current_path then
+            -- ルートディレクトリまで到達した
+            return nil
+        end
+        current_path = parent_path
+    end
+end
 
 return M
