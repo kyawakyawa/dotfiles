@@ -1,7 +1,14 @@
 {
-  "ai_assistant": {
-    "github_copilot": {
-      "enabled": false
+  "plugins": {
+    "aiAssistant": {
+      "githubCopilot": {
+        "enabled": false
+      }
+    },
+    "inputBehavior": {
+      "hardtime": {
+        "enabled": false
+      }
     }
   },
   "colorscheme": {

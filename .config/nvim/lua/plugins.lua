@@ -1,5 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     "git",
     "clone",
@@ -24,8 +24,8 @@ plugins = require('plugins_nvim_lsp').setup(plugins)
 plugins = require('plugins_complement').setup(plugins)
 
 -- copilot
-if config['ai_assistant']['github_copilot']["enabled"] then
-plugins = require('plugins_copilot').setup(plugins)
+if config['plugins']['aiAssistant']['githubCopilot']["enabled"] then
+  plugins = require('plugins_copilot').setup(plugins)
 end
 
 -- fuzzy finder
@@ -86,7 +86,7 @@ plugins = require('plugins_notify').setup(plugins)
 plugins = require('plugins_noice').setup(plugins)
 
 -- animation
-if not require('util').isSsh() then
+if config['plugins']['animation']["enabled"] then
   plugins = require("plugins_animation").setup(plugins)
 end
 
@@ -108,8 +108,10 @@ plugins = require("plugins_format").setup(plugins)
 -- format
 plugins = require("plugins_json5").setup(plugins)
 
---- hardtime
-plugins = require("plugins_hardtime").setup(plugins)
+-- hardtime
+if config['plugins']['inputBehavior']["hardtime"]["enabled"] then
+  plugins = require("plugins_hardtime").setup(plugins)
+end
 
 require("lazy").setup(plugins, opts)
 
