@@ -89,6 +89,8 @@ git.setup = function(plugins)
       local bufopts = { noremap=true }
       vim.keymap.set('n', '<leader>gm', require('messenger').show, bufopts)
     end,
+    lazy = true,
+    event = "BufWinEnter",
   })
 
   return plugins
