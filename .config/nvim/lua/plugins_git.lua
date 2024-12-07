@@ -72,6 +72,25 @@ git.setup = function(plugins)
     },
   })
 
+  -- messenger.nvim
+  table.insert(plugins, {
+    'lsig/messenger.nvim',
+    -- opts = {
+    --   border = "rounded",
+    --   heading_hl = "#000000"
+    --   -- heading_hl = "#89b4fa"
+    -- },
+    config = function()
+      require('messenger').setup({
+        border = "rounded",
+        heading_hl = "#000000"
+        -- heading_hl = "#89b4fa"
+      })
+      local bufopts = { noremap=true }
+      vim.keymap.set('n', '<leader>gm', require('messenger').show, bufopts)
+    end,
+  })
+
   return plugins
 end
 
