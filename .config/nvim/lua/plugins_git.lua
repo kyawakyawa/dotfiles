@@ -75,11 +75,6 @@ git.setup = function(plugins)
   -- messenger.nvim
   table.insert(plugins, {
     'lsig/messenger.nvim',
-    -- opts = {
-    --   border = "rounded",
-    --   heading_hl = "#000000"
-    --   -- heading_hl = "#89b4fa"
-    -- },
     config = function()
       require('messenger').setup({
         border = "rounded",
@@ -90,7 +85,56 @@ git.setup = function(plugins)
       vim.keymap.set('n', '<leader>gm', require('messenger').show, bufopts)
     end,
     lazy = true,
-    event = "BufWinEnter",
+    event = "VeryLazy",
+  })
+
+  -- sindrets/diffview.nvim
+  table.insert(plugins, {
+    'sindrets/diffview.nvim',
+    config = function()
+
+      win_config = function()
+        local c = { type = "float" }
+        local editor_width = vim.o.columns
+        local editor_height = vim.o.lines
+        c.width = math.min(100, editor_width)
+        c.height = math.min(24, editor_height)
+        c.col = math.floor(editor_width * 0.5 - c.width * 0.5)
+        c.row = math.floor(editor_height * 0.5 - c.height * 0.5)
+        return c
+        -- local c = { type = "float" }
+        -- local editor_width = vim.o.columns
+        -- local editor_height = vim.o.lines
+        -- c.width = editor_width
+        -- c.height = math.min(24, editor_height)
+        -- c.col = math.floor(editor_width * 0.5 - c.width * 0.5)
+        -- -- c.row = math.floor(editor_height * 0.5 - c.height * 0.5)
+        -- c.row = math.floor(editor_height - c.height)
+        -- return c
+      end
+
+      require("diffview").setup({
+        file_panel = {
+          win_config = win_config,
+        },
+        file_history_panel = {
+          win_config = win_config,
+        },
+        commit_log_panel = {
+          win_config = win_config,
+        },
+        hook = {
+          view_opened = function(view)
+            print(
+              ("A new %s was opened on tab page %d!")
+              :format(view.class:name(), view.tabpage)
+            )
+          end,
+        }
+      })
+    end,
+    lazy = true,
+    event = "VeryLazy",
   })
 
   return plugins
