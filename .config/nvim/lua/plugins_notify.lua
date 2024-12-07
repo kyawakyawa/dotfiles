@@ -8,6 +8,7 @@ notify.setup = function(plugins)
     config = function()
       require("notify").setup({
         background_colour = "#000000",
+        top_down = false,
       })
       -- -- https://zenn.dev/kawarimidoll/articles/7e986ceb6802fc
       -- vim.cmd [[
