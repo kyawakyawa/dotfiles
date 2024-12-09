@@ -117,6 +117,12 @@ require('mason-lspconfig').setup_handlers {
       -- end
       setting.before_init = function(_, config)
 
+        local python_base_path = require("nvim_lsp_cfg/find_python").find_python_base_dir()
+        if python_base_path ~= nil then
+          config.settings.python.venvPath = python_base_path
+          config.settings.python.pythonPath = python_base_path .. '/bin/python'
+        end
+
         local venv_path = require("nvim_lsp_cfg/venv").search_venv_path(config.root_dir)
         if venv_path ~= nil then
           -- pythonPathをvenvに設定
