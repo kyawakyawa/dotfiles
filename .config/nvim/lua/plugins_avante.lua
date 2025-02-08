@@ -2,9 +2,7 @@ local avante = {}
 
 local util = require('util')
 
-local config = util.load_config()
-avante_config = config['plugins']['aiAssistant']['avante']
-avante_config_opts = config['plugins']['aiAssistant']['avante']['opts']
+local avante_cfg = require('avante_cfg')
 
 avante.setup = function(plugins)
 
@@ -14,19 +12,7 @@ avante.setup = function(plugins)
         event = "VeryLazy",
         lazy = false,
         version = false, -- set this to "*" if you want to always pull the latest change, false to update on release
-        opts = {
-          -- provider = "ollama",
-          provider = avante_config_opts["provider"],
-          vendors = {
-            ---@type AvanteProvider
-            ollama = {
-              __inherited_from = "openai",
-              api_key_name = "",
-              endpoint = avante_config_opts["venders"]["ollama"]["endpoint"],
-              model = avante_config_opts["venders"]["ollama"]["model"],
-            },
-          },
-        },
+        opts = avante_cfg.opts,
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
         build = "make",
         -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
