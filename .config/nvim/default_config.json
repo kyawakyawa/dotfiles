@@ -3,6 +3,9 @@
     "aiAssistant": {
       "githubCopilot": {
         "enabled": false
+      },
+      "avante": {
+        "enabled": false
       }
     },
     "animation": {
