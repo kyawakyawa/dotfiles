@@ -5,7 +5,16 @@
         "enabled": false
       },
       "avante": {
-        "enabled": false
+        "enabled": false,
+        "opts": {
+          "provider": "copilot",
+          "venders": {
+            "ollama": {
+              "endpoint": "127.0.0.1:11434/v1",
+              "model": "qwen2.5-coder:1.5b-base"
+            }
+          }
+        }
       }
     },
     "animation": {

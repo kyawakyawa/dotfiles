@@ -1,6 +1,10 @@
 local avante = {}
 
-util = require('util')
+local util = require('util')
+
+local config = util.load_config()
+avante_config = config['plugins']['aiAssistant']['avante']
+avante_config_opts = config['plugins']['aiAssistant']['avante']['opts']
 
 avante.setup = function(plugins)
 
@@ -12,14 +16,14 @@ avante.setup = function(plugins)
         version = false, -- set this to "*" if you want to always pull the latest change, false to update on release
         opts = {
           -- provider = "ollama",
-          provider = "copilot",
+          provider = avante_config_opts["provider"],
           vendors = {
             ---@type AvanteProvider
             ollama = {
               __inherited_from = "openai",
               api_key_name = "",
-              endpoint = "127.0.0.1:11434/v1",
-              model = "qwen2.5-coder:32b-instruct-q8_0",
+              endpoint = avante_config_opts["venders"]["ollama"]["endpoint"],
+              model = avante_config_opts["venders"]["ollama"]["model"],
             },
           },
         },
