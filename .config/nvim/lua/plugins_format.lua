@@ -1,5 +1,16 @@
 local format = {}
 
+local config = require('util').load_config()
+
+local format_on_save = nil
+if config["format"]["format_on_save"] then
+  format_on_save = {
+    -- These options will be passed to conform.format()
+    timeout_ms = 20000,
+    lsp_format = "fallback",
+  }
+end
+
 format.setup = function(plugins)
   table.insert(plugins, {
     "stevearc/conform.nvim",
@@ -17,11 +28,7 @@ format.setup = function(plugins)
           json = { "jq" },
           cpp = { "clang-format" }
         },
-        format_on_save = {
-          -- These options will be passed to conform.format()
-          timeout_ms = 20000,
-          lsp_format = "fallback",
-        },
+        format_on_save = format_on_save,
       })
     end,
     init = function()
