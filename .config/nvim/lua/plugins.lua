@@ -105,7 +105,9 @@ plugins = require('plugins_which_key').setup(plugins)
 -- plugins = require("plugins_window").setup(plugins)
 
 -- rest
-plugins = require("plugins_rest").setup(plugins)
+if config["plugins"]["rest"]["enabled"] then
+  plugins = require("plugins_rest").setup(plugins)
+end
 
 -- format
 plugins = require("plugins_format").setup(plugins)
