@@ -26,7 +26,8 @@ format.setup = function(plugins)
             end
           end,
           json = { "jq" },
-          cpp = { "clang-format" }
+          cpp = { "clang-format" },
+          cuda = { "clang-format" },
         },
         format_on_save = format_on_save,
       })
