@@ -61,11 +61,14 @@ elseif config["colorscheme"]['name'] == 'solarized' then
   -- soralized osaka colorscheme
   plugins = require('plugins_solarized_osaka').setup(plugins)
 elseif config["colorscheme"]['name'] == 'vim' then
-  -- colorschemeの設定が呼ばれるたびにSignColumnの背景色をNONEにする
   vim.api.nvim_create_autocmd("ColorScheme", {
     pattern = "*",
     callback = function()
+      -- colorschemeの設定が呼ばれるたびにSignColumnの背景色をNONEにする
       vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE", fg = "NONE" })
+
+      -- Foating windowの背景の色の設定
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE", fg = "NONE" })
     end,
   })
 
