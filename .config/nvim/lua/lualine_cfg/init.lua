@@ -192,15 +192,15 @@ ins_left {
   },
 }
 
-ins_left {
-  -- lsp_signature
-  function()
-    local width = 60
-    if not pcall(require, 'lsp_signature') then return end
-    local sig = require("lsp_signature").status_line(width)
-    return sig.label .. "🐼" .. sig.hint
-  end
-}
+-- ins_left {
+--   -- lsp_signature
+--   function()
+--     local width = 60
+--     if not pcall(require, 'lsp_signature') then return end
+--     local sig = require("lsp_signature").status_line(width)
+--     return sig.label .. "🐼" .. sig.hint
+--   end
+-- }
 
 
 -- Insert mid section. You can make any number of sections in neovim :)
