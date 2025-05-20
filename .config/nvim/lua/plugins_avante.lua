@@ -49,6 +49,36 @@ avante.setup = function(plugins)
             },
             ft = { "markdown", "Avante" },
           },
+          {
+            "ravitemer/mcphub.nvim",
+            dependencies = {
+              "nvim-lua/plenary.nvim",
+            },
+            build = "bundled_build.lua", 
+            opts = {
+                extensions = {
+                    avante = {
+                        make_slash_commands = true, -- /mcp:server_name:prompt_name で呼び出し可能
+                        -- スラッシュコマンドのプリフィックス（オプション）
+                        -- slash_command_prefix = "/mcp:",
+                    }
+                },
+                auto_approve = false, -- MCP tool呼び出し時の自動承認（任意）
+                use_bundled_binary = true, -- MCPHub.nvimのバイナリを使用する場合はtrue
+                -- 新機能: MCPサーバーの自動起動
+                autostart_servers = {
+                    "neovim", -- neovim MCPサーバーを自動起動
+                    "fetch", -- fetch MCPサーバーを自動起動
+                },
+                -- MCP HUB UI設定
+                ui = {
+                    -- UIのカスタマイズ設定
+                    border = "rounded",
+                    width = 80,
+                    height = 20,
+                }
+            },
+          }
         },
       },
       {

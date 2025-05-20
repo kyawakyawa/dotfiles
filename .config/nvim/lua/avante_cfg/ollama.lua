@@ -105,6 +105,15 @@ local ollama = {
 	parse_messages = parse_messages,
 	parse_curl_args = parse_curl_args,
 	parse_stream_data = parse_stream_data,
+  -- Ollamaの追加設定 
+  timeout = 60000, -- タイムアウト (ミリ秒)
+  -- カーソル計画モードを強く推奨
+  -- カスタムオプション
+  options = {
+    num_ctx = 16384, -- コンテキストウィンドウを大きく
+    temperature = 0, -- 決定的な出力用に低温度に設定
+  },
+  -- Ollamaモデルはツール使用が制限される場合があるため、計画モードを推奨
 }
 
 return ollama
