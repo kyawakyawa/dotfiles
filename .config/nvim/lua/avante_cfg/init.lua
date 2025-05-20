@@ -11,6 +11,9 @@ avante_cfg_opts = {
   -- auto_suggestions_provider = "copilot", -- Use Copilot for auto suggestions
   copilot = {
     model = "claude-3.7-sonnet",
+    -- model = "gpt-4o",
+    -- model = "gpt-4.1",
+    -- model = "o3-mini", reasoning_effort = "high"
   },
   vendors = {
     ---@type AvanteProvider
