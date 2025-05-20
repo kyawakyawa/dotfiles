@@ -2,7 +2,15 @@
 
 -- mason.nvim
 require("mason").setup()
-require("mason-lspconfig").setup()
+require("mason-lspconfig").setup {
+    automatic_enable = {
+        exclude = {
+          -- "rust_analyzer",
+          -- "ts_ls"
+        }
+    },
+    ensure_installed = { "clangd", "pyright", "ruff" },
+}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -55,140 +63,73 @@ local lspconfig_util = require('lspconfig/util')
 
 local use_ccls = false -- cclsを使う場合はここをtrueにする
 
-require('mason-lspconfig').setup_handlers {
-  function(server_name)
-    local setting = {
-      capabilities = capabilities,
-      on_attach = on_attach,
-    }
 
-    if server_name == 'efm' then
-      setting = {
-          init_options = {documentFormatting = true},
-          settings = {
-              rootMarkers = {".git/"},
-              languages = {
-                  lua = {
-                      {formatCommand = "lua-format -i", formatStdin = true}
-                  },
-                  python = {
-                    {formatCommand = "black", formatStdin = true}
-                  }
-              },
-              commands = {
-                -- 何故かconfig.yamlを読まない？のでこちらを追加
-                command = "efm-langserver",
-                arguments = { "-c", "~/.config/efm-langserver/config.yaml" } -- TODO: Windows用の設定
-              }
-          },
-          capabilities = capabilities,
-          filetypes = { 'python' },
-      }
-    end
-
-    if server_name == 'clangd' then
-      if use_ccls then
-        return
-      end
-
-      setting.cmd = {
-        "clangd",
-        "--background-index",
-        "--header-insertion=never",
-        "--pch-storage=memory",
-        "--clang-tidy"
-      }
-      setting.filetypes =  { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'cl' }
-      setting.root_dir = function(fname)
-        return lspconfig_util.root_pattern('compile_commands.json', '.cache', 'compile_flags.txt')(fname)
-          or lspconfig_util.path.dirname(fname)
-      end
-    end
-
-    if server_name == 'pyright' then
-      -- local poetry_venv_path = require("nvim_lsp_cfg/poetry").get_poetry_venv_path()
-      -- if poetry_venv_path ~= nil then
-      --   setting.settings = {
-      --     python = {
-      --       venvPath = poetry_venv_path,
-      --       pythonPath = poetry_venv_path .. '/bin/python'
-      --     }
-      --   }
-      -- end
-      setting.before_init = function(_, config)
-
-        local python_base_path = require("nvim_lsp_cfg/find_python").find_python_base_dir()
-        if python_base_path ~= nil then
-          config.settings.python.venvPath = python_base_path
-          config.settings.python.pythonPath = python_base_path .. '/bin/python'
-        end
-
-        -- local venv_path = require("nvim_lsp_cfg/venv").search_venv_path(config.root_dir)
-        -- if venv_path ~= nil then
-        --   -- pythonPathをvenvに設定
-        --   config.settings.python.venvPath = venv_path
-        --   config.settings.python.pythonPath = venv_path .. '/bin/python'
-        -- end
-
-        -- -- ワークスペースディレクトリがpoetryのプロジェクトか確認する
-        -- local poetry_venv_path = require("nvim_lsp_cfg/poetry").get_poetry_venv_path(config.root_dir)
-        -- if poetry_venv_path ~= nil then
-        --   -- pythonPathをpoetryのvirtualenvに設定
-        --   config.settings.python.venvPath = poetry_venv_path
-        --   config.settings.python.pythonPath = poetry_venv_path .. '/bin/python'
-        -- end
-      end
-
-    end
-
-    lspconfig[server_name].setup (setting)
-  end,
-}
-
-if use_ccls then
-  ---- ccls
-  lspconfig['ccls'].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    },
-    init_options = {
-      cache = {
-        directory = "/tmp/ccls-cache";
-      },
-    },
-    capabilities = capabilities,
-    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
-    root_dir = function(fname)
-      return require('lspconfig/util').root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt')(fname)
-        or require('lspconfig/util').path.dirname(fname)
-    end,
-  }
-end
-
--- lspconfig.efm.setup {
---     init_options = {documentFormatting = true},
---     settings = {
---         rootMarkers = {".git/"},
---         languages = {
---             lua = {
---                 {formatCommand = "lua-format -i", formatStdin = true}
---             },
---             python = {
---               {formatCommand = "black", formatStdin = true}
---             }
---         },
---         commands = {
---           command = "efm-langserver",
---           arguments = { "-c", "~/.config/efm-langserver/config.yaml" }
---         }
+-- if use_ccls then
+--   ---- ccls
+--   lspconfig['ccls'].setup {
+--     on_attach = on_attach,
+--     flags = {
+--       debounce_text_changes = 150,
+--     },
+--     init_options = {
+--       cache = {
+--         directory = "/tmp/ccls-cache";
+--       },
 --     },
 --     capabilities = capabilities,
---     filetypes = { 'python' },
--- }
+--     filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
+--     root_dir = function(fname)
+--       return require('lspconfig/util').root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt')(fname)
+--         or require('lspconfig/util').path.dirname(fname)
+--     end,
+--   }
+-- end
 
--- -- format on save
--- vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
---   pattern = {"*"},
---   callback = function() vim.lsp.buf.format { sync = false, timeout_ms=20000 } end,
--- })
+-- lsp config
+
+-- shared config
+vim.lsp.config('*', {
+  root_markers = { '.git', '.hg' },
+})
+vim.lsp.config('*', {
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
+
+-- clangd
+vim.lsp.config('clangd', {
+  cmd = {
+    "clangd",
+    "--background-index",
+    "--header-insertion=never",
+    "--pch-storage=memory",
+    "--clang-tidy"
+  },
+  filetypes =  { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'cl' },
+  root_markers = { 'compile_commands.json', '.cache', 'compile_flags.txt' }
+})
+
+-- pyright
+vim.lsp.config('pyright', {
+  before_init = function(_, config)
+    local python_base_path = require("nvim_lsp_cfg/find_python").find_python_base_dir()
+    if python_base_path ~= nil then
+      config.settings.python.venvPath = python_base_path
+      config.settings.python.pythonPath = python_base_path .. '/bin/python'
+    end
+    -- local venv_path = require("nvim_lsp_cfg/venv").search_venv_path(config.root_dir)
+    -- if venv_path ~= nil then
+    --   -- pythonPathをvenvに設定
+    --   config.settings.python.venvPath = venv_path
+    --   config.settings.python.pythonPath = venv_path .. '/bin/python'
+    -- end
+
+    -- -- ワークスペースディレクトリがpoetryのプロジェクトか確認する
+    -- local poetry_venv_path = require("nvim_lsp_cfg/poetry").get_poetry_venv_path(config.root_dir)
+    -- if poetry_venv_path ~= nil then
+    --   -- pythonPathをpoetryのvirtualenvに設定
+    --   config.settings.python.venvPath = poetry_venv_path
+    --   config.settings.python.pythonPath = poetry_venv_path .. '/bin/python'
+    -- end
+  end,
+})

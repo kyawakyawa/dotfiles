@@ -3,15 +3,15 @@ local nvim_lsp = {}
 nvim_lsp.setup = function(plugins)
 
   table.insert(plugins, {
-    "neovim/nvim-lspconfig",
+    "mason-org/mason-lspconfig.nvim",
     lazy = true,
     config = function() 
       require("nvim_lsp_cfg")
     end,
     event = { "BufReadPost", "BufAdd", "BufNewFile" },
     dependencies = {
-		  { "williamboman/mason.nvim" } ,
-		  { "williamboman/mason-lspconfig.nvim" },
+		  { "mason-org/mason.nvim", opts = {} } ,
+      { "neovim/nvim-lspconfig" },
       { "j-hui/fidget.nvim",
         config = function()
           require("fidget").setup()
