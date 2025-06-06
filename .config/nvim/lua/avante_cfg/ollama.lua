@@ -1,7 +1,7 @@
 local util = require('util')
 
 local config = util.load_config()
-avante_config_opts = config['plugins']['aiAssistant']['avante']['opts']
+local avante_config_opts = config['plugins']['aiAssistant']['avante']['opts']
 
 -- Ollama API Documentation https://github.com/ollama/ollama/blob/main/docs/api.md#generate-a-completion
 local role_map = {
@@ -99,19 +99,21 @@ end
 
 ---@type AvanteProvider
 local ollama = {
-	api_key_name = "",
-  endpoint = avante_config_opts["venders"]["ollama"]["endpoint"],
-  model = avante_config_opts["venders"]["ollama"]["model"],
-	parse_messages = parse_messages,
-	parse_curl_args = parse_curl_args,
-	parse_stream_data = parse_stream_data,
+  api_key_name = "",
+  endpoint = avante_config_opts["providers"]["ollama"]["endpoint"],
+  model = avante_config_opts["providers"]["ollama"]["model"],
+  parse_messages = parse_messages,
+  parse_curl_args = parse_curl_args,
+  parse_stream_data = parse_stream_data,
   -- Ollamaの追加設定 
   timeout = 60000, -- タイムアウト (ミリ秒)
   -- カーソル計画モードを強く推奨
   -- カスタムオプション
-  options = {
-    num_ctx = 16384, -- コンテキストウィンドウを大きく
-    temperature = 0, -- 決定的な出力用に低温度に設定
+  extra_request_body = {
+    options = {
+      num_ctx = 16384, -- コンテキストウィンドウを大きく
+      temperature = 0, -- 決定的な出力用に低温度に設定
+    },
   },
   -- Ollamaモデルはツール使用が制限される場合があるため、計画モードを推奨
 }

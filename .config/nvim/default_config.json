@@ -8,7 +8,7 @@
         "enabled": false,
         "opts": {
           "provider": "copilot",
-          "venders": {
+          "providers": {
             "ollama": {
               "endpoint": "127.0.0.1:11434",
               "model": "qwen2.5-coder:1.5b-base"
