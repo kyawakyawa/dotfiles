@@ -23,8 +23,7 @@ complement.setup = function(plugins)
       { 'hrsh7th/cmp-path' },
       { 'hrsh7th/cmp-cmdline' },
       { 'hrsh7th/cmp-nvim-lsp-document-symbol' },
-      { "f3fora/cmp-spell" },
-      { "ray-x/cmp-treesitter" },
+      -- { "ray-x/cmp-treesitter" },
       -- snippet
       { 'L3MON4D3/LuaSnip'},
       { 'saadparwaiz1/cmp_luasnip'},

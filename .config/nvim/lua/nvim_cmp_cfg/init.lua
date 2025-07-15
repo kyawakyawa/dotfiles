@@ -61,16 +61,27 @@ cmp.setup({
       end
     end, { "i", "s" }),
   }),
-  sources = cmp.config.sources({
-    { name = "treesitter" },
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' }, -- For luasnip users.
-    { name = 'nvim_lsp_signature_help' },
-  }, {
-    { name = "treesitter" },
-		{ name = "spell" },
-    { name = 'buffer' },
-  }),
+  sources = cmp.config.sources(
+    {
+      { name = 'nvim_lsp', keyword_length = 3 },
+      { name = 'luasnip', keyword_length = 3  }, -- For luasnip users.
+      { name = 'nvim_lsp_signature_help', keyword_length = 3  },
+      -- { name = "treesitter", keyword_length = 3  },
+      { name = 'buffer', keyword_length = 5 },
+    },
+    {
+      { name = 'path', keyword_length = 2 },
+    }
+    -- {
+    --   { name = "treesitter" },
+    --   { name = 'nvim_lsp' },
+    --   { name = 'luasnip' }, -- For luasnip users.
+    --   { name = 'nvim_lsp_signature_help' },
+    -- }, {
+    --   { name = "treesitter" },
+    --   { name = 'buffer' },
+    -- }
+  ),
   formatting = {
     format = lspkind.cmp_format({
       mode = 'symbol', -- show only symbol annotations

@@ -37,13 +37,12 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>cd', function() vim.diagnostic.open_float({scope="line"}) end, bufopts)
   -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   -- vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { sync = false, timeout_ms=20000  } end, bufopts)
-  vim.keymap.set('n', '<space>f', require("conform").format, bufopts)
 
-  -- ref https://zenn.dev/link/comments/fd67dab010b7d5
-  -- ref https://github.com/haskell/haskell-language-server/issues/1148#issuecomment-887858195
   -- keymap setting ...
   local cap = client.server_capabilities
 
+  -- ref https://zenn.dev/link/comments/fd67dab010b7d5
+  -- ref https://github.com/haskell/haskell-language-server/issues/1148#issuecomment-887858195
   -- Only highlight if compatible with the language
   if cap.documentHighlightProvider then
     vim.cmd [[

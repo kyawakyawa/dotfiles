@@ -30,6 +30,7 @@ format.setup = function(plugins)
         },
         format_on_save = format_on_save,
       })
+      -- vim.keymap.set('n', '<space>f', require("conform").format)
     end,
     init = function()
       -- If you want the formatexpr, here is the place to set it
@@ -38,6 +39,9 @@ format.setup = function(plugins)
     end,
     lazy=true,
     event = { "BufReadPost", "BufAdd", "BufNewFile" },
+    keys = {
+      { "<space>f", "<cmd>lua require('conform').format()<cr>", desc = "format"} ,
+    },
   })
   
   return plugins
