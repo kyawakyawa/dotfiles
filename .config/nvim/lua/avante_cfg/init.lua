@@ -9,14 +9,11 @@ avante_config_opts = config['plugins']['aiAssistant']['avante']['opts']
 
 avante_cfg_opts = {
   provider = avante_config_opts["provider"],
-  -- auto_suggestions_provider = "copilot", -- Use Copilot for auto suggestions
   providers = {
     ollama = ollama,
     copilot = {
-      model = "claude-3.7-sonnet",
-      -- model = "gpt-4o",
-      -- model = "gpt-4.1",
-      -- model = "o3-mini", reasoning_effort = "high"
+      model = avante_config_opts["providers"]["copilot"]["model"]
+        or "gpt-4o",
     },
   },
   system_prompt = mcp.system_prompt,
