@@ -2,14 +2,18 @@
 
 -- mason.nvim
 require("mason").setup()
+
+local ensure_installed = { "clangd", "pyright", "ruff", "jsonls", "bashls", "lua_ls" }
+
 require("mason-lspconfig").setup {
-    automatic_enable = {
-        exclude = {
-          -- "rust_analyzer",
-          -- "ts_ls"
-        }
-    },
-    ensure_installed = { "clangd", "pyright", "ruff", "jsonls"  },
+  automatic_enable = true,
+  -- automatic_enable = {
+  --     exclude = {
+  --       -- "rust_analyzer",
+  --       -- "ts_ls"
+  --     }
+  -- },
+  ensure_installed = ensure_installed
 }
 
 -- Use an on_attach function to only map the following keys
@@ -20,7 +24,7 @@ local on_attach = function(client, bufnr)
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   -- vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -34,7 +38,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
   -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', '<leader>cd', function() vim.diagnostic.open_float({scope="line"}) end, bufopts)
+  vim.keymap.set('n', '<leader>cd', function() vim.diagnostic.open_float({ scope = "line" }) end, bufopts)
   -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   -- vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { sync = false, timeout_ms=20000  } end, bufopts)
 
@@ -104,7 +108,7 @@ vim.lsp.config('clangd', {
     "--pch-storage=memory",
     "--clang-tidy"
   },
-  filetypes =  { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'cl' },
+  filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'cl' },
   root_markers = { 'compile_commands.json', '.cache', 'compile_flags.txt' }
 })
 
@@ -133,6 +137,18 @@ vim.lsp.config('pyright', {
   end,
 })
 
+-- lua_ls
+vim.lsp.config('lua_ls', {
+  -- nvim-lspconfig が設定したコンフィグにsettingsを追加する
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' }
+      },
+    }
+  },
+})
+
 
 vim.diagnostic.config({
   -- https://eiji.page/blog/neovim-diagnostic-config/
@@ -150,3 +166,5 @@ vim.diagnostic.config({
     },
   },
 })
+
+vim.lsp.enable(ensure_installed)
