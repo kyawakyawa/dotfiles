@@ -16,6 +16,8 @@ vim.opt.laststatus = 3 -- https://wed.dev/blog/posts/neovim-statuline
 
 local init_dir = vim.fn.fnamemodify(vim.fn.expand("<sfile>:p"), ":h")
 require('util').set_default_config_path(init_dir .. "/default_config.json")
+vim.api.nvim_create_user_command('ConfigInfo', require('util').print_config_path, {})
+
 
 if not vim.g.vscode then
   -- For OpenCL

@@ -136,6 +136,16 @@ local load_local_config = function()
   end
 end
 
+function M.print_config_path()
+  local config_dir = M.find_dir_upwards(nil, ".nvim")
+  if not config_dir then
+    print("Not found config")
+  end
+
+  config_path = config_dir .. "/config.json"
+  print(config_path)
+end
+
 function M.load_config()
   local default_config = load_default_config()
   local local_config = load_local_config()
