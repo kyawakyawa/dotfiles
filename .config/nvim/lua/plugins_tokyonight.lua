@@ -1,19 +1,18 @@
 local tokyonight = {}
 
 tokyonight.setup = function(plugins)
-
   -- tokyonight
   table.insert(plugins, {
-    'folke/tokyonight.nvim',
+    "folke/tokyonight.nvim",
     config = function()
       require("tokyonight").setup({
-        style = 'storm',
+        style = "storm",
         transparent = true,
       })
-      vim.cmd[[colorscheme tokyonight]]
+      vim.cmd([[colorscheme tokyonight]])
     end,
     lazy = true,
-    event = "VeryLazy"
+    event = "VeryLazy",
   })
 
   return plugins

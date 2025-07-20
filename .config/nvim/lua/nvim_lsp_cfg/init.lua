@@ -5,7 +5,7 @@ require("mason").setup()
 
 local ensure_installed = { "clangd", "pyright", "ruff", "jsonls", "bashls", "lua_ls" }
 
-require("mason-lspconfig").setup {
+require("mason-lspconfig").setup({
   automatic_enable = true,
   -- automatic_enable = {
   --     exclude = {
@@ -13,32 +13,34 @@ require("mason-lspconfig").setup {
   --       -- "ts_ls"
   --     }
   -- },
-  ensure_installed = ensure_installed
-}
+  ensure_installed = ensure_installed,
+})
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
   -- vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wl', function()
+  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set("n", "<space>wl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
-  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
   -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', '<leader>cd', function() vim.diagnostic.open_float({ scope = "line" }) end, bufopts)
+  vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set("n", "<leader>cd", function()
+    vim.diagnostic.open_float({ scope = "line" })
+  end, bufopts)
   -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   -- vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { sync = false, timeout_ms=20000  } end, bufopts)
 
@@ -49,23 +51,22 @@ local on_attach = function(client, bufnr)
   -- ref https://github.com/haskell/haskell-language-server/issues/1148#issuecomment-887858195
   -- Only highlight if compatible with the language
   if cap.documentHighlightProvider then
-    vim.cmd [[
+    vim.cmd([[
       augroup lsp_document_highlight
         autocmd! * <buffer>
         autocmd CursorHold,CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
         autocmd CursorMoved,CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
       augroup END
-    ]]
+    ]])
   end
 end
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-local lspconfig = require('lspconfig')
-local lspconfig_util = require('lspconfig/util')
+local lspconfig = require("lspconfig")
+local lspconfig_util = require("lspconfig/util")
 
 local use_ccls = false -- cclsを使う場合はここをtrueにする
-
 
 -- if use_ccls then
 --   ---- ccls
@@ -91,34 +92,34 @@ local use_ccls = false -- cclsを使う場合はここをtrueにする
 -- lsp config
 
 -- shared config
-vim.lsp.config('*', {
-  root_markers = { '.git', '.hg' },
+vim.lsp.config("*", {
+  root_markers = { ".git", ".hg" },
 })
-vim.lsp.config('*', {
+vim.lsp.config("*", {
   capabilities = capabilities,
   on_attach = on_attach,
 })
 
 -- clangd
-vim.lsp.config('clangd', {
+vim.lsp.config("clangd", {
   cmd = {
     "clangd",
     "--background-index",
     "--header-insertion=never",
     "--pch-storage=memory",
-    "--clang-tidy"
+    "--clang-tidy",
   },
-  filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'cl' },
-  root_markers = { 'compile_commands.json', '.cache', 'compile_flags.txt' }
+  filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "cl" },
+  root_markers = { "compile_commands.json", ".cache", "compile_flags.txt" },
 })
 
 -- pyright
-vim.lsp.config('pyright', {
+vim.lsp.config("pyright", {
   before_init = function(_, config)
     local python_base_path = require("nvim_lsp_cfg/find_python").find_python_base_dir()
     if python_base_path ~= nil then
       config.settings.python.venvPath = python_base_path
-      config.settings.python.pythonPath = python_base_path .. '/bin/python'
+      config.settings.python.pythonPath = python_base_path .. "/bin/python"
     end
     -- local venv_path = require("nvim_lsp_cfg/venv").search_venv_path(config.root_dir)
     -- if venv_path ~= nil then
@@ -138,17 +139,16 @@ vim.lsp.config('pyright', {
 })
 
 -- lua_ls
-vim.lsp.config('lua_ls', {
+vim.lsp.config("lua_ls", {
   -- nvim-lspconfig が設定したコンフィグにsettingsを追加する
   settings = {
     Lua = {
       diagnostics = {
-        globals = { 'vim' }
+        globals = { "vim" },
       },
-    }
+    },
   },
 })
-
 
 vim.diagnostic.config({
   -- https://eiji.page/blog/neovim-diagnostic-config/

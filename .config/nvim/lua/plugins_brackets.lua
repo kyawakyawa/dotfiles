@@ -7,35 +7,35 @@ brackets.setup = function(plugins)
       require("autoclose").setup()
     end,
     lazy = true,
-  	event = "InsertEnter",
+    event = "InsertEnter",
   })
 
   -- indent-blankline.nvim
   table.insert(plugins, {
     "lukas-reineke/indent-blankline.nvim",
-    main = "ibl", 
+    main = "ibl",
     opts = {},
     config = function()
       require("ibl").setup()
     end,
-	  lazy = true,
-	  event = "BufReadPost", 
+    lazy = true,
+    event = "BufReadPost",
   })
 
   -- mini.indentscope.nvim
-  table.insert(plugins, { 
-    'echasnovski/mini.indentscope', 
-    version = '*',
+  table.insert(plugins, {
+    "echasnovski/mini.indentscope",
+    version = "*",
     config = function()
-      require('mini.indentscope').setup()
+      require("mini.indentscope").setup()
     end,
     lazy = true,
-	  event = "BufReadPost", 
+    event = "BufReadPost",
   })
 
   -- -- nvim-autopairs
   -- use {
-	 --  "windwp/nvim-autopairs",
+  --  "windwp/nvim-autopairs",
   --   config = function()
   --     require("nvim-autopairs").setup {}
 
@@ -45,7 +45,6 @@ brackets.setup = function(plugins)
   -- }
 
   return plugins
-
 end
 
 return brackets

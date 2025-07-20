@@ -1,38 +1,38 @@
 local nvim_lsp = {}
 
 nvim_lsp.setup = function(plugins)
-
   table.insert(plugins, {
     "mason-org/mason-lspconfig.nvim",
     lazy = true,
-    config = function() 
+    config = function()
       require("nvim_lsp_cfg")
     end,
     event = { "BufReadPost", "BufAdd", "BufNewFile" },
     dependencies = {
-		  { "mason-org/mason.nvim", opts = {} } ,
+      { "mason-org/mason.nvim", opts = {} },
       { "neovim/nvim-lspconfig" },
-      { "j-hui/fidget.nvim",
+      {
+        "j-hui/fidget.nvim",
         config = function()
           require("fidget").setup()
-        end
+        end,
       },
-	  },
+    },
   })
   -- lspsage.nvim
   table.insert(plugins, {
     "glepnir/lspsaga.nvim",
     branch = "main",
     config = function()
-      require('lspsaga_cfg')
+      require("lspsaga_cfg")
     end,
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
     },
-    lazy=true,
+    lazy = true,
     event = { "BufReadPost", "BufAdd", "BufNewFile" },
   })
- 
+
   -- -- lspsage.nvim
   -- use({
   --   "glepnir/lspsaga.nvim",
@@ -73,4 +73,4 @@ nvim_lsp.setup = function(plugins)
   return plugins
 end
 
-return nvim_lsp  
+return nvim_lsp

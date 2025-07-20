@@ -16,14 +16,14 @@ copilot.setup = function(plugins)
             jump_next = "]]",
             accept = "<CR>",
             refresh = "gr",
-            open = "<M-o>"
+            open = "<M-o>",
           },
           layout = {
             position = "bottom", -- | top | left | right
-            ratio = 0.4
+            ratio = 0.4,
           },
         },
-			  suggestion = {
+        suggestion = {
           enabled = true,
           auto_trigger = true,
           hide_during_completion = true,
@@ -38,7 +38,7 @@ copilot.setup = function(plugins)
             dismiss = "<C-]>",
           },
         },
-			  filetypes = {
+        filetypes = {
           yaml = false,
           markdown = false,
           help = false,
@@ -49,31 +49,31 @@ copilot.setup = function(plugins)
           cvs = false,
           ["."] = false,
         },
-			  copilot_node_command = "node", -- Node.js version must be > 18.x
-			  server_opts_overrides = {},
-		})
+        copilot_node_command = "node", -- Node.js version must be > 18.x
+        server_opts_overrides = {},
+      })
     end,
   })
 
-  table.insert(plugins, {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "main",
-    dependencies = {
-      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-    },
-    event = "BufRead",
-    config = function()
-      require("CopilotChat").setup{}
+  -- table.insert(plugins, {
+  --   "CopilotC-Nvim/CopilotChat.nvim",
+  --   branch = "main",
+  --   dependencies = {
+  --     { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+  --     { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+  --   },
+  --   event = "BufRead",
+  --   config = function()
+  --     require("CopilotChat").setup{}
 
-      local bufopts = { noremap=true }
-      -- Open the chat window
-      vim.keymap.set('n', '<leader>cc', function() require("CopilotChat").toggle({window = {layout = 'float', title = 'My Title'}}) end, bufopts)
-    end,
-    keys = {
-      "<leader>cc",
-    },
-  })
+  --     local bufopts = { noremap=true }
+  --     -- Open the chat window
+  --     vim.keymap.set('n', '<leader>cc', function() require("CopilotChat").toggle({window = {layout = 'float', title = 'My Title'}}) end, bufopts)
+  --   end,
+  --   keys = {
+  --     "<leader>cc",
+  --   },
+  -- })
 
   return plugins
 end

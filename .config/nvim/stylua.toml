@@ -1,0 +1,12 @@
+# 使用するクォートスタイル（ダブルを優先）
+quote_style = "AutoPreferDouble"
+
+# インデント設定
+indent_type = "Spaces"
+indent_width = 2
+
+# 行の最大幅（自動整形時の改行位置）
+column_width = 100
+
+# 改行コードの形式
+line_endings = "Unix"

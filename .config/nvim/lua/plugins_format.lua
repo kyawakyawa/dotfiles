@@ -1,6 +1,6 @@
 local format = {}
 
-local config = require('util').load_config()
+local config = require("util").load_config()
 
 local format_on_save = nil
 if config["format"]["format_on_save"] then
@@ -38,13 +38,13 @@ format.setup = function(plugins)
       vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
       vim.bo.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
-    lazy=true,
+    lazy = true,
     event = { "BufReadPost", "BufAdd", "BufNewFile" },
     keys = {
-      { "<space>f", "<cmd>lua require('conform').format()<cr>", desc = "format"} ,
+      { "<space>f", "<cmd>lua require('conform').format()<cr>", desc = "format" },
     },
   })
-  
+
   return plugins
 end
 
