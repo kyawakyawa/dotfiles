@@ -9,7 +9,7 @@ require("mason-lspconfig").setup {
           -- "ts_ls"
         }
     },
-    ensure_installed = { "clangd", "pyright", "ruff" },
+    ensure_installed = { "clangd", "pyright", "ruff", "jsonls"  },
 }
 
 -- Use an on_attach function to only map the following keys
