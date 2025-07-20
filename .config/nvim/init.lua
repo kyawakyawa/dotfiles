@@ -25,7 +25,7 @@ if not vim.g.vscode then
   vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     pattern = { "*.cl" },
     callback = function()
-      vim.opt.filetype = cl
+      vim.bo.filetype = "cl"
     end,
   })
 
