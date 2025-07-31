@@ -5,17 +5,16 @@ local rest = {}
 -- end
 
 rest.setup = function(plugins)
-
   -- rest.nvim
   table.insert(plugins, {
     "rest-nvim/rest.nvim",
     dependencies = {
       "j-hui/fidget.nvim",
     },
-    lazy=true,
+    lazy = true,
     event = { "BufReadPost", "BufAdd", "BufNewFile" },
   })
- 
+
   return plugins
 end
 

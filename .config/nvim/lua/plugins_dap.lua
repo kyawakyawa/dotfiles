@@ -3,15 +3,15 @@ local dap = {}
 dap.setup = function(plugins)
   -- nvim-dap
   table.insert(plugins, {
-    'mfussenegger/nvim-dap',
+    "mfussenegger/nvim-dap",
     config = function()
-      require('nvim_dap_cfg')
+      require("nvim_dap_cfg")
     end,
     dependencies = {
       { "rcarriga/nvim-dap-ui" },
-      { 'theHamsta/nvim-dap-virtual-text' },
-      { 'mfussenegger/nvim-dap-python' },
-      { 'nvim-neotest/nvim-nio' },
+      { "theHamsta/nvim-dap-virtual-text" },
+      { "mfussenegger/nvim-dap-python" },
+      { "nvim-neotest/nvim-nio" },
     },
     lazy = true,
     event = "VeryLazy",
@@ -27,7 +27,7 @@ dap.setup = function(plugins)
       "<leader>bc",
       "<leader>l",
       "<leader>c",
-    }
+    },
   })
 
   return plugins

@@ -1,7 +1,6 @@
 local which_key = {}
 
 which_key.setup = function(plugins)
-
   -- which_key.nvim
   table.insert(plugins, {
     "folke/which-key.nvim",
@@ -15,7 +14,7 @@ which_key.setup = function(plugins)
       -- your configuration comes here
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
-    }
+    },
   })
 
   return plugins

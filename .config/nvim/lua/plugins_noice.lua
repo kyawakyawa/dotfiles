@@ -1,7 +1,6 @@
 local noice = {}
 
 noice.setup = function(plugins)
-
   -- noice.nvim
   table.insert(plugins, {
     "folke/noice.nvim",
@@ -12,7 +11,7 @@ noice.setup = function(plugins)
         lsp = {
           signature = {
             enabled = false,
-          }
+          },
         },
         -- lsp signatureを有効にする場合以下をコメントアウト
         -- lsp = { -- https://www.reddit.com/r/neovim/comments/yfqtoi/weekly_noice_updates/

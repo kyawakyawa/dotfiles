@@ -1,5 +1,7 @@
 -- cacheの設定 (https://zenn.dev/kawarimidoll/articles/19bfc63e1c218c)
-if vim.loader then vim.loader.enable() end
+if vim.loader then
+  vim.loader.enable()
+end
 
 vim.opt.number = true
 vim.opt.expandtab = true
@@ -15,39 +17,42 @@ vim.opt.updatetime = 250
 vim.opt.laststatus = 3 -- https://wed.dev/blog/posts/neovim-statuline
 
 local init_dir = vim.fn.fnamemodify(vim.fn.expand("<sfile>:p"), ":h")
-require('util').set_default_config_path(init_dir .. "/default_config.json")
+require("util").set_default_config_path(init_dir .. "/default_config.json")
+vim.api.nvim_create_user_command("ConfigInfo", require("util").print_config_path, {})
 
 if not vim.g.vscode then
   -- For OpenCL
-  vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead"}, {
+  vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     pattern = { "*.cl" },
-    callback = function() vim.opt.filetype=cl end,
+    callback = function()
+      vim.bo.filetype = "cl"
+    end,
   })
-  
-  vim.api.nvim_set_keymap('t', '<ESC>', '<C-\\><C-n>', { noremap = true })
 
--- Plugins
-  require('plugins') -- プラグインの読み込み
+  vim.api.nvim_set_keymap("t", "<ESC>", "<C-\\><C-n>", { noremap = true })
+
+  -- Plugins
+  require("plugins") -- プラグインの読み込み
 end
 
 -- WSLの時の+/*レジスタの設定
-if require('util').isWSL() then
+if require("util").isWSL() then
   vim.g.clipboard = {
     -- Windows側にwin32yank.exeを置き、WSL側にシンボリックリンク /usr/local/bin/win32yank を作成
     name = "win32yank-wsl",
     copy = {
       ["+"] = "win32yank -i --crlf",
-      ["*"] = "win32yank -i --crlf"
+      ["*"] = "win32yank -i --crlf",
     },
     paste = {
       ["+"] = "win32yank -o --lf",
-      ["*"] = "win32yank -o --lf"
+      ["*"] = "win32yank -o --lf",
     },
     cache_enable = 0,
   }
 end
 
-if require('util').isWSL() or vim.fn.has("win32") then
+if require("util").isWSL() or vim.fn.has("win32") then
   --WSL or Windows の時
 
   -- Windows側にzenhan.exeを置き、WSL側にシンボリックリンク /usr/local/bin/zenhan を作成
@@ -55,21 +60,25 @@ if require('util').isWSL() or vim.fn.has("win32") then
   vim.api.nvim_create_autocmd({ "InsertLeave" }, {
     pattern = { "*" },
     callback = function()
-      vim.fn.system('zenhan 0')
+      vim.fn.system("zenhan 0")
     end,
   })
-elseif require('util').OSX() then
+elseif require("util").OSX() then
   -- Macの時
   -- For IME
   vim.api.nvim_create_autocmd({ "InsertLeave" }, {
     pattern = { "*" },
-    callback = function() vim.fn.system('im-select com.apple.inputmethod.Kotoeri.RomajiTyping.Roman') end,
+    callback = function()
+      vim.fn.system("im-select com.apple.inputmethod.Kotoeri.RomajiTyping.Roman")
+    end,
   })
 else
   -- Linuxのとき
   -- For IME
   vim.api.nvim_create_autocmd({ "InsertLeave" }, {
     pattern = { "*" },
-    callback = function() vim.fn.system('fcitx5-remote -c') end,
+    callback = function()
+      vim.fn.system("fcitx5-remote -c")
+    end,
   })
 end

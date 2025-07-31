@@ -2,14 +2,14 @@
 -- launch.jsonの利用 (.vscode/launch.json)
 
 function load_launchjs()
-  local ok, json5 = pcall(require, 'json5')
+  local ok, json5 = pcall(require, "json5")
   if ok then
-    require('dap.ext.vscode').json_decode = require('json5').parse
+    require("dap.ext.vscode").json_decode = require("json5").parse
   end
 
-  require('dap.ext.vscode').load_launchjs(nil, {
-    lldb = { 'c', 'cpp' }, -- dap.configurations.cpp の変わりにlaunch.jsonを使う
-    debugpy = { 'python' }
+  require("dap.ext.vscode").load_launchjs(nil, {
+    lldb = { "c", "cpp" }, -- dap.configurations.cpp の変わりにlaunch.jsonを使う
+    debugpy = { "python" },
   })
 end
 
@@ -19,8 +19,8 @@ load_launchjs()
 -- - https://github.com/mfussenegger/nvim-dap/issues/20#issuecomment-1212214935
 
 -- UIの自動起動
-require 'dap'.listeners.before['event_initialized']['custom'] = function(session, body)
-  require 'dapui'.open()
+require("dap").listeners.before["event_initialized"]["custom"] = function(session, body)
+  require("dapui").open()
 end
 
 -- -- UIの自動消去
@@ -32,7 +32,9 @@ require("dapui").setup()
 -- Key Map
 local function map(mode, lhs, rhs, opts)
   local options = { noremap = true }
-  if opts then options = vim.tbl_extend('force', options, opts) end
+  if opts then
+    options = vim.tbl_extend("force", options, opts)
+  end
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
@@ -45,28 +47,37 @@ map("n", "<F10>", ":lua require'dap'.step_over()<CR>", { silent = true })
 map("n", "<F11>", ":lua require'dap'.step_into()<CR>", { silent = true })
 map("n", "<F12>", ":lua require'dap'.step_out()<CR>", { silent = true })
 map("n", "<leader>b", ":lua require'dap'.toggle_breakpoint()<CR>", { silent = true })
-map("n", "<leader>bc", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", { silent = true })
-map("n", "<leader>l", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
-  { silent = true })
-vim.keymap.set('n', '<leader>c', require 'dap'.repl.close, { silent = true }, bufopts)
+map(
+  "n",
+  "<leader>bc",
+  ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+  { silent = true }
+)
+map(
+  "n",
+  "<leader>l",
+  ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
+  { silent = true }
+)
+vim.keymap.set("n", "<leader>c", require("dap").repl.close, { silent = true }, bufopts)
 
 -- C++ with codelldb
-local dap = require('dap')
+local dap = require("dap")
 dap.adapters.lldb = {
-  type = 'server',
+  type = "server",
   port = "${port}",
   executable = {
     -- CHANGE THIS to your path!
-    command = 'codelldb',
+    command = "codelldb",
     args = { "--port", "${port}" },
 
     -- On windows you may have to uncomment this:
     -- detached = false,
-  }
+  },
 }
 
 -- Python
-require('dap-python').setup(nil, {
+require("dap-python").setup(nil, {
   include_configs = false, -- デフォルトのconfigurations.python は使わない
 })
 

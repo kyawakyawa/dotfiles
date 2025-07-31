@@ -1,6 +1,6 @@
 local format = {}
 
-local config = require('util').load_config()
+local config = require("util").load_config()
 
 local format_on_save = nil
 if config["format"]["format_on_save"] then
@@ -28,19 +28,24 @@ format.setup = function(plugins)
           json = { "jq" },
           cpp = { "clang-format" },
           cuda = { "clang-format" },
+          lua = { "stylua" },
         },
         format_on_save = format_on_save,
       })
+      -- vim.keymap.set('n', '<space>f', require("conform").format)
     end,
     init = function()
       -- If you want the formatexpr, here is the place to set it
       vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
       vim.bo.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
-    lazy=true,
+    lazy = true,
     event = { "BufReadPost", "BufAdd", "BufNewFile" },
+    keys = {
+      { "<space>f", "<cmd>lua require('conform').format()<cr>", desc = "format" },
+    },
   })
-  
+
   return plugins
 end
 

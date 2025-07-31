@@ -1,10 +1,9 @@
 local notify = {}
 
 notify.setup = function(plugins)
-
   -- notify
   table.insert(plugins, {
-    'rcarriga/nvim-notify',
+    "rcarriga/nvim-notify",
     config = function()
       require("notify").setup({
         background_colour = "#000000",
@@ -23,8 +22,8 @@ notify.setup = function(plugins)
     lazy = true,
     event = "VeryLazy",
     dependencies = {
-      'nvim-lua/plenary.nvim'
-    }
+      "nvim-lua/plenary.nvim",
+    },
   })
 
   return plugins
