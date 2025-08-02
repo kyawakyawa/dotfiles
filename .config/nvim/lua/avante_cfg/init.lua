@@ -13,11 +13,11 @@ avante_cfg_opts = {
     ollama = ollama,
     copilot = {
       model = avante_config_opts["providers"]["copilot"]["model"] or "gpt-4o",
+      disabled_tools = mcp.disabled_tools,
     },
   },
   system_prompt = mcp.system_prompt,
   custom_tools = mcp.custom_tools,
-  -- disabled_tools = mcp.disabled_tools,
 }
 
 avante_cfg.opts = avante_cfg_opts

@@ -65,18 +65,6 @@ avante.setup = function(plugins)
             },
             auto_approve = false, -- MCP tool呼び出し時の自動承認（任意）
             use_bundled_binary = true, -- MCPHub.nvimのバイナリを使用する場合はtrue
-            -- 新機能: MCPサーバーの自動起動
-            autostart_servers = {
-              "neovim", -- neovim MCPサーバーを自動起動
-              "fetch", -- fetch MCPサーバーを自動起動
-            },
-            -- MCP HUB UI設定
-            ui = {
-              -- UIのカスタマイズ設定
-              border = "rounded",
-              width = 80,
-              height = 20,
-            },
           },
         },
       },
