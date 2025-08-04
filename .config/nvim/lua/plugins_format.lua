@@ -29,6 +29,7 @@ format.setup = function(plugins)
           cpp = { "clang-format" },
           cuda = { "clang-format" },
           lua = { "stylua" },
+          yaml = { "yamlfmt" },
         },
         format_on_save = format_on_save,
       })
