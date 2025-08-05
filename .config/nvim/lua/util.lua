@@ -77,12 +77,36 @@ function M.find_dir_upwards(start_path, target_dir)
   end
 end
 
+function M.find_nvim_config_dir()
+  local start_dir = vim.uv.cwd()
+  while true do
+    local config_dir = M.find_dir_upwards(start_dir, ".nvim")
+    if not config_dir then
+      return nil
+    end
+
+    local config_path = config_dir .. "/config.json"
+    if vim.uv.fs_stat(config_path) then
+      return config_dir
+    end
+
+    local parent_dir = vim.uv.fs_realpath(config_dir .. "/..")
+    local parent_parent_dir = vim.uv.fs_realpath(parent_dir .. "/..")
+    if parent_dir == parent_parent_dir then
+      return nil
+    end
+
+    start_dir = parent_parent_dir
+  end
+end
+
 local config_path_loaded = nil
 local default_config_path = "~/.config/nvim/default_config.json"
 
 function M.set_default_config_path(path)
   default_config_path = path
 end
+
 function M.get_default_config_path(path)
   return default_config_path
 end
@@ -100,7 +124,7 @@ local load_default_config = function()
 end
 
 local load_local_config = function()
-  local config_dir = M.find_dir_upwards(nil, ".nvim")
+  local config_dir = M.find_nvim_config_dir(nil, ".nvim")
   if not config_dir then
     return nil
   end
@@ -134,9 +158,10 @@ local load_local_config = function()
 end
 
 function M.print_config_path()
-  local config_dir = M.find_dir_upwards(nil, ".nvim")
+  local config_dir = M.find_nvim_config_dir(nil, ".nvim")
   if not config_dir then
     print("Not found config")
+    return
   end
 
   config_path = config_dir .. "/config.json"
