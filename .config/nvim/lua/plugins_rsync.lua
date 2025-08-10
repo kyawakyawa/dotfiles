@@ -1,5 +1,8 @@
 local rsync = {}
 
+local util = require("util")
+local config = util.load_config()
+
 rsync.setup = function(plugins)
   table.insert(plugins, {
     "coffebar/transfer.nvim",
@@ -12,7 +15,10 @@ rsync.setup = function(plugins)
       "TransferDirDiff",
       "TransferRepeat",
     },
-    opts = {},
+    -- opts = {
+    --   upload_rsync_params = config["plugins"]["rsync"]["transfer"]["upload_rsync_params"],
+    --   download_rsync_params = config["plugins"]["rsync"]["transfer"]["download_rsync_params"],
+    -- },
     config = function()
       vim.api.nvim_create_autocmd({ "BufWritePost" }, {
         pattern = { "*" },
@@ -25,7 +31,10 @@ rsync.setup = function(plugins)
         end,
       })
 
-      require("transfer").setup()
+      require("transfer").setup({
+        upload_rsync_params = config["plugins"]["rsync"]["transfer"]["upload_rsync_params"],
+        download_rsync_params = config["plugins"]["rsync"]["transfer"]["download_rsync_params"],
+      })
     end,
   })
 

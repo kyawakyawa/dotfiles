@@ -30,6 +30,30 @@
     },
     "rest": {
       "enabled": false
+    },
+    "rsync": {
+      "transfer": {
+        "upload_rsync_params": [
+          "-rlzi",
+          "--checksum",
+          "--exclude",
+          ".git",
+          "--exclude",
+          ".idea",
+          "--exclude",
+          ".DS_Store",
+          "--exclude",
+          ".nvim",
+          "--exclude",
+          "*.pyc"
+        ],
+        "download_rsync_params": [
+          "-rlzi",
+          "--checksum",
+          "--exclude",
+          ".git"
+        ]
+      }
     }
   },
   "format": {
