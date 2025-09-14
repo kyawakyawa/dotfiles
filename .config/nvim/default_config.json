@@ -2,7 +2,8 @@
   "plugins": {
     "aiAssistant": {
       "githubCopilot": {
-        "enabled": false
+        "enabled": false,
+        "confirm_tab": false
       },
       "avante": {
         "enabled": false,

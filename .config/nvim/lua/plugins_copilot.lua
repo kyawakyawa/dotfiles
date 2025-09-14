@@ -1,6 +1,49 @@
 local copilot = {}
 
 util = require("util")
+local config = util.load_config()
+
+keymap = util.OSX()
+    and {
+      -- Commandキー(Macの場合はOSXがtrue)
+      accept = "<D-l>",
+      accept_word = false,
+      accept_line = false,
+      next = "<D-]>",
+      prev = "<D-[>",
+      dismiss = "<C-]>",
+    }
+  or {
+    -- MはAltキー(Mac以外の場合)
+    accept = "<M-l>",
+    accept_word = false,
+    accept_line = false,
+    next = "<M-]>",
+    prev = "<M-[>",
+    dismiss = "<C-]>",
+  }
+
+if config["plugins"]["aiAssistant"]["githubCopilot"]["confirm_tab"] then
+  keymap = util.OSX()
+      and {
+        -- Commandキー(Macの場合はOSXがtrue)
+        accept = "<Tab>",
+        accept_word = false,
+        accept_line = false,
+        next = "<S-Tab>",
+        prev = "<D-[>",
+        dismiss = "<C-]>",
+      }
+    or {
+      -- MはAltキー(Mac以外の場合)
+      accept = "<Tab>",
+      accept_word = false,
+      accept_line = false,
+      next = "<S-Tab>",
+      prev = "<M-[>",
+      dismiss = "<C-]>",
+    }
+end
 
 copilot.setup = function(plugins)
   -- copilotsigns.nvim
@@ -30,23 +73,7 @@ copilot.setup = function(plugins)
           auto_trigger = true,
           hide_during_completion = true,
           debounce = 75,
-          keymap = util.OSX() and {
-            -- Commandキー(Macの場合はOSXがtrue)
-            accept = "<D-l>",
-            accept_word = false,
-            accept_line = false,
-            next = "<D-]>",
-            prev = "<D-[>",
-            dismiss = "<C-]>",
-          } or {
-            -- MはAltキー(Mac以外の場合)
-            accept = "<M-l>",
-            accept_word = false,
-            accept_line = false,
-            next = "<M-]>",
-            prev = "<M-[>",
-            dismiss = "<C-]>",
-          },
+          keymap = keymap,
         },
         filetypes = {
           yaml = false,
