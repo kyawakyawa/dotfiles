@@ -15,7 +15,7 @@ avante.setup = function(plugins)
       -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
       build = vim.fn.has("win32") ~= 0
           and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
-          or "make",
+        or "make",
       dependencies = {
         "stevearc/dressing.nvim",
         "nvim-lua/plenary.nvim",

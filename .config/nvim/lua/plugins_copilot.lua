@@ -1,5 +1,7 @@
 local copilot = {}
 
+util = require("util")
+
 copilot.setup = function(plugins)
   -- copilotsigns.nvim
   table.insert(plugins, {
@@ -28,8 +30,16 @@ copilot.setup = function(plugins)
           auto_trigger = true,
           hide_during_completion = true,
           debounce = 75,
-          keymap = {
-            -- MはAltキー(Macの場合はOptionキー)
+          keymap = util.OSX() and {
+            -- Commandキー(Macの場合はOSXがtrue)
+            accept = "<D-l>",
+            accept_word = false,
+            accept_line = false,
+            next = "<D-]>",
+            prev = "<D-[>",
+            dismiss = "<C-]>",
+          } or {
+            -- MはAltキー(Mac以外の場合)
             accept = "<M-l>",
             accept_word = false,
             accept_line = false,
