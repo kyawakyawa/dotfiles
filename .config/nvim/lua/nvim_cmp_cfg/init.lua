@@ -26,7 +26,10 @@ cmp_mapping = {
   ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 }
 
-if not use_tab_key_in_copilot then
+if use_tab_key_in_copilot then
+  cmp_mapping["<Tab>"] = cmp.config.disable
+  cmp_mapping["<S-Tab>"] = cmp.config.disable
+else
   cmp_mapping["<Tab>"] = cmp.mapping(function(fallback)
     if cmp.visible() then
       cmp.confirm({ select = true })
@@ -71,7 +74,7 @@ cmp.setup({
       winhighlight = "Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None",
     },
   },
-  mapping = cmp_mapping,
+  mapping = cmp.mapping.preset.insert(cmp_mapping),
   sources = cmp.config.sources(
     {
       { name = "nvim_lsp", keyword_length = 1 },
