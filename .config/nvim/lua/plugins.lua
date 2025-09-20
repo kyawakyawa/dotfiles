@@ -60,6 +60,9 @@ if config["colorscheme"]["name"] == "tokyonight" then
 elseif config["colorscheme"]["name"] == "solarized" then
   -- soralized osaka colorscheme
   plugins = require("plugins_solarized_osaka").setup(plugins)
+elseif config["colorscheme"]["name"] == "ayu" then
+  -- ayu colorscheme
+  plugins = require("plugins_ayu").setup(plugins)
 elseif config["colorscheme"]["name"] == "vim" then
   vim.api.nvim_create_autocmd("ColorScheme", {
     pattern = "*",
