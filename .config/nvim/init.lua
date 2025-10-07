@@ -32,7 +32,7 @@ if not vim.g.vscode then
   vim.api.nvim_set_keymap("t", "<ESC>", "<C-\\><C-n>", { noremap = true })
 
   -- Plugins
-  require("plugins") -- プラグインの読み込み
+  require("lazy_nvim") -- プラグインの読み込み
 end
 
 -- WSLの時の+/*レジスタの設定
