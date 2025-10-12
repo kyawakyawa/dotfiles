@@ -1,6 +1,6 @@
 local M = {}
 
-function checkMicrosoftInProcVersion()
+local function checkMicrosoftInProcVersion()
   local file = io.open("/proc/version", "r")
 
   if file then
