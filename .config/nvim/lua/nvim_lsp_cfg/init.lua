@@ -143,8 +143,10 @@ vim.lsp.config("lua_ls", {
   -- nvim-lspconfig が設定したコンフィグにsettingsを追加する
   settings = {
     Lua = {
-      diagnostics = {
-        globals = { "vim" },
+      workspace = {
+        library = {
+          vim.env.VIMRUNTIME .. "/lua",
+        },
       },
     },
   },
