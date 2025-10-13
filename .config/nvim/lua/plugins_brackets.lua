@@ -1,17 +1,20 @@
 local brackets = {}
+local util = require("util")
 
 brackets.setup = function(plugins)
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "m4xshen/autoclose.nvim",
     config = function()
       require("autoclose").setup()
     end,
     lazy = true,
     event = "InsertEnter",
+  }, {
+    vscode = false,
   })
 
   -- indent-blankline.nvim
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     opts = {},
@@ -20,10 +23,12 @@ brackets.setup = function(plugins)
     end,
     lazy = true,
     event = "BufReadPost",
+  }, {
+    vscode = false,
   })
 
   -- mini.indentscope.nvim
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "echasnovski/mini.indentscope",
     version = "*",
     config = function()
@@ -31,6 +36,8 @@ brackets.setup = function(plugins)
     end,
     lazy = true,
     event = "BufReadPost",
+  }, {
+    vscode = false,
   })
 
   -- -- nvim-autopairs

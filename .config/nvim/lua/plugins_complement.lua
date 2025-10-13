@@ -1,7 +1,8 @@
 local complement = {}
+local util = require("util")
 
 complement.setup = function(plugins)
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "hrsh7th/nvim-cmp",
     config = function()
       require("nvim_cmp_cfg")
@@ -28,6 +29,8 @@ complement.setup = function(plugins)
       { "L3MON4D3/LuaSnip" },
       { "saadparwaiz1/cmp_luasnip" },
     },
+  }, {
+    vscode = false,
   })
   return plugins
 end

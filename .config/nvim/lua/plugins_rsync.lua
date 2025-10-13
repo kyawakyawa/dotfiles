@@ -4,7 +4,7 @@ local util = require("util")
 local config = util.load_config()
 
 rsync.setup = function(plugins)
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "coffebar/transfer.nvim",
     lazy = false,
     cmd = {
@@ -36,6 +36,8 @@ rsync.setup = function(plugins)
         download_rsync_params = config["plugins"]["rsync"]["transfer"]["download_rsync_params"],
       })
     end,
+  }, {
+    vscode = false,
   })
 
   return plugins

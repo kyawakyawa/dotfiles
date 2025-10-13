@@ -1,8 +1,9 @@
 local noice = {}
+local util = require("util")
 
 noice.setup = function(plugins)
   -- noice.nvim
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "folke/noice.nvim",
     config = function()
       require("noice").setup({
@@ -33,6 +34,8 @@ noice.setup = function(plugins)
     },
     lazy = true,
     event = "VeryLazy",
+  }, {
+    vscode = false,
   })
 
   return plugins

@@ -1,8 +1,9 @@
 local term = {}
+local util = require("util")
 
 term.setup = function(plugins)
   -- toggleterm.nvim
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "akinsho/toggleterm.nvim",
     config = function(use)
       require("toggleterm").setup()
@@ -26,6 +27,8 @@ term.setup = function(plugins)
     keys = {
       "<C-j>",
     },
+  }, {
+    vscode = false,
   })
 
   return plugins

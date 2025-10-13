@@ -4,7 +4,7 @@ util = require("util")
 
 git.setup = function(plugins)
   -- gitsigns.nvim
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "lewis6991/gitsigns.nvim",
     config = function()
       require("gitsigns").setup({
@@ -79,10 +79,12 @@ git.setup = function(plugins)
       "<leader>hD",
       "<leader>td",
     },
+  }, {
+    vscode = false,
   })
 
   -- messenger.nvim
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "lsig/messenger.nvim",
     config = function()
       require("messenger").setup({
@@ -95,10 +97,12 @@ git.setup = function(plugins)
     end,
     lazy = true,
     event = "VeryLazy",
+  }, {
+    vscode = false,
   })
 
   -- sindrets/diffview.nvim
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "sindrets/diffview.nvim",
     config = function()
       win_config = function()
@@ -140,6 +144,8 @@ git.setup = function(plugins)
     end,
     lazy = true,
     event = "VeryLazy",
+  }, {
+    vscode = false,
   })
 
   util.add_plugin(plugins, {

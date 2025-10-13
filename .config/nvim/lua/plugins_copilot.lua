@@ -13,15 +13,15 @@ keymap = util.OSX()
       prev = "<D-[>",
       dismiss = "<C-]>",
     }
-  or {
-    -- MはAltキー(Mac以外の場合)
-    accept = "<M-l>",
-    accept_word = false,
-    accept_line = false,
-    next = "<M-]>",
-    prev = "<M-[>",
-    dismiss = "<C-]>",
-  }
+    or {
+      -- MはAltキー(Mac以外の場合)
+      accept = "<M-l>",
+      accept_word = false,
+      accept_line = false,
+      next = "<M-]>",
+      prev = "<M-[>",
+      dismiss = "<C-]>",
+    }
 
 if config["plugins"]["aiAssistant"]["githubCopilot"]["confirm_tab"] then
   keymap = util.OSX()
@@ -34,20 +34,20 @@ if config["plugins"]["aiAssistant"]["githubCopilot"]["confirm_tab"] then
         prev = "<D-[>",
         dismiss = "<C-]>",
       }
-    or {
-      -- MはAltキー(Mac以外の場合)
-      accept = "<Tab>",
-      accept_word = false,
-      accept_line = false,
-      next = "<S-Tab>",
-      prev = "<M-[>",
-      dismiss = "<C-]>",
-    }
+      or {
+        -- MはAltキー(Mac以外の場合)
+        accept = "<Tab>",
+        accept_word = false,
+        accept_line = false,
+        next = "<S-Tab>",
+        prev = "<M-[>",
+        dismiss = "<C-]>",
+      }
 end
 
 copilot.setup = function(plugins)
   -- copilotsigns.nvim
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
@@ -90,6 +90,8 @@ copilot.setup = function(plugins)
         server_opts_overrides = {},
       })
     end,
+  }, {
+    vscode = false,
   })
 
   -- table.insert(plugins, {

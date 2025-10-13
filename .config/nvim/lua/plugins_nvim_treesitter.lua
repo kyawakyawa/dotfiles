@@ -1,8 +1,9 @@
 local treesitter = {}
+local util = require("util")
 
 treesitter.setup = function(plugins)
   -- nvim-treesitter
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "nvim-treesitter/nvim-treesitter",
     config = function()
       require("nvim-treesitter.configs").setup({
@@ -56,47 +57,49 @@ treesitter.setup = function(plugins)
         },
       })
 
-      my_ts_install =
-        function()
-          vim.api.nvim_command("TSUpdate")
+      my_ts_install = function()
+        vim.api.nvim_command("TSUpdate")
 
-          vim.api.nvim_command('echo "C/C++"')
-          vim.api.nvim_command("TSInstall c cpp cmake make cuda glsl")
+        vim.api.nvim_command('echo "C/C++"')
+        vim.api.nvim_command("TSInstall c cpp cmake make cuda glsl")
 
-          vim.api.nvim_command('echo "Rust"')
-          vim.api.nvim_command("TSInstall rust")
+        vim.api.nvim_command('echo "Rust"')
+        vim.api.nvim_command("TSInstall rust")
 
-          vim.api.nvim_command('echo "Python"')
-          vim.api.nvim_command("TSInstall python")
+        vim.api.nvim_command('echo "Python"')
+        vim.api.nvim_command("TSInstall python")
 
-          vim.api.nvim_command('echo "Lua"')
-          vim.api.nvim_command("TSInstall lua")
+        vim.api.nvim_command('echo "Lua"')
+        vim.api.nvim_command("TSInstall lua")
 
-          vim.api.nvim_command('echo "Web"')
-          vim.api.nvim_command("TSInstall html css javascript typescript json jsonc json5 tsx")
+        vim.api.nvim_command('echo "Web"')
+        vim.api.nvim_command("TSInstall html css javascript typescript json jsonc json5 tsx")
 
-          vim.api.nvim_command('echo "TOML/YAML"')
-          vim.api.nvim_command("TSInstall toml yaml")
+        vim.api.nvim_command('echo "TOML/YAML"')
+        vim.api.nvim_command("TSInstall toml yaml")
 
-          vim.api.nvim_command('echo "Vim"')
-          vim.api.nvim_command("TSInstall vim")
+        vim.api.nvim_command('echo "Vim"')
+        vim.api.nvim_command("TSInstall vim")
 
-          vim.api.nvim_command('echo "Bash"')
-          vim.api.nvim_command("TSInstall bash")
+        vim.api.nvim_command('echo "Bash"')
+        vim.api.nvim_command("TSInstall bash")
 
-          vim.api.nvim_command('echo "Regex"')
-          vim.api.nvim_command("TSInstall regex")
+        vim.api.nvim_command('echo "Regex"')
+        vim.api.nvim_command("TSInstall regex")
 
-          vim.api.nvim_command('echo "Markdown"')
-          vim.api.nvim_command("TSInstall markdown markdown_inline")
-        end, vim.api.nvim_command("command MyTSInstall lua my_ts_install()")
+        vim.api.nvim_command('echo "Markdown"')
+        vim.api.nvim_command("TSInstall markdown markdown_inline")
+      end
+      vim.api.nvim_command("command MyTSInstall lua my_ts_install()")
     end,
     lazy = true,
     event = "BufReadPost",
+  }, {
+    vscode = false,
   })
 
   -- nvim-treesitter-context
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "nvim-treesitter/nvim-treesitter-context",
     config = function()
       require("treesitter-context").setup({
@@ -107,10 +110,12 @@ treesitter.setup = function(plugins)
     end,
     lazy = true,
     event = "BufReadPost",
+  }, {
+    vscode = false,
   })
 
   -- nvim-treesitter/nvim-treesitter-textobjects
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "nvim-treesitter/nvim-treesitter-textobjects",
     config = function()
       require("nvim-treesitter.configs").setup({
@@ -135,7 +140,7 @@ treesitter.setup = function(plugins)
 
             selection_modes = {
               ["@parameter.outer"] = "v", -- charwise
-              ["@function.outer"] = "V", -- linewise
+              ["@function.outer"] = "V",  -- linewise
               ["@class.outer"] = "<c-v>", -- blockwise
             },
             include_surrounding_whitespace = true,
@@ -167,6 +172,8 @@ treesitter.setup = function(plugins)
     },
     lazy = true,
     event = "BufReadPost",
+  }, {
+    vscode = false,
   })
 
   return plugins

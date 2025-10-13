@@ -1,8 +1,9 @@
 local which_key = {}
+local util = require("util")
 
 which_key.setup = function(plugins)
   -- which_key.nvim
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "folke/which-key.nvim",
     lazy = true,
     event = "BufReadPost",
@@ -15,6 +16,8 @@ which_key.setup = function(plugins)
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
     },
+  }, {
+    vscode = false,
   })
 
   return plugins

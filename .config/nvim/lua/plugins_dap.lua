@@ -1,8 +1,9 @@
 local dap = {}
+local util = require("util")
 
 dap.setup = function(plugins)
   -- nvim-dap
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "mfussenegger/nvim-dap",
     config = function()
       require("nvim_dap_cfg")
@@ -28,6 +29,8 @@ dap.setup = function(plugins)
       "<leader>l",
       "<leader>c",
     },
+  }, {
+    vscode = false,
   })
 
   return plugins

@@ -1,8 +1,9 @@
 local line = {}
+local util = require("util")
 
 line.setup = function(plugins)
   -- lualine.nvim
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "nvim-lualine/lualine.nvim",
     lazy = true,
     event = "VeryLazy",
@@ -10,14 +11,16 @@ line.setup = function(plugins)
       require("lualine_cfg")
     end,
     dependencies = { "nvim-tree/nvim-web-devicons" },
+  }, {
+    vscode = false,
   })
 
   -- barbar.nvim
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "romgrk/barbar.nvim",
     event = "VeryLazy",
     dependencies = {
-      "lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
+      "lewis6991/gitsigns.nvim",     -- OPTIONAL: for git status
       "nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
     },
     init = function()
@@ -30,6 +33,8 @@ line.setup = function(plugins)
       -- …etc.
     },
     version = "^1.0.0", -- optional: only update when a new 1.x version is released
+  }, {
+    vscode = false,
   })
 
   -- -- sidebar.nvim

@@ -1,7 +1,8 @@
 local greeter = {}
+local util = require("util")
 
 greeter.setup = function(plugins)
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "goolord/alpha-nvim",
     requires = { "nvim-tree/nvim-web-devicons" },
     config = function()
@@ -10,6 +11,8 @@ greeter.setup = function(plugins)
     end,
     lazy = true,
     event = "BufWinEnter",
+  }, {
+    vscode = false,
   })
 
   return plugins

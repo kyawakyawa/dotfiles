@@ -1,8 +1,9 @@
 local notify = {}
+local util = require("util")
 
 notify.setup = function(plugins)
   -- notify
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "rcarriga/nvim-notify",
     config = function()
       require("notify").setup({
@@ -24,6 +25,8 @@ notify.setup = function(plugins)
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
+  }, {
+    vscode = false,
   })
 
   return plugins
