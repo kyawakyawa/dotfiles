@@ -52,7 +52,7 @@ if require("util").isWSL() then
   }
 end
 
-if require("util").isWSL() or vim.fn.has("win32") then
+if require("util").isWSL() or vim.fn.has("win32") ~= 0 then
   --WSL or Windows の時
 
   -- Windows側にzenhan.exeを置き、WSL側にシンボリックリンク /usr/local/bin/zenhan を作成
@@ -69,7 +69,8 @@ elseif require("util").OSX() then
   vim.api.nvim_create_autocmd({ "InsertLeave" }, {
     pattern = { "*" },
     callback = function()
-      vim.fn.system("im-select com.apple.inputmethod.Kotoeri.RomajiTyping.Roman")
+      -- vim.fn.system("im-select com.apple.inputmethod.Kotoeri.RomajiTyping.Roman")
+      vim.fn.system("/opt/homebrew/bin/im-select com.apple.keylayout.ABC")
     end,
   })
 else
