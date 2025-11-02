@@ -95,7 +95,7 @@ treesitter.setup = function(plugins)
     lazy = true,
     event = "BufReadPost",
   }, {
-    vscode = false,
+    vscode = true,
   })
 
   -- nvim-treesitter-context
@@ -173,7 +173,7 @@ treesitter.setup = function(plugins)
     lazy = true,
     event = "BufReadPost",
   }, {
-    vscode = false,
+    vscode = true,
   })
 
   return plugins
