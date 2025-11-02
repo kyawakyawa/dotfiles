@@ -1,7 +1,8 @@
 local file_explorer = {}
+local util = require("util")
 
 file_explorer.setup = function(plugins)
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     dependencies = {
@@ -33,6 +34,8 @@ file_explorer.setup = function(plugins)
         },
       })
     end,
+  }, {
+    vscode = false,
   })
 
   return plugins

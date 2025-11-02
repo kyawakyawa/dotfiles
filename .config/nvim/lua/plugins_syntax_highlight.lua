@@ -1,4 +1,5 @@
 local syntax_highlight = {}
+local util = require("util")
 
 syntax_highlight.setup = function(plugins)
   -- -- nvim-ts-rainbow
@@ -7,7 +8,7 @@ syntax_highlight.setup = function(plugins)
   -- })
 
   -- todo-comments.nvim
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
     config = function()
@@ -19,13 +20,17 @@ syntax_highlight.setup = function(plugins)
     end,
     lazy = true,
     event = "BufReadPost",
+  }, {
+    vscode = false,
   })
 
   -- vim-illuminate
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "RRethy/vim-illuminate",
     lazy = true,
     event = "BufReadPost",
+  }, {
+    vscode = false,
   })
 
   return plugins

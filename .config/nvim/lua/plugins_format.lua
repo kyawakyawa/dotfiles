@@ -1,4 +1,5 @@
 local format = {}
+local util = require("util")
 
 local config = require("util").load_config()
 
@@ -12,7 +13,7 @@ if config["format"]["format_on_save"] then
 end
 
 format.setup = function(plugins)
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "stevearc/conform.nvim",
     opts = {},
     config = function()
@@ -45,6 +46,8 @@ format.setup = function(plugins)
     keys = {
       { "<space>f", "<cmd>lua require('conform').format()<cr>", desc = "format" },
     },
+  }, {
+    vscode = false,
   })
 
   return plugins

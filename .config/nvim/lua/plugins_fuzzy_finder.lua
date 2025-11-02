@@ -1,7 +1,8 @@
 local fuzzy_finder = {}
+local util = require("util")
 
 fuzzy_finder.setup = function(plugins)
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
     config = function()
@@ -76,6 +77,8 @@ fuzzy_finder.setup = function(plugins)
       "debugloop/telescope-undo.nvim",
       "kyoh86/telescope-windows.nvim",
     },
+  }, {
+    vscode = false,
   })
 
   return plugins

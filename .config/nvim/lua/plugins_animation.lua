@@ -1,4 +1,5 @@
 local animation = {}
+local util = require("util")
 
 animation.setup = function(plugins)
   -- table.insert(plugins, {
@@ -11,7 +12,7 @@ animation.setup = function(plugins)
   --    event = "BufReadPost",
   -- })
 
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "karb94/neoscroll.nvim",
     config = function()
       neoscroll = require("neoscroll")
@@ -131,9 +132,11 @@ animation.setup = function(plugins)
       "<zz>",
       "<zb>",
     },
+  }, {
+    vscode = false,
   })
 
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     -- 'edluffy/specs.nvim',
     "cxwx/specs.nvim",
     config = function()
@@ -142,8 +145,8 @@ animation.setup = function(plugins)
         min_jump = 30,
         popup = {
           delay_ms = 0, -- delay before popup displays
-          inc_ms = 5, -- time increments used for fade/resize effects
-          blend = 0, -- starting blend, between 0-100 (fully transparent), see :h winblend
+          inc_ms = 5,   -- time increments used for fade/resize effects
+          blend = 0,    -- starting blend, between 0-100 (fully transparent), see :h winblend
           width = 24,
           winhl = "Pmenu",
           -- fader = require('specs').linear_fader,
@@ -306,6 +309,8 @@ animation.setup = function(plugins)
     end,
     lazy = true,
     event = "BufReadPost",
+  }, {
+    vscode = false,
   })
 
   return plugins

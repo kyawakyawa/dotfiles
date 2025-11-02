@@ -1,8 +1,9 @@
 local ayu = {}
+local util = require("util")
 
 ayu.setup = function(plugins)
   -- ayu
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "Shatur/neovim-ayu",
     config = function()
       require("ayu").setup({
@@ -24,6 +25,8 @@ ayu.setup = function(plugins)
     end,
     lazy = true,
     event = "VeryLazy",
+  }, {
+    vscode = false,
   })
 
   return plugins

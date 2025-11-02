@@ -1,8 +1,9 @@
 local tokyonight = {}
+local util = require("util")
 
 tokyonight.setup = function(plugins)
   -- tokyonight
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "folke/tokyonight.nvim",
     config = function()
       require("tokyonight").setup({
@@ -13,6 +14,8 @@ tokyonight.setup = function(plugins)
     end,
     lazy = true,
     event = "VeryLazy",
+  }, {
+    vscode = false,
   })
 
   return plugins

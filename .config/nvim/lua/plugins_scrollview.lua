@@ -1,8 +1,9 @@
 local scrollview = {}
+local util = require("util")
 
 scrollview.setup = function(plugins)
   -- codewindow
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "gorbit99/codewindow.nvim",
     config = function()
       local codewindow = require("codewindow")
@@ -17,9 +18,11 @@ scrollview.setup = function(plugins)
     keys = {
       "<leader>m",
     },
+  }, {
+    vscode = false,
   })
 
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "dstein64/nvim-scrollview",
     config = function()
       require("scrollview").setup({
@@ -30,6 +33,8 @@ scrollview.setup = function(plugins)
     end,
     lazy = true,
     event = "BufReadPost",
+  }, {
+    vscode = false,
   })
 
   return plugins

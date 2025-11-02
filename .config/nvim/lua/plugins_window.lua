@@ -1,7 +1,8 @@
 local window = {}
+local util = require("util")
 
 window.setup = function(plugins)
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "anuvyklack/windows.nvim",
     requires = { "anuvyklack/middleclass", "anuvyklack/animation.nvim" },
     config = function()
@@ -21,17 +22,23 @@ window.setup = function(plugins)
     end,
     lazy = true,
     event = "BufWinEnter",
+  }, {
+    vscode = false,
   })
 
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "anuvyklack/middleclass",
     lazy = true,
     -- event = "BufWinEnter",
+  }, {
+    vscode = false,
   })
-  table.insert(plugins, {
+  util.add_plugin(plugins, {
     "anuvyklack/animation.nvim",
     lazy = true,
     -- event = "BufWinEnter",
+  }, {
+    vscode = false,
   })
 
   return plugins

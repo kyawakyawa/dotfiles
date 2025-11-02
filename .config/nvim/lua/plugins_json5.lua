@@ -1,4 +1,5 @@
 local json5 = {}
+local util = require("util")
 
 json5.setup = function(plugins)
   if vim.fn.executable("cargo") == 1 then
@@ -7,11 +8,13 @@ json5.setup = function(plugins)
       build_cmd = "powershell ./install.ps1"
     end
 
-    table.insert(plugins, {
+    util.add_plugin(plugins, {
       "Joakker/lua-json5",
       build = build_cmd,
       lazy = true,
       event = "VeryLazy",
+    }, {
+      vscode = false,
     })
   end
 
