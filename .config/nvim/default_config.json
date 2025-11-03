@@ -24,6 +24,9 @@
     "animation": {
       "enabled": false
     },
+    "file_explorer": {
+      "name": "yazi"
+    },
     "inputBehavior": {
       "hardtime": {
         "enabled": false
