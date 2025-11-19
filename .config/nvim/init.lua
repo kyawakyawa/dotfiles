@@ -16,6 +16,17 @@ vim.opt.termguicolors = true
 vim.opt.updatetime = 250
 vim.opt.laststatus = 3 -- https://wed.dev/blog/posts/neovim-statuline
 
+-- Disable some language provider
+-- Python provider 完全オフ
+vim.g.loaded_python3_provider = 0
+-- もしPython providerを使う場合は以下を書く(Pyenv環境だとshimが遅くて起動が遅れるので使うPythonを明示的に指定する)
+-- vim.g.python3_host_prog = '/usr/bin/python3'
+-- その他使わないproviderもオフにする
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+
+-- user config
 local init_dir = vim.fn.fnamemodify(vim.fn.expand("<sfile>:p"), ":h")
 require("util").set_default_config_path(init_dir .. "/default_config.json")
 vim.api.nvim_create_user_command("ConfigInfo", require("util").print_config_path, {})
