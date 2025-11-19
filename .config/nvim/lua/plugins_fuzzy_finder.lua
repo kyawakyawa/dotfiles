@@ -57,17 +57,6 @@ fuzzy_finder.setup = function(plugins)
       vim.keymap.set("n", "<leader>u", require("telescope").extensions.undo.undo, bufopts)
 
       vim.keymap.set("n", "<leader>fre", require("telescope.builtin").registers, bufopts)
-
-      vim.keymap.set("n", "<leader>fw", require("telescope").extensions.windows.list, bufopts)
-
-      --nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-      --nnoremap <leader>fgr <cmd>lua require('telescope.builtin').live_grep()<cr>
-      --nnoremap <leader>fgs <cmd>lua require('telescope.builtin').git_status()<cr>
-      --nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-      --nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-      --nnoremap <leader>fq <cmd>lua require('telescope.builtin').quickfix()<cr>
-      --nnoremap <leader>fd <cmd>lua require('telescope.builtin').diagnostics()<cr>
-      --nnoremap gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
     end,
     lazy = true,
     event = "VeryLazy",
@@ -75,7 +64,7 @@ fuzzy_finder.setup = function(plugins)
     dependencies = {
       "nvim-lua/plenary.nvim",
       "debugloop/telescope-undo.nvim",
-      "kyoh86/telescope-windows.nvim",
+      "rcarriga/nvim-notify",
     },
   }, {
     vscode = false,
