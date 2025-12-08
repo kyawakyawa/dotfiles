@@ -10,6 +10,12 @@ notify.setup = function(plugins)
         background_colour = "#000000",
         top_down = false,
       })
+      
+      -- 表示されている通知を全て消す
+      vim.keymap.set('n', '<leader>dn', function()
+          require('notify').dismiss { silent = true }
+      end, { desc = 'Dismiss notifications' })
+
       -- -- https://zenn.dev/kawarimidoll/articles/7e986ceb6802fc
       -- vim.cmd [[
       --   augroup notify_events
