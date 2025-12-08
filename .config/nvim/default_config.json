@@ -24,6 +24,10 @@
     "animation": {
       "enabled": false
     },
+    "complement": {
+      "enabled": false,
+      "engine": "nvim-cmp"
+    },
     "file_explorer": {
       "name": "yazi"
     },

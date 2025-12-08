@@ -43,6 +43,19 @@ if not vim.g.vscode then
   vim.api.nvim_set_keymap("t", "<ESC>", "<C-\\><C-n>", { noremap = true })
 end
 
+-- color
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+      -- colorschemeの設定が呼ばれるたびにSignColumnの背景色をNONEにする
+      vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE", fg = "NONE" })
+  
+      -- Foating windowの背景の色の設定
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE", fg = "NONE" })
+    end,
+  })
+vim.cmd([[colorscheme vim]])
+
 -- Plugins
 require("plugins") -- プラグインの読み込み
 

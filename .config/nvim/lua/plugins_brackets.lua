@@ -13,32 +13,32 @@ brackets.setup = function(plugins)
     vscode = false,
   })
 
-  -- indent-blankline.nvim
-  util.add_plugin(plugins, {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    opts = {},
-    config = function()
-      require("ibl").setup()
-    end,
-    lazy = true,
-    event = "BufReadPost",
-  }, {
-    vscode = false,
-  })
+  -- -- indent-blankline.nvim
+  -- util.add_plugin(plugins, {
+  --   "lukas-reineke/indent-blankline.nvim",
+  --   main = "ibl",
+  --   opts = {},
+  --   config = function()
+  --     require("ibl").setup()
+  --   end,
+  --   lazy = true,
+  --   event = "BufReadPost",
+  -- }, {
+  --   vscode = false,
+  -- })
 
-  -- mini.indentscope.nvim
-  util.add_plugin(plugins, {
-    "echasnovski/mini.indentscope",
-    version = "*",
-    config = function()
-      require("mini.indentscope").setup()
-    end,
-    lazy = true,
-    event = "BufReadPost",
-  }, {
-    vscode = false,
-  })
+  -- -- mini.indentscope.nvim
+  -- util.add_plugin(plugins, {
+  --   "echasnovski/mini.indentscope",
+  --   version = "*",
+  --   config = function()
+  --     require("mini.indentscope").setup()
+  --   end,
+  --   lazy = true,
+  --   event = "BufReadPost",
+  -- }, {
+  --   vscode = false,
+  -- })
 
   -- -- nvim-autopairs
   -- use {

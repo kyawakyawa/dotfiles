@@ -1,4 +1,4 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath("data") .. "/lazy_dev/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -21,7 +21,11 @@ local plugins = {}
 plugins = require("plugins_nvim_lsp").setup(plugins)
 
 -- complement
-plugins = require("plugins_complement").setup(plugins)
+if config["plugins"]["complement"]["enabled"] then
+  -- if config["plugins"]["complement"]["engine"] then
+  -- end
+  plugins = require("plugins_complement").setup(plugins)
+end
 
 -- copilot
 if config["plugins"]["aiAssistant"]["githubCopilot"]["enabled"] then
@@ -39,8 +43,8 @@ plugins = require("plugins_fuzzy_finder").setup(plugins)
 -- file explorer
 plugins = require("plugins_file_explorer").setup(plugins)
 
--- line
-plugins = require("plugins_line").setup(plugins)
+-- -- line
+-- plugins = require("plugins_line").setup(plugins)
 
 -- git
 plugins = require("plugins_git").setup(plugins)
@@ -48,110 +52,87 @@ plugins = require("plugins_git").setup(plugins)
 -- brackets
 plugins = require("plugins_brackets").setup(plugins)
 
--- syntax highlight
-plugins = require("plugins_syntax_highlight").setup(plugins)
+-- -- syntax highlight
+-- plugins = require("plugins_syntax_highlight").setup(plugins)
 
 -- nvim treesitter
 plugins = require("plugins_nvim_treesitter").setup(plugins)
 
-if config["colorscheme"]["name"] == "tokyonight" then
-  -- tokyonight colorscheme
-  plugins = require("plugins_tokyonight").setup(plugins)
-elseif config["colorscheme"]["name"] == "solarized" then
-  -- soralized osaka colorscheme
-  plugins = require("plugins_solarized_osaka").setup(plugins)
-elseif config["colorscheme"]["name"] == "ayu" then
-  -- ayu colorscheme
-  plugins = require("plugins_ayu").setup(plugins)
-elseif config["colorscheme"]["name"] == "vim" then
-  vim.api.nvim_create_autocmd("ColorScheme", {
-    pattern = "*",
-    callback = function()
-      -- colorschemeの設定が呼ばれるたびにSignColumnの背景色をNONEにする
-      vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE", fg = "NONE" })
+-- if config["colorscheme"]["name"] == "tokyonight" then
+--   -- tokyonight colorscheme
+--   plugins = require("plugins_tokyonight").setup(plugins)
+-- elseif config["colorscheme"]["name"] == "solarized" then
+--   -- soralized osaka colorscheme
+--   plugins = require("plugins_solarized_osaka").setup(plugins)
+-- elseif config["colorscheme"]["name"] == "ayu" then
+--   -- ayu colorscheme
+--   plugins = require("plugins_ayu").setup(plugins)
+-- elseif config["colorscheme"]["name"] == "vim" then
+--   vim.api.nvim_create_autocmd("ColorScheme", {
+--     pattern = "*",
+--     callback = function()
+--       -- colorschemeの設定が呼ばれるたびにSignColumnの背景色をNONEにする
+--       vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE", fg = "NONE" })
+--
+--       -- Foating windowの背景の色の設定
+--       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE", fg = "NONE" })
+--     end,
+--   })
+--
+--   vim.cmd([[colorscheme vim]])
+-- end
 
-      -- Foating windowの背景の色の設定
-      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE", fg = "NONE" })
-    end,
-  })
+-- -- dap
+-- plugins = require("plugins_dap").setup(plugins)
 
-  vim.cmd([[colorscheme vim]])
-end
+-- -- rsync
+-- plugins = require("plugins_rsync").setup(plugins)
 
--- dap
-plugins = require("plugins_dap").setup(plugins)
+-- -- term
+-- plugins = require("plugins_term").setup(plugins)
 
--- rsync
-plugins = require("plugins_rsync").setup(plugins)
-
--- term
-plugins = require("plugins_term").setup(plugins)
-
--- scrollview
-plugins = require("plugins_scrollview").setup(plugins)
+-- -- scrollview
+-- plugins = require("plugins_scrollview").setup(plugins)
 
 -- notify
 plugins = require("plugins_notify").setup(plugins)
 
--- noice
-plugins = require("plugins_noice").setup(plugins)
+-- -- noice
+-- plugins = require("plugins_noice").setup(plugins)
 
--- animation
-if config["plugins"]["animation"]["enabled"] then
-  plugins = require("plugins_animation").setup(plugins)
-end
+-- -- animation
+-- if config["plugins"]["animation"]["enabled"] then
+--   plugins = require("plugins_animation").setup(plugins)
+-- end
 
--- greeter
-plugins = require("plugins_greeter").setup(plugins)
+-- -- greeter
+-- plugins = require("plugins_greeter").setup(plugins)
 
--- which-key.nvim
-plugins = require("plugins_which_key").setup(plugins)
+-- -- which-key.nvim
+-- plugins = require("plugins_which_key").setup(plugins)
 
--- -- window
--- plugins = require("plugins_window").setup(plugins)
+-- -- -- window
+-- -- plugins = require("plugins_window").setup(plugins)
 
--- rest
-if config["plugins"]["rest"]["enabled"] then
-  plugins = require("plugins_rest").setup(plugins)
-end
+-- -- rest
+-- if config["plugins"]["rest"]["enabled"] then
+--   plugins = require("plugins_rest").setup(plugins)
+-- end
 
 -- format
 plugins = require("plugins_format").setup(plugins)
 
--- format
-plugins = require("plugins_json5").setup(plugins)
+-- -- json5
+-- plugins = require("plugins_json5").setup(plugins)
+--
+-- -- hardtime
+-- if config["plugins"]["inputBehavior"]["hardtime"]["enabled"] then
+--   plugins = require("plugins_hardtime").setup(plugins)
+-- end
 
--- hardtime
-if config["plugins"]["inputBehavior"]["hardtime"]["enabled"] then
-  plugins = require("plugins_hardtime").setup(plugins)
-end
+-- HACK
+local opts = {
+  root = vim.fn.stdpath("data") .. "/lazy_dev"
+}
 
 require("lazy").setup(plugins, opts)
-
---- local packer = require("packer")
---- -- コンパイルしたファイル./lua以下に置く
---- -- (VSCode Neovimで読まないようにするため)
---- -- (参考: https://github.com/wbthomason/packer.nvim/issues/933)
---- packer.init({ compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua"  })
----
---- -- packer.nvim
---- -- ~/.local/share/nvim/site/pack/packer/start
---- -- か
---- -- ~/.local/share/nvim/site/pack/packer/opt
---- -- にインストール
---- -- (startは起動時に読み込み, optは遅延して読み込む(packaddしたとき)
----
----
---- -- packer.nvim を
---- -- ~/.local/share/nvim/site/pack/packer/opt
---- -- にインストールした場合に以下が必要
----
---- -- vim.cmd [[packadd packer.nvim]]
----
---- return packer.startup(function(use)
----   -- Packer can manage itself
----   use 'wbthomason/packer.nvim'
----
----   -- -- nightfox colorscheme
----   -- require('packer_nightfox').setup(use)
---- end)
