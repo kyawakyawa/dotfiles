@@ -31,3 +31,5 @@
 
 [merge]
     conflictStyle = zdiff3
+[ghq]
+	root = ~/src
