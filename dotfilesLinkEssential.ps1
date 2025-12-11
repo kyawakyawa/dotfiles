@@ -20,3 +20,4 @@ Create-SymbolicLinkIfNotExists -SourcePath $HOME\dotfiles\.vim -LinkPath $HOME\.
 Create-SymbolicLinkIfNotExists -SourcePath $HOME\dotfiles\.gitconfig -LinkPath $HOME\.gitconfig
 Create-SymbolicLinkIfNotExists -SourcePath $HOME\dotfiles\.config\nvim -LinkPath $env:LOCALAPPDATA\nvim
 Create-SymbolicLinkIfNotExists -SourcePath $HOME\dotfiles\.config\efm-langserver  -LinkPath $env:APPDATA\efm-langserver
+Create-SymbolicLinkIfNotExists -SourcePath $HOME\dotfiles\.config\lazygit -LinkPath $env:LOCALAPPDATA\lazygit
