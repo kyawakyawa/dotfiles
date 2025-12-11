@@ -43,8 +43,8 @@ plugins = require("plugins_fuzzy_finder").setup(plugins)
 -- file explorer
 plugins = require("plugins_file_explorer").setup(plugins)
 
--- -- line
--- plugins = require("plugins_line").setup(plugins)
+-- line
+plugins = require("plugins_line").setup(plugins)
 
 -- git
 plugins = require("plugins_git").setup(plugins)
