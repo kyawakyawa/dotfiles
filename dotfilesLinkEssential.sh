@@ -7,6 +7,7 @@ mkdir -p ~/.config
 if [ ! -e ~/.config/nvim ]; then ln -s ~/dotfiles/.config/nvim ~/.config/nvim ; else echo .config/nvim is exist; fi
 if [ ! -e ~/.config/efm-langserver ]; then ln -s ~/dotfiles/.config/efm-langserver ~/.config/efm-langserver ; else echo .config/efm-langserver is exist; fi
 if [ ! -e ~/.config/lazygit ]; then ln -s ~/dotfiles/.config/lazygit ~/.config/lazygit ; else echo .config/lazygit is exist; fi
+if [ ! -e ~/.config/peco ]; then ln -s ~/dotfiles/.config/peco ~/.config/peco ; else echo .config/peco is exist; fi
 
 # For Arch
 # if [ ! -e ~/.bashrc ]; then ln -s ~/dotfiles/.bashrc_for_arch ~/.bashrc ; else echo .bashrc is exist; fi
