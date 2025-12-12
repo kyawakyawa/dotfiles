@@ -43,7 +43,7 @@ FD_URL=""
 
 if [ "$(uname)" == 'Darwin' ]; then
   DELTA_URL=https://github.com/dandavison/delta/releases/download/${DELTA_VERSION}/delta-${DELTA_VERSION}-aarch64-apple-darwin.tar.gz
-  PECO_URL=https://github.com/peco/peco/releases/download/${PECO_VERSION}/peco_linux_${PECO_LINUX_ARCH}.tar.gz
+  PECO_URL=https://github.com/peco/peco/releases/download/${PECO_VERSION}/peco_darwin_arm64.zip
   RG_URL=https://github.com/BurntSushi/ripgrep/releases/download/${RG_VERSION}/ripgrep-${RG_VERSION}-aarch64-apple-darwin.tar.gz
   GHQ_URL=https://github.com/x-motemen/ghq/releases/download/${GHQ_VERSION}/ghq_darwin_arm64.zip
   LAZYGIT_URL="https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_darwin_arm64.tar.gz"
