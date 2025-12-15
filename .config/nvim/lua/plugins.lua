@@ -26,6 +26,7 @@ if config["plugins"]["complement"]["enabled"] then
   -- end
   plugins = require("plugins_complement").setup(plugins)
 end
+plugins = require("plugins_complement").setup(plugins)
 
 -- copilot
 if config["plugins"]["aiAssistant"]["githubCopilot"]["enabled"] then
@@ -132,7 +133,7 @@ plugins = require("plugins_format").setup(plugins)
 
 -- HACK
 local opts = {
-  root = vim.fn.stdpath("data") .. "/lazy_dev"
+  root = vim.fn.stdpath("data") .. "/lazy_dev",
 }
 
 require("lazy").setup(plugins, opts)
