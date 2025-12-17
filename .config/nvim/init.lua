@@ -26,6 +26,12 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
+-- leaderの設定
+vim.g.mapleader = ","
+-- vim.g.mapleader = " " -- スペースに設定
+vim.api.nvim_set_keymap("n", "\\", ",", { noremap = true })
+
+
 -- user config
 local init_dir = vim.fn.fnamemodify(vim.fn.expand("<sfile>:p"), ":h")
 require("util").set_default_config_path(init_dir .. "/default_config.json")
