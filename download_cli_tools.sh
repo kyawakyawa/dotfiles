@@ -21,6 +21,9 @@ PECO_VERSION=v0.5.11
 RG_LINUX_ARCH=x86_64 # armv7, aarch64
 RG_VERSION=15.1.0
 
+GH_LINUX_ARCH=amd64 # arm64
+GH_VERSION=2.83.2
+
 GHQ_LINUX_ARCH=amd64 # arm64
 GHQ_VERSION=v1.8.0
 
@@ -45,6 +48,7 @@ if [ "$(uname)" == 'Darwin' ]; then
   DELTA_URL=https://github.com/dandavison/delta/releases/download/${DELTA_VERSION}/delta-${DELTA_VERSION}-aarch64-apple-darwin.tar.gz
   PECO_URL=https://github.com/peco/peco/releases/download/${PECO_VERSION}/peco_darwin_arm64.zip
   RG_URL=https://github.com/BurntSushi/ripgrep/releases/download/${RG_VERSION}/ripgrep-${RG_VERSION}-aarch64-apple-darwin.tar.gz
+  GH_URL=https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_macOS_arm64.zip
   GHQ_URL=https://github.com/x-motemen/ghq/releases/download/${GHQ_VERSION}/ghq_darwin_arm64.zip
   LAZYGIT_URL="https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_darwin_arm64.tar.gz"
   YAZI_URL="https://github.com/sxyazi/yazi/releases/download/${YAZI_VERSION}/yazi-aarch64-apple-darwin.zip"
@@ -54,6 +58,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   DELTA_URL=https://github.com/dandavison/delta/releases/download/${DELTA_VERSION}/delta-${DELTA_VERSION}-${DELTA_LINUX_ARCH}-unknown-linux-musl.tar.gz
   PECO_URL=https://github.com/peco/peco/releases/download/${PECO_VERSION}/peco_linux_amd64.tar.gz
   RG_URL=https://github.com/BurntSushi/ripgrep/releases/download/${RG_VERSION}/ripgrep-${RG_VERSION}-${RG_LINUX_ARCH}-unknown-linux-musl.tar.gz
+  GH_URL=https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_${GH_LINUX_ARCH}.tar.gz
   GHQ_URL=https://github.com/x-motemen/ghq/releases/download/${GHQ_VERSION}/ghq_linux_${GHQ_LINUX_ARCH}.zip
   LAZYGIT_URL="https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_linux_${LAZYGIT_LINUX_ARCH}.tar.gz"
   YAZI_URL="https://github.com/sxyazi/yazi/releases/download/${YAZI_VERSION}/yazi-${YAZI_LINUX_ARCH}-unknown-linux-musl.zip"
@@ -84,6 +89,11 @@ curl -LO $RG_URL
 tar zxvf $(basename $RG_URL)
 cp $(basename $RG_URL .tar.gz)/rg $OUTDIR/
 cp $(basename $RG_URL .tar.gz)/complete/rg.bash $BASH_CMP_D/
+
+# GH
+curl -LO $GH_URL 
+tar zxvf $(basename $GH_URL)
+cp $(basename $GH_URL .tar.gz)/bin/gh $OUTDIR/
 
 # GHQ
 curl -LO $GHQ_URL 
