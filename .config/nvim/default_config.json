@@ -31,6 +31,24 @@
     "file_explorer": {
       "name": "yazi"
     },
+    "fuzzy_finder": {
+      "telescope": {
+        "find_command": [
+          "rg",
+          "--files",
+          "--hidden",
+          "--no-ignore",
+          "--glob",
+          "!.git/*",
+          "--glob",
+          "!*.cache/*",
+          "--glob",
+          "!.venv/*",
+          "--glob",
+          "!*.pyc"
+        ]
+      }
+    },
     "inputBehavior": {
       "hardtime": {
         "enabled": false
