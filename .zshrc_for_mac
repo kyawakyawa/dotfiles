@@ -1,1 +1,10 @@
 eval "$(starship init zsh)"
+
+# コマンドをneovimで編集できるようにする ###############
+
+# https://qiita.com/mollifier/items/7b1cfe609a7911a69706
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
+
+########################################################
