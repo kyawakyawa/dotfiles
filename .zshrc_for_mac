@@ -1,10 +1,38 @@
 eval "$(starship init zsh)"
 
+# 補完の初期化 #########################################
+
+# 1. zshの補完機能を初期化 (Sheldonの読み込み前に行う)
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.m-1) ]]; then
+  compinit
+else
+  compinit -C
+fi
+########################################################
+
 # コマンドをneovimで編集できるようにする ###############
 
 # https://qiita.com/mollifier/items/7b1cfe609a7911a69706
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^x^e' edit-command-line
+
+########################################################
+
+# Sheldonの設定 ########################################
+
+## Sheldonのバイナリが存在するか確認
+if (( $+commands[sheldon] )); then
+    # キャッシュディレクトリの作成（念のため）
+    [[ -d ~/.cache ]] || mkdir -p ~/.cache
+
+    # 設定ファイル(plugins.toml)が更新されていたらキャッシュを再生成する
+    # ※ -nt は "newer than" を意味します
+    if [[ ! -f ~/.cache/sheldon.zsh || ~/.config/sheldon/plugins.toml -nt ~/.cache/sheldon.zsh ]]; then
+        sheldon source > ~/.cache/sheldon.zsh
+    fi
+    source ~/.cache/sheldon.zsh
+fi
 
 ########################################################
