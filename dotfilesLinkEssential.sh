@@ -9,5 +9,7 @@ if [ ! -e ~/.config/efm-langserver ]; then ln -s ~/dotfiles/.config/efm-langserv
 if [ ! -e ~/.config/lazygit ]; then ln -s ~/dotfiles/.config/lazygit ~/.config/lazygit ; else echo .config/lazygit is exist; fi
 if [ ! -e ~/.config/peco ]; then ln -s ~/dotfiles/.config/peco ~/.config/peco ; else echo .config/peco is exist; fi
 
+if [ ! -e ~/.config/starship.toml ]; then ln -s ~/dotfiles/.config/starship.toml ~/.config/starship.toml ; else echo ~/.config/starship.toml is exist; fi
+
 # For Arch
 # if [ ! -e ~/.bashrc ]; then ln -s ~/dotfiles/.bashrc_for_arch ~/.bashrc ; else echo .bashrc is exist; fi
