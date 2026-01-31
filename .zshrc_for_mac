@@ -35,4 +35,21 @@ if (( $+commands[sheldon] )); then
     source ~/.cache/sheldon.zsh
 fi
 
-########################################################
+## pyenvの設定 ##########################################
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+
+# pyenvコマンドが存在する場合のみ初期化（補完も有効化）
+if command -v pyenv >/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+# ghqpコマンドの作成 ####################################
+
+
+# ghq と peco がインストールされているかチェック
+if type ghq > /dev/null 2>&1 && type peco > /dev/null 2>&1; then
+    alias ghqp='cd $(ghq root)/$(ghq list | peco --initial-filter Fuzzy)'
+fi
+
+#########################################################
