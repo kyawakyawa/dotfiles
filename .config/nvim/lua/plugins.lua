@@ -89,8 +89,8 @@ plugins = require("plugins_nvim_treesitter").setup(plugins)
 -- -- rsync
 -- plugins = require("plugins_rsync").setup(plugins)
 
--- -- term
--- plugins = require("plugins_term").setup(plugins)
+-- term
+plugins = require("plugins_term").setup(plugins)
 
 -- -- scrollview
 -- plugins = require("plugins_scrollview").setup(plugins)
