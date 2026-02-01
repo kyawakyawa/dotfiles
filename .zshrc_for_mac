@@ -9,6 +9,19 @@ if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.m-1) ]]; then
 else
   compinit -C
 fi
+
+# cli toolの補完 #######################################
+
+if command -v delta >/dev/null 2>&1; then
+  source <(delta  --generate-completion zsh)
+fi
+if command -v gh >/dev/null 2>&1; then
+  source <(gh completion -s zsh)
+fi
+if command -v rg >/dev/null 2>&1; then
+  source <(rg --generate=complete-zsh)
+fi
+
 ########################################################
 
 # コマンドをneovimで編集できるようにする ###############
