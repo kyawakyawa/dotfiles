@@ -1,10 +1,12 @@
 local fuzzy_finder = {}
 local util = require("util")
 
+local config = require("util").load_config()
+
 fuzzy_finder.setup = function(plugins)
   util.add_plugin(plugins, {
     "nvim-telescope/telescope.nvim",
-    branch = "0.1.x",
+    tag = "v0.2.0",
     config = function()
       require("telescope").setup({
         -- the rest of your telescope config goes here
@@ -17,21 +19,7 @@ fuzzy_finder.setup = function(plugins)
         },
         pickers = {
           find_files = {
-            -- デフォルトではドットファイルを無視しますが、以下の設定で無視しないようにします
-            find_command = {
-              "rg",
-              "--files",
-              "--hidden",
-              "--no-ignore",
-              "--glob",
-              "!.git/*",
-              "--glob",
-              "!*.cache/*",
-              "--glob",
-              "!.venv/*",
-              "--glob",
-              "!*.pyc",
-            },
+            find_command = config["plugins"]["fuzzy_finder"]["telescope"]["find_command"],
           },
         },
       })

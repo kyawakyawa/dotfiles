@@ -61,7 +61,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local lspconfig = require("lspconfig")
 local lspconfig_util = require("lspconfig/util")
@@ -96,7 +96,7 @@ vim.lsp.config("*", {
   root_markers = { ".git", ".hg" },
 })
 vim.lsp.config("*", {
-  capabilities = capabilities,
+  -- capabilities = capabilities,
   on_attach = on_attach,
 })
 
