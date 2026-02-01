@@ -1,4 +1,4 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy_dev/lazy.nvim"
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -130,10 +130,5 @@ plugins = require("plugins_format").setup(plugins)
 -- if config["plugins"]["inputBehavior"]["hardtime"]["enabled"] then
 --   plugins = require("plugins_hardtime").setup(plugins)
 -- end
-
--- HACK
-local opts = {
-  root = vim.fn.stdpath("data") .. "/lazy_dev",
-}
 
 require("lazy").setup(plugins, opts)
