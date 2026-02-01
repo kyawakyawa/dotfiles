@@ -49,6 +49,10 @@ if not vim.g.vscode then
   vim.api.nvim_set_keymap("t", "<ESC>", "<C-\\><C-n>", { noremap = true })
 end
 
+if vim.g.goneovim ~= nil then
+  require('gui.goneovim')
+end
+
 -- color
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
