@@ -93,7 +93,7 @@ cp $(basename $RG_URL .tar.gz)/complete/rg.bash $BASH_CMP_D/
 # GH
 curl -LO $GH_URL 
 tar zxvf $(basename $GH_URL)
-cp $(basename $GH_URL .tar.gz)/bin/gh $OUTDIR/
+cp $(basename "$GH_URL" | sed -E 's/\.(tar\.gz|zip)$//')/bin/gh "$OUTDIR/"
 
 # GHQ
 curl -LO $GHQ_URL 

@@ -1,0 +1,63 @@
+eval "$(starship init zsh)"
+
+# 補完の初期化 #########################################
+
+# 1. zshの補完機能を初期化 (Sheldonの読み込み前に行う)
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.m-1) ]]; then
+  compinit
+else
+  compinit -C
+fi
+########################################################
+
+# コマンドをneovimで編集できるようにする ###############
+
+# https://qiita.com/mollifier/items/7b1cfe609a7911a69706
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
+
+########################################################
+
+# Sheldonの設定 ########################################
+
+## Sheldonのバイナリが存在するか確認
+if (( $+commands[sheldon] )); then
+    # キャッシュディレクトリの作成（念のため）
+    [[ -d ~/.cache ]] || mkdir -p ~/.cache
+
+    # 設定ファイル(plugins.toml)が更新されていたらキャッシュを再生成する
+    # ※ -nt は "newer than" を意味します
+    if [[ ! -f ~/.cache/sheldon.zsh || ~/.config/sheldon/plugins.toml -nt ~/.cache/sheldon.zsh ]]; then
+        sheldon source > ~/.cache/sheldon.zsh
+    fi
+    source ~/.cache/sheldon.zsh
+fi
+
+## pyenvの設定 ##########################################
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+
+# pyenvコマンドが存在する場合のみ初期化（補完も有効化）
+if command -v pyenv >/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+# ghqpコマンドの作成 ####################################
+
+
+# ghq と peco がインストールされているかチェック
+if type ghq > /dev/null 2>&1 && type peco > /dev/null 2>&1; then
+    alias ghqp='cd $(ghq root)/$(ghq list | peco --initial-filter Fuzzy)'
+fi
+
+# ailias ################################################
+alias ls='ls --color=auto'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
