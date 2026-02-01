@@ -13,5 +13,7 @@ if [ ! -e ~/.config/peco ]; then ln -s "$DOTFILES_DIR/.config/peco" ~/.config/pe
 
 if [ ! -e ~/.config/starship.toml ]; then ln -s "$DOTFILES_DIR/.config/starship.toml" ~/.config/starship.toml ; else echo ~/.config/starship.toml is exist; fi
 
+if [ ! -e ~/.config/zellij ]; then ln -s "$DOTFILES_DIR/.config/zellij" ~/.config/zellij ; else echo .config/zellij is exist; fi
+
 # For Arch
 # if [ ! -e ~/.bashrc ]; then ln -s "$DOTFILES_DIR/.bashrc_for_arch" ~/.bashrc ; else echo .bashrc is exist; fi
