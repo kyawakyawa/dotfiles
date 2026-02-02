@@ -45,7 +45,11 @@
           "--glob",
           "!.venv/*",
           "--glob",
-          "!*.pyc"
+          "!*.pyc",
+          "--glob",
+          "!.obsidian/*",
+          "--glob",
+          "!*.DS_Store"
         ]
       }
     },
