@@ -1,5 +1,8 @@
 eval "$(starship init zsh)"
 
+# cli toolの補完ファイル置き場（compinit より前！）
+fpath=(~/.zsh/completions $fpath)
+
 # 補完の初期化 #########################################
 
 # 1. zshの補完機能を初期化 (Sheldonの読み込み前に行う)
@@ -10,17 +13,17 @@ else
   compinit -C
 fi
 
-# cli toolの補完 #######################################
-
-if command -v delta >/dev/null 2>&1; then
-  source <(delta  --generate-completion zsh)
-fi
-if command -v gh >/dev/null 2>&1; then
-  source <(gh completion -s zsh)
-fi
-if command -v rg >/dev/null 2>&1; then
-  source <(rg --generate=complete-zsh)
-fi
+# # cli toolの補完 #######################################
+# 
+# if command -v delta >/dev/null 2>&1; then
+#   source <(delta  --generate-completion zsh)
+# fi
+# if command -v gh >/dev/null 2>&1; then
+#   source <(gh completion -s zsh)
+# fi
+# if command -v rg >/dev/null 2>&1; then
+#   source <(rg --generate=complete-zsh)
+# fi
 
 ########################################################
 
@@ -56,6 +59,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 # pyenvコマンドが存在する場合のみ初期化（補完も有効化）
 if command -v pyenv >/dev/null 2>&1; then
   eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init - | sed s/precmd/chpwd/g)"
 fi
 # ghqpコマンドの作成 ####################################
 
