@@ -1,3 +1,21 @@
 add_newline = false
+
+[directory]
+style = "fg:blue"
+format = "[$path]($style) "
+truncation_length = 4
+truncation_symbol = "..."
+truncate_to_repo = false
+
+
 [line_break]
 disabled = true
+
+[time]
+disabled = true 
+
+[git_branch]
+symbol = " " #アイコン絵文字を変更
+
+[git_status]
+modified = "+"
