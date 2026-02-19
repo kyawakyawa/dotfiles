@@ -82,3 +82,12 @@ alias tree='tree -C'
 
 # EDITOR
 export EDITOR=nvim
+
+# Load local setting ####################################
+
+# Load local (not tracked) settings if present
+# Put device-specific/private stuff in ~/.zshrc.local
+if [[ -r "$HOME/.zshrc.local" ]]; then
+  source "$HOME/.zshrc.local"
+fi
+
