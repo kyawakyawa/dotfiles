@@ -91,3 +91,13 @@ if [[ -r "$HOME/.zshrc.local" ]]; then
   source "$HOME/.zshrc.local"
 fi
 
+# Open with Obsidian
+obs () {
+  local target="$(realpath $1)"
+  if [ -z "$target" ]; then
+    echo "usage: obs <path-to-note.md>"
+    return 1
+  fi
+
+  open "obsidian://open?path=${target}"
+}
