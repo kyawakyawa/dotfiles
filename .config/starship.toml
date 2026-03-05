@@ -19,3 +19,8 @@ symbol = " " #アイコン絵文字を変更
 
 [git_status]
 modified = "+"
+
+[python]
+# disabled = true
+# pyenv_version_name = false
+detect_extensions = []
