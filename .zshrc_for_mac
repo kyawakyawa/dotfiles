@@ -26,6 +26,13 @@ fi
 # fi
 
 ########################################################
+# keybind
+
+bindkey -e
+
+# ジャンプ
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
 
 # コマンドをneovimで編集できるようにする ###############
 
