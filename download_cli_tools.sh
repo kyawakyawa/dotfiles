@@ -55,9 +55,11 @@ if [ "$(uname)" == 'Darwin' ]; then
   FD_URL="https://github.com/sharkdp/fd/releases/download/${FD_VERSION}/fd-v10.3.0-aarch64-apple-darwin.tar.gz"
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
 
-  DELTA_URL=https://github.com/dandavison/delta/releases/download/${DELTA_VERSION}/delta-${DELTA_VERSION}-${DELTA_LINUX_ARCH}-unknown-linux-musl.tar.gz
+  DELTA_LIBC=$([ "$DELTA_LINUX_ARCH" = "aarch64" ] && echo gnu || echo musl)
+  DELTA_URL=https://github.com/dandavison/delta/releases/download/${DELTA_VERSION}/delta-${DELTA_VERSION}-${DELTA_LINUX_ARCH}-unknown-linux-${DELTA_LIBC}.tar.gz
   PECO_URL=https://github.com/peco/peco/releases/download/${PECO_VERSION}/peco_linux_amd64.tar.gz
-  RG_URL=https://github.com/BurntSushi/ripgrep/releases/download/${RG_VERSION}/ripgrep-${RG_VERSION}-${RG_LINUX_ARCH}-unknown-linux-musl.tar.gz
+  RG_LIBC=$(case "$RG_LINUX_ARCH" in aarch64) echo gnu ;; armv7) echo musleabi ;; *) echo musl ;; esac)
+  RG_URL="https://github.com/BurntSushi/ripgrep/releases/download/${RG_VERSION}/ripgrep-${RG_VERSION}-${RG_LINUX_ARCH}-unknown-linux-${RG_LIBC}.tar.gz"
   GH_URL=https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_${GH_LINUX_ARCH}.tar.gz
   GHQ_URL=https://github.com/x-motemen/ghq/releases/download/${GHQ_VERSION}/ghq_linux_${GHQ_LINUX_ARCH}.zip
   LAZYGIT_URL="https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_linux_${LAZYGIT_LINUX_ARCH}.tar.gz"
