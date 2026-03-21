@@ -33,7 +33,7 @@
     },
     "fuzzy_finder": {
       "telescope": {
-        "find_command": [
+        "0find_command": [
           "rg",
           "--files",
           "--hidden",
@@ -50,6 +50,11 @@
           "!.obsidian/*",
           "--glob",
           "!*.DS_Store"
+        ],
+        "find_command": [
+          "rg",
+          "--files",
+          "--hidden"
         ]
       }
     },
