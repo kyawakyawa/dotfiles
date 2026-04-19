@@ -22,11 +22,8 @@ plugins = require("plugins_nvim_lsp").setup(plugins)
 
 -- complement
 if config["plugins"]["complement"]["enabled"] then
-  -- if config["plugins"]["complement"]["engine"] then
-  -- end
   plugins = require("plugins_complement").setup(plugins)
 end
-plugins = require("plugins_complement").setup(plugins)
 
 -- copilot
 if config["plugins"]["aiAssistant"]["githubCopilot"]["enabled"] then
@@ -94,12 +91,6 @@ plugins = require("plugins_term").setup(plugins)
 
 -- -- scrollview
 -- plugins = require("plugins_scrollview").setup(plugins)
-
--- notify
-plugins = require("plugins_notify").setup(plugins)
-
--- -- noice
--- plugins = require("plugins_noice").setup(plugins)
 
 -- -- animation
 -- if config["plugins"]["animation"]["enabled"] then

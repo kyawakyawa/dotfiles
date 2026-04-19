@@ -12,29 +12,7 @@ nvim_lsp.setup = function(plugins)
     dependencies = {
       { "mason-org/mason.nvim", opts = {} },
       { "neovim/nvim-lspconfig" },
-      {
-        "j-hui/fidget.nvim",
-        config = function()
-          require("fidget").setup()
-        end,
-      },
     },
-  }, {
-    vscode = false,
-  })
-
-  -- lspsage.nvim
-  util.add_plugin(plugins, {
-    "glepnir/lspsaga.nvim",
-    branch = "main",
-    config = function()
-      require("lspsaga_cfg")
-    end,
-    dependencies = {
-      { "nvim-tree/nvim-web-devicons" },
-    },
-    lazy = true,
-    event = { "BufReadPost", "BufAdd", "BufNewFile" },
   }, {
     vscode = false,
   })

@@ -6,13 +6,7 @@ require("mason").setup()
 local ensure_installed = { "clangd", "pyright", "ruff", "jsonls", "bashls", "lua_ls" }
 
 require("mason-lspconfig").setup({
-  automatic_enable = true,
-  -- automatic_enable = {
-  --     exclude = {
-  --       -- "rust_analyzer",
-  --       -- "ts_ls"
-  --     }
-  -- },
+  automatic_enable = false,
   ensure_installed = ensure_installed,
 })
 
@@ -20,14 +14,15 @@ require("mason-lspconfig").setup({
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+  vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
+  local bufopts = { noremap = true, silent = true, buf = bufnr }
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-  -- vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+  vim.keymap.set("n", "gh", vim.lsp.buf.references, bufopts)
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
   vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
@@ -36,13 +31,27 @@ local on_attach = function(client, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
   vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
-  -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
   vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
   vim.keymap.set("n", "<leader>cd", function()
     vim.diagnostic.open_float({ scope = "line" })
   end, bufopts)
-  -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  local open_diagnostic_on_jump = function(diagnostic, jump_bufnr)
+    if diagnostic then
+      vim.diagnostic.open_float({ bufnr = jump_bufnr, scope = "cursor" })
+    end
+  end
+  vim.keymap.set("n", "[d", function()
+    vim.diagnostic.jump({ count = -1, on_jump = open_diagnostic_on_jump })
+  end, bufopts)
+  vim.keymap.set("n", "]d", function()
+    vim.diagnostic.jump({ count = 1, on_jump = open_diagnostic_on_jump })
+  end, bufopts)
   -- vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { sync = false, timeout_ms=20000  } end, bufopts)
+
+  if client.server_capabilities.codeLensProvider then
+    vim.lsp.codelens.enable(true, { bufnr = bufnr })
+  end
 
   -- keymap setting ...
   local cap = client.server_capabilities
@@ -60,11 +69,6 @@ local on_attach = function(client, bufnr)
     ]])
   end
 end
-
--- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-local lspconfig = require("lspconfig")
-local lspconfig_util = require("lspconfig/util")
 
 local use_ccls = false -- cclsを使う場合はここをtrueにする
 
