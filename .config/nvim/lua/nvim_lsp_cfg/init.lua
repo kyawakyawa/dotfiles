@@ -3,7 +3,7 @@
 -- mason.nvim
 require("mason").setup()
 
-local ensure_installed = { "clangd", "pyright", "ruff", "jsonls", "bashls", "lua_ls" }
+local ensure_installed = { "clangd", "pyright", "ruff", "jsonls", "bashls", "lua_ls", "texlab" }
 
 require("mason-lspconfig").setup({
   automatic_enable = false,
