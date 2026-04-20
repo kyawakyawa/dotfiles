@@ -27,8 +27,6 @@
 
 - 補完: 有効、engine は `blink-cmp`
 - ファイラ: `yazi.nvim`
-- GitHub Copilot: 無効
-- Avante: 無効
 - format on save: 有効
 - colorscheme: `vim`
 
@@ -119,19 +117,6 @@ filetype ごとの formatter は次の通り。
 - C++ / CUDA: `clang-format`
 - Lua: `stylua`
 - YAML: `yamlfmt`
-
-### AI 補助
-
-既定では無効。
-設定ファイルで有効化した場合のみ読み込まれる。
-
-`githubCopilot.enabled=true` で `zbirenbaum/copilot.lua` を使う。
-補完候補は insert mode で自動表示される。
-Markdown、help、gitcommit などでは無効。
-
-`avante.enabled=true` かつ `cargo` が実行可能な場合は `yetone/avante.nvim` を使う。
-provider は設定ファイルで選び、既定値は `copilot`。
-`ollama` provider 用の設定もあり、`mcphub.nvim` との連携で MCP tool を Avante に渡す。
 
 ## キーマップ
 
@@ -262,30 +247,6 @@ LSP が attach したバッファで有効になる。
 | --- | --- | --- |
 | normal | `<space>f` | `conform.format()` |
 
-### Copilot
-
-`githubCopilot.enabled=true` のときだけ有効。
-
-| mode | key | 動作 |
-| --- | --- | --- |
-| insert | `<M-l>` | suggestion を accept |
-| insert | `<M-]>` | 次の suggestion |
-| insert | `<M-[>` | 前の suggestion |
-| insert | `<C-]>` | suggestion を dismiss |
-
-macOS では `<M-l>` / `<M-]>` / `<M-[>` の代わりに `<D-l>` / `<D-]>` / `<D-[>` を使う。
-`githubCopilot.confirm_tab=true` の場合は accept が `<Tab>`、next が `<S-Tab>` になる。
-
-Copilot panel のキーは次の通り。
-
-| key | 動作 |
-| --- | --- |
-| `[[` | 前へ |
-| `]]` | 次へ |
-| `<CR>` | accept |
-| `gr` | refresh |
-| `<M-o>` | panel を開く |
-
 ### 補完
 
 `blink.cmp` は `keymap.preset = "default"`。
@@ -312,12 +273,9 @@ Copilot panel のキーは次の通り。
 | insert / select | `<Tab>` | 候補確定、snippet jump、または補完開始 |
 | insert / select | `<S-Tab>` | 前候補、または snippet の前位置へ |
 
-Copilot で `confirm_tab=true` の場合、`nvim-cmp` 側の `<Tab>` / `<S-Tab>` は無効化される。
-
 ## コマンド
 
 | command | 動作 |
 | --- | --- |
 | `:ConfigInfo` | 読み込まれる `.nvim/config.json` のパスを表示 |
 | `:MyTSInstall` | Treesitter parser をまとめて update / install |
-| `:Copilot` | Copilot plugin のコマンド。Copilot 有効時のみ |

@@ -7,16 +7,11 @@ local cmp = require("cmp")
 -- LuaSnip
 local luasnip = require("luasnip")
 
-local config = util.load_config()
-
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0
     and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
-
-use_tab_key_in_copilot = config["plugins"]["aiAssistant"]["githubCopilot"]["enabled"]
-  and config["plugins"]["aiAssistant"]["githubCopilot"]["confirm_tab"]
 
 cmp_mapping = {
   ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -26,32 +21,27 @@ cmp_mapping = {
   ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 }
 
-if use_tab_key_in_copilot then
-  cmp_mapping["<Tab>"] = cmp.config.disable
-  cmp_mapping["<S-Tab>"] = cmp.config.disable
-else
-  cmp_mapping["<Tab>"] = cmp.mapping(function(fallback)
-    if cmp.visible() then
-      cmp.confirm({ select = true })
-    elseif luasnip.expand_or_jumpable() then
-      luasnip.expand_or_jump()
-    elseif has_words_before() then
-      cmp.complete()
-    else
-      fallback()
-    end
-  end, { "i", "s" })
+cmp_mapping["<Tab>"] = cmp.mapping(function(fallback)
+  if cmp.visible() then
+    cmp.confirm({ select = true })
+  elseif luasnip.expand_or_jumpable() then
+    luasnip.expand_or_jump()
+  elseif has_words_before() then
+    cmp.complete()
+  else
+    fallback()
+  end
+end, { "i", "s" })
 
-  cmp_mapping["<S-Tab>"] = cmp.mapping(function(fallback)
-    if cmp.visible() then
-      cmp.select_prev_item()
-    elseif luasnip.jumpable(-1) then
-      luasnip.jump(-1)
-    else
-      fallback()
-    end
-  end, { "i", "s" })
-end
+cmp_mapping["<S-Tab>"] = cmp.mapping(function(fallback)
+  if cmp.visible() then
+    cmp.select_prev_item()
+  elseif luasnip.jumpable(-1) then
+    luasnip.jump(-1)
+  else
+    fallback()
+  end
+end, { "i", "s" })
 
 cmp.setup({
   snippet = {
