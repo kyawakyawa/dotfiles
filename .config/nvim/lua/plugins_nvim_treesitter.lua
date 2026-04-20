@@ -5,6 +5,7 @@ treesitter.setup = function(plugins)
   -- nvim-treesitter
   util.add_plugin(plugins, {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     config = function()
       require("nvim-treesitter.configs").setup({
         -- A list of parser names, or "all"

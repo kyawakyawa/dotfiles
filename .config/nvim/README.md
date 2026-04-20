@@ -93,6 +93,7 @@ Git 差分は `gitsigns.nvim`、アイコンは `nvim-web-devicons` に依存す
 ### Treesitter
 
 `nvim-treesitter`、`nvim-treesitter-context`、`nvim-treesitter-textobjects` を使う。
+`nvim-treesitter` 本体は `main` branch を明示して使う。
 
 parser は C / C++ / CMake / Make / CUDA / GLSL / Rust / Python / Lua / HTML / CSS / JavaScript / TypeScript / JSON / JSONC / JSON5 / TSX / TOML / YAML / Vim / Bash / Regex / Markdown を対象にする。
 highlight は有効で、parser の auto install も有効。
