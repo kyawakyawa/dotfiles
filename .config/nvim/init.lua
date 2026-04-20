@@ -31,7 +31,6 @@ vim.g.mapleader = ","
 -- vim.g.mapleader = " " -- スペースに設定
 vim.api.nvim_set_keymap("n", "\\", ",", { noremap = true })
 
-
 -- user config
 local init_dir = vim.fn.fnamemodify(vim.fn.expand("<sfile>:p"), ":h")
 require("util").set_default_config_path(init_dir .. "/default_config.json")
@@ -50,7 +49,7 @@ if not vim.g.vscode then
 end
 
 if vim.g.goneovim ~= nil then
-  require('gui.goneovim')
+  require("gui.goneovim")
 end
 
 -- color
@@ -117,3 +116,6 @@ else
     end,
   })
 end
+
+-- builtin plugins
+vim.cmd("packadd nvim.undotree")

@@ -74,3 +74,6 @@ if ime_off_command then
     end,
   })
 end
+
+-- builtin plugins
+vim.cmd("packadd nvim.undotree")
