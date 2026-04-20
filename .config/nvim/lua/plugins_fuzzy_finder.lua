@@ -6,7 +6,7 @@ local config = require("util").load_config()
 fuzzy_finder.setup = function(plugins)
   util.add_plugin(plugins, {
     "nvim-telescope/telescope.nvim",
-    tag = "v0.2.0",
+    tag = "v0.2.1",
     config = function()
       require("telescope").setup({
         pickers = {
