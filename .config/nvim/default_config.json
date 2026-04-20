@@ -1,26 +1,5 @@
 {
   "plugins": {
-    "aiAssistant": {
-      "githubCopilot": {
-        "enabled": false,
-        "confirm_tab": false
-      },
-      "avante": {
-        "enabled": false,
-        "opts": {
-          "provider": "copilot",
-          "providers": {
-            "ollama": {
-              "endpoint": "127.0.0.1:11434",
-              "model": "qwen2.5-coder:1.5b-base"
-            },
-            "copilot": {
-              "model": "gpt-4o"
-            }
-          }
-        }
-      }
-    },
     "animation": {
       "enabled": false
     },

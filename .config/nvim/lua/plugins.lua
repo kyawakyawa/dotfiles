@@ -25,16 +25,6 @@ if config["plugins"]["complement"]["enabled"] then
   plugins = require("plugins_complement").setup(plugins)
 end
 
--- copilot
-if config["plugins"]["aiAssistant"]["githubCopilot"]["enabled"] then
-  plugins = require("plugins_copilot").setup(plugins)
-end
-
--- avante.nvim
-if config["plugins"]["aiAssistant"]["avante"]["enabled"] then
-  plugins = require("plugins_avante").setup(plugins)
-end
-
 -- fuzzy finder
 plugins = require("plugins_fuzzy_finder").setup(plugins)
 
