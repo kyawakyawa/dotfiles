@@ -33,7 +33,17 @@
         "find_command": [
           "rg",
           "--files",
-          "--hidden"
+          "--hidden",
+          "--glob",
+          "!.git/*",
+          "--glob",
+          "!.venv/*",
+          "--glob",
+          "!*.pyc",
+          "--glob",
+          "!.obsidian/*",
+          "--glob",
+          "!*.DS_Store"
         ]
       }
     },
