@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # Install
-# delta peco ripgrep ghq lazygit yazi fd bat xan broot pastel
+# delta peco ripgrep ghq lazygit yazi fd bat xan broot pastel kubectl k9s
 
 OUTDIR="${HOME}/bin"
 BASH_CMP_D="${HOME}/.config/bash_completion.d"
@@ -87,6 +87,7 @@ BAT_VERSION=$(latest_release_tag sharkdp/bat)
 XAN_VERSION=$(latest_release_tag medialab/xan)
 BROOT_VERSION=$(latest_release_tag Canop/broot)
 PASTEL_VERSION=$(latest_release_tag sharkdp/pastel)
+K9S_VERSION=$(latest_release_tag derailed/k9s)
 
 DELTA_URL=""
 PECO_URL=""
@@ -100,6 +101,8 @@ BAT_URL=""
 XAN_URL=""
 BROOT_URL=""
 PASTEL_URL=""
+KUBECTL_URL=""
+K9S_URL=""
 
 if [ "$PLATFORM" = "darwin" ]; then
   DELTA_URL="https://github.com/dandavison/delta/releases/download/${DELTA_VERSION}/delta-${DELTA_VERSION}-aarch64-apple-darwin.tar.gz"
@@ -138,6 +141,14 @@ else
     PASTEL_URL="https://github.com/sharkdp/pastel/releases/download/${PASTEL_VERSION}/pastel-${PASTEL_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
   fi
 fi
+
+KUBECTL_VERSION=$(curl -fsSL https://dl.k8s.io/release/stable.txt)
+KUBECTL_ARCH=$([ "$TARGET_ARCH" = "aarch64" ] && echo arm64 || echo amd64)
+KUBECTL_URL="https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/${PLATFORM}/${KUBECTL_ARCH}/kubectl"
+
+K9S_OS=$([ "$PLATFORM" = "darwin" ] && echo Darwin || echo Linux)
+K9S_ARCH=$([ "$TARGET_ARCH" = "aarch64" ] && echo arm64 || echo amd64)
+K9S_URL="https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_${K9S_OS}_${K9S_ARCH}.tar.gz"
 
 # delta
 download_tar "$DELTA_URL"
@@ -211,3 +222,15 @@ if [ -n "$PASTEL_URL" ]; then
   download_tar "$PASTEL_URL"
   cp "$(basename "$PASTEL_URL" .tar.gz)/pastel" "$OUTDIR/"
 fi
+
+# KUBECTL
+curl -fL -o kubectl "$KUBECTL_URL"
+chmod +x kubectl
+cp kubectl "$OUTDIR/"
+"$OUTDIR/kubectl" completion bash > "$BASH_CMP_D/kubectl"
+
+# K9S
+download_tar "$K9S_URL"
+cp ./k9s "$OUTDIR/"
+rm -f ./k9s
+"$OUTDIR/k9s" completion bash > "$BASH_CMP_D/k9s"
