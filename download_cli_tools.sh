@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # Install
-# delta peco ripgrep ghq lazygit yazi fd bat xan broot pastel kubectl k9s
+# delta peco ripgrep ghq lazygit yazi fd bat xan broot pastel mo leaf kubectl k9s
 
 OUTDIR="${HOME}/bin"
 BASH_CMP_D="${HOME}/.config/bash_completion.d"
@@ -66,6 +66,12 @@ download_zip() {
   unzip -o "$(basename "$url")"
 }
 
+download_file() {
+  local url="$1"
+  local dst="$2"
+  curl -fL -o "$dst" "$url"
+}
+
 copy_if_exists() {
   local src="$1"
   local dst="$2"
@@ -88,6 +94,8 @@ XAN_VERSION=$(latest_release_tag medialab/xan)
 BROOT_VERSION=$(latest_release_tag Canop/broot)
 PASTEL_VERSION=$(latest_release_tag sharkdp/pastel)
 K9S_VERSION=$(latest_release_tag derailed/k9s)
+MO_VERSION=$(latest_release_tag k1LoW/mo)
+LEAF_VERSION=$(latest_release_tag RivoLink/leaf)
 
 DELTA_URL=""
 PECO_URL=""
@@ -103,6 +111,8 @@ BROOT_URL=""
 PASTEL_URL=""
 KUBECTL_URL=""
 K9S_URL=""
+MO_URL=""
+LEAF_URL=""
 
 if [ "$PLATFORM" = "darwin" ]; then
   DELTA_URL="https://github.com/dandavison/delta/releases/download/${DELTA_VERSION}/delta-${DELTA_VERSION}-aarch64-apple-darwin.tar.gz"
@@ -117,6 +127,8 @@ if [ "$PLATFORM" = "darwin" ]; then
   XAN_URL="https://github.com/medialab/xan/releases/download/${XAN_VERSION}/xan-aarch64-apple-darwin.tar.gz"
   BROOT_URL="https://github.com/Canop/broot/releases/download/${BROOT_VERSION}/broot_${BROOT_VERSION#v}.zip"
   PASTEL_URL="https://github.com/sharkdp/pastel/releases/download/${PASTEL_VERSION}/pastel-${PASTEL_VERSION}-aarch64-apple-darwin.tar.gz"
+  MO_URL="https://github.com/k1LoW/mo/releases/download/${MO_VERSION}/mo_${MO_VERSION}_darwin_arm64.zip"
+  LEAF_URL="https://github.com/RivoLink/leaf/releases/download/${LEAF_VERSION}/leaf-macos-arm64"
 else
   DELTA_LIBC=$([ "$TARGET_ARCH" = "aarch64" ] && echo gnu || echo musl)
   DELTA_URL="https://github.com/dandavison/delta/releases/download/${DELTA_VERSION}/delta-${DELTA_VERSION}-${TARGET_ARCH}-unknown-linux-${DELTA_LIBC}.tar.gz"
@@ -140,6 +152,10 @@ else
   else
     PASTEL_URL="https://github.com/sharkdp/pastel/releases/download/${PASTEL_VERSION}/pastel-${PASTEL_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
   fi
+  MO_ARCH=$([ "$TARGET_ARCH" = "aarch64" ] && echo arm64 || echo amd64)
+  MO_URL="https://github.com/k1LoW/mo/releases/download/${MO_VERSION}/mo_${MO_VERSION}_linux_${MO_ARCH}.tar.gz"
+  LEAF_ARCH=$([ "$TARGET_ARCH" = "aarch64" ] && echo arm64 || echo x86_64)
+  LEAF_URL="https://github.com/RivoLink/leaf/releases/download/${LEAF_VERSION}/leaf-linux-${LEAF_ARCH}"
 fi
 
 KUBECTL_VERSION=$(curl -fsSL https://dl.k8s.io/release/stable.txt)
@@ -222,6 +238,20 @@ if [ -n "$PASTEL_URL" ]; then
   download_tar "$PASTEL_URL"
   cp "$(basename "$PASTEL_URL" .tar.gz)/pastel" "$OUTDIR/"
 fi
+
+# MO
+if [ "$PLATFORM" = "darwin" ]; then
+  download_zip "$MO_URL"
+else
+  download_tar "$MO_URL"
+fi
+cp "./mo" "$OUTDIR/"
+rm -f ./mo
+
+# LEAF
+download_file "$LEAF_URL" leaf
+chmod +x leaf
+cp "./leaf" "$OUTDIR/"
 
 # KUBECTL
 curl -fL -o kubectl "$KUBECTL_URL"
