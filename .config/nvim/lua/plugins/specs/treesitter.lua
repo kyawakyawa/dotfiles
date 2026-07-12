@@ -37,6 +37,20 @@ local function patch_tree_sitter_manager_git_args()
 
   local no_advice_supported = git_supports_no_advice()
 
+  local function git_command(args)
+    local index = 2
+    while index <= #args do
+      local arg = args[index]
+      if arg == "-C" or arg == "--git-dir" or arg == "--work-tree" then
+        index = index + 2
+      elseif type(arg) == "string" and arg:sub(1, 1) == "-" then
+        index = index + 1
+      else
+        return arg
+      end
+    end
+  end
+
   local function normalize_git_args(args)
     if type(args) ~= "table" or args[1] ~= "git" then
       return args
@@ -44,6 +58,7 @@ local function patch_tree_sitter_manager_git_args()
 
     local normalized = { "git" }
     local work_tree
+    local command = git_command(args)
 
     for index, arg in ipairs(args) do
       local skip = index == 1 and arg == "git"
@@ -60,7 +75,6 @@ local function patch_tree_sitter_manager_git_args()
       end
     end
 
-    local command = normalized[2]
     if work_tree and command and command ~= "clone" and command ~= "init" then
       table.insert(normalized, 2, work_tree)
       table.insert(normalized, 2, "-C")
