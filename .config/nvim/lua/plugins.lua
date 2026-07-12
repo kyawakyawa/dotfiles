@@ -1,115 +1,120 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.uv.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
+local config = require("config")
+local registry = require("plugin_registry")
 
-local config = require("util").load_config()
+local M = {}
 
-local plugins = {}
-
--- plugins = require("hoge").setup(plugins)
-
--- nvim lsp
-plugins = require("plugins_nvim_lsp").setup(plugins)
-
--- complement
-if config["plugins"]["complement"]["enabled"] then
-  plugins = require("plugins_complement").setup(plugins)
+local function by_id()
+  local result = {}
+  for _, plugin in ipairs(registry) do
+    result[plugin.id] = plugin
+  end
+  return result
 end
 
--- fuzzy finder
-plugins = require("plugins_fuzzy_finder").setup(plugins)
+local function should_enable(plugin)
+  if not config.env_allows(plugin) then
+    return false
+  end
 
--- file explorer
-plugins = require("plugins_file_explorer").setup(plugins)
+  if plugin.dependency then
+    local override = config.get_plugin_override(plugin.id)
+    return override and override.enabled == true or false
+  end
 
--- line
-plugins = require("plugins_line").setup(plugins)
+  return config.is_plugin_enabled(plugin)
+end
 
--- git
-plugins = require("plugins_git").setup(plugins)
+local function add_dependency(id, plugins_by_id, enabled, visiting)
+  if enabled[id] then
+    return
+  end
 
--- brackets
-plugins = require("plugins_brackets").setup(plugins)
+  local plugin = plugins_by_id[id]
+  if not plugin then
+    vim.notify("Unknown plugin dependency: " .. id, vim.log.levels.WARN)
+    return
+  end
 
--- -- syntax highlight
--- plugins = require("plugins_syntax_highlight").setup(plugins)
+  local override = config.get_plugin_override(id)
+  if override and override.enabled == false then
+    local msg = "Plugin dependency is disabled but required: " .. id
+    if config.get("strict", false) then
+      error(msg)
+    end
+    vim.notify(msg, vim.log.levels.WARN)
+  end
 
--- nvim treesitter
-plugins = require("plugins_nvim_treesitter").setup(plugins)
+  if visiting[id] then
+    error("Circular plugin dependency: " .. id)
+  end
+  visiting[id] = true
 
--- if config["colorscheme"]["name"] == "tokyonight" then
---   -- tokyonight colorscheme
---   plugins = require("plugins_tokyonight").setup(plugins)
--- elseif config["colorscheme"]["name"] == "solarized" then
---   -- soralized osaka colorscheme
---   plugins = require("plugins_solarized_osaka").setup(plugins)
--- elseif config["colorscheme"]["name"] == "ayu" then
---   -- ayu colorscheme
---   plugins = require("plugins_ayu").setup(plugins)
--- elseif config["colorscheme"]["name"] == "vim" then
---   vim.api.nvim_create_autocmd("ColorScheme", {
---     pattern = "*",
---     callback = function()
---       -- colorschemeの設定が呼ばれるたびにSignColumnの背景色をNONEにする
---       vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE", fg = "NONE" })
---
---       -- Foating windowの背景の色の設定
---       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE", fg = "NONE" })
---     end,
---   })
---
---   vim.cmd([[colorscheme vim]])
--- end
+  for _, dep in ipairs(plugin.dependencies or {}) do
+    add_dependency(dep, plugins_by_id, enabled, visiting)
+  end
 
--- -- dap
--- plugins = require("plugins_dap").setup(plugins)
+  enabled[id] = true
+  visiting[id] = nil
+end
 
--- -- rsync
--- plugins = require("plugins_rsync").setup(plugins)
+local function resolve_enabled_plugins()
+  local plugins_by_id = by_id()
+  local enabled = {}
 
--- term
-plugins = require("plugins_term").setup(plugins)
+  for _, plugin in ipairs(registry) do
+    if should_enable(plugin) then
+      for _, dep in ipairs(plugin.dependencies or {}) do
+        add_dependency(dep, plugins_by_id, enabled, {})
+      end
+      enabled[plugin.id] = true
+    end
+  end
 
--- -- scrollview
--- plugins = require("plugins_scrollview").setup(plugins)
+  local result = {}
+  for _, plugin in ipairs(registry) do
+    if enabled[plugin.id] then
+      table.insert(result, plugin)
+    end
+  end
 
--- -- animation
--- if config["plugins"]["animation"]["enabled"] then
---   plugins = require("plugins_animation").setup(plugins)
--- end
+  return result
+end
 
--- -- greeter
--- plugins = require("plugins_greeter").setup(plugins)
+local function pack_specs(plugins)
+  return vim.tbl_map(function(plugin)
+    local spec = {
+      src = plugin.src,
+      name = plugin.id,
+    }
+    if plugin.version then
+      spec.version = plugin.version
+    end
+    return spec
+  end, plugins)
+end
 
--- -- which-key.nvim
--- plugins = require("plugins_which_key").setup(plugins)
+local function setup_plugins(plugins)
+  for _, plugin in ipairs(plugins) do
+    if plugin.setup then
+      local ok, mod = pcall(require, plugin.setup)
+      if not ok then
+        vim.notify("Failed to load setup for " .. plugin.id .. ": " .. mod, vim.log.levels.ERROR)
+      elseif mod.setup then
+        local setup_ok, err = pcall(mod.setup)
+        if not setup_ok then
+          vim.notify("Failed to setup " .. plugin.id .. ": " .. err, vim.log.levels.ERROR)
+        end
+      end
+    end
+  end
+end
 
--- -- -- window
--- -- plugins = require("plugins_window").setup(plugins)
+function M.setup()
+  local plugins = resolve_enabled_plugins()
+  vim.pack.add(pack_specs(plugins), { confirm = false, load = true })
+  setup_plugins(plugins)
+end
 
--- -- rest
--- if config["plugins"]["rest"]["enabled"] then
---   plugins = require("plugins_rest").setup(plugins)
--- end
+M.setup()
 
--- format
-plugins = require("plugins_format").setup(plugins)
-
--- -- json5
--- plugins = require("plugins_json5").setup(plugins)
---
--- -- hardtime
--- if config["plugins"]["inputBehavior"]["hardtime"]["enabled"] then
---   plugins = require("plugins_hardtime").setup(plugins)
--- end
-
-require("lazy").setup(plugins, opts)
+return M

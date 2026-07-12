@@ -105,6 +105,9 @@ local default_config_path = "~/.config/nvim/default_config.json"
 
 function M.set_default_config_path(path)
   default_config_path = path
+  pcall(function()
+    require("config").setup({ default_config_path = path })
+  end)
 end
 
 function M.get_default_config_path(path)
@@ -169,13 +172,21 @@ function M.print_config_path()
 end
 
 function M.load_config()
+  local ok, config = pcall(require, "config")
+  if ok then
+    return config.get()
+  end
+
   local default_config = load_default_config()
   local local_config = load_local_config()
-
   return vim.tbl_deep_extend("force", default_config, local_config or {})
 end
 
 function M.get_config_path()
+  local ok, config = pcall(require, "config")
+  if ok then
+    return config.local_config_path()
+  end
   return config_path_loaded
 end
 

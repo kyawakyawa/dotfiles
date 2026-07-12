@@ -33,8 +33,10 @@ vim.api.nvim_set_keymap("n", "\\", ",", { noremap = true })
 
 -- user config
 local init_dir = vim.fn.fnamemodify(vim.fn.expand("<sfile>:p"), ":h")
-require("util").set_default_config_path(init_dir .. "/default_config.json")
-vim.api.nvim_create_user_command("ConfigInfo", require("util").print_config_path, {})
+require("config").setup({
+  default_config_path = init_dir .. "/default_config.json",
+})
+vim.api.nvim_create_user_command("ConfigInfo", require("config").print_info, {})
 
 if not vim.g.vscode then
   -- For OpenCL
@@ -64,6 +66,12 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
 })
 vim.cmd([[colorscheme vim]])
+
+if require("config").get("features.ui.popup_border", true) then
+  vim.o.winborder = "rounded"
+end
+
+require("features.treesitter").setup()
 
 -- Plugins
 require("plugins") -- プラグインの読み込み

@@ -1,90 +1,238 @@
 {
-  "plugins": {
-    "animation": {
-      "enabled": false
+  "version": 1,
+  "strict": false,
+  "features": {
+    "core": {
+      "enabled": true
     },
-    "complement": {
+    "lsp": {
       "enabled": true,
-      "engine": "blink-cmp"
+      "runtime": true,
+      "server_manager": "mason",
+      "automatic_enable": false,
+      "ensure_installed": [
+        "clangd",
+        "pyright",
+        "ruff",
+        "jsonls",
+        "bashls",
+        "lua_ls",
+        "texlab"
+      ],
+      "enable": null,
+      "diagnostics": {
+        "virtual_text": true,
+        "signs": true,
+        "float_on_jump": true
+      },
+      "document_highlight": true,
+      "codelens": true
     },
-    "file_explorer": {
-      "name": "yazi"
+    "completion": {
+      "enabled": true,
+      "engine": "native",
+      "autotrigger": true,
+      "manual_key": "<C-Space>",
+      "confirm_key": "<C-y>",
+      "completeopt": [
+        "menuone",
+        "noselect",
+        "popup"
+      ],
+      "snippets": false,
+      "signature_help": {
+        "enabled": true,
+        "auto": false,
+        "key": "<C-k>"
+      }
     },
-    "fuzzy_finder": {
-      "telescope": {
-        "0find_command": [
-          "rg",
-          "--files",
-          "--hidden",
-          "--no-ignore",
-          "--glob",
-          "!.git/*",
-          "--glob",
-          "!*.cache/*",
-          "--glob",
-          "!.venv/*",
-          "--glob",
-          "!*.pyc",
-          "--glob",
-          "!.obsidian/*",
-          "--glob",
-          "!*.DS_Store"
+    "treesitter": {
+      "enabled": true,
+      "parser_manager": true,
+      "runtime_highlight": true,
+      "textobjects": true,
+      "context": false
+    },
+    "search": {
+      "enabled": true,
+      "picker": "telescope",
+      "find_command": [
+        "rg",
+        "--files",
+        "--hidden",
+        "--glob",
+        "!.git/*",
+        "--glob",
+        "!.venv/*",
+        "--glob",
+        "!*.pyc",
+        "--glob",
+        "!.obsidian/*",
+        "--glob",
+        "!*.DS_Store"
+      ]
+    },
+    "file": {
+      "enabled": true,
+      "explorer": "yazi"
+    },
+    "git": {
+      "enabled": true,
+      "signs": true,
+      "diff_view": true,
+      "linker": true,
+      "notifications": false
+    },
+    "format": {
+      "enabled": true,
+      "provider": "conform",
+      "format_on_save": true,
+      "manual_key": "<space>f",
+      "lsp_format": "fallback"
+    },
+    "terminal": {
+      "enabled": true,
+      "backend": "toggleterm",
+      "default_shell": true,
+      "codex": {
+        "enabled": true,
+        "cmd": "codex",
+        "key": "<leader>cx"
+      }
+    },
+    "ui": {
+      "enabled": true,
+      "status": true,
+      "icons": true,
+      "theme": "vim",
+      "animations": false,
+      "greeter": false,
+      "minimap": false,
+      "scrollbar": false,
+      "window_manager": false,
+      "popup_border": true
+    },
+    "python": {
+      "enabled": true
+    },
+    "editing": {
+      "enabled": true,
+      "autoclose": true
+    },
+    "debug": {
+      "enabled": false,
+      "ui": true,
+      "virtual_text": true,
+      "python": true,
+      "launch_json": true,
+      "codelldb": true
+    },
+    "tooling": {
+      "enabled": false,
+      "rest": false,
+      "remote_transfer": false
+    }
+  },
+  "languages": {
+    "treesitter": {
+      "parsers": [
+        "c",
+        "cpp",
+        "cmake",
+        "make",
+        "cuda",
+        "glsl",
+        "rust",
+        "python",
+        "lua",
+        "html",
+        "css",
+        "javascript",
+        "typescript",
+        "json",
+        "json5",
+        "tsx",
+        "toml",
+        "yaml",
+        "vim",
+        "bash",
+        "regex",
+        "markdown",
+        "markdown_inline"
+      ],
+      "start_filetypes": [
+        "c",
+        "cpp",
+        "cmake",
+        "make",
+        "cuda",
+        "glsl",
+        "rust",
+        "python",
+        "latex",
+        "lua",
+        "html",
+        "css",
+        "javascript",
+        "typescript",
+        "typescriptreact",
+        "json",
+        "jsonc",
+        "json5",
+        "toml",
+        "yaml",
+        "vim",
+        "bash",
+        "regex",
+        "markdown"
+      ],
+      "textobjects": {
+        "select": [
+          "af",
+          "if",
+          "ac",
+          "ic",
+          "as"
         ],
-        "find_command": [
-          "rg",
-          "--files",
-          "--hidden",
-          "--glob",
-          "!.git/*",
-          "--glob",
-          "!.venv/*",
-          "--glob",
-          "!*.pyc",
-          "--glob",
-          "!.obsidian/*",
-          "--glob",
-          "!*.DS_Store"
+        "move": [
+          "]f",
+          "[f",
+          "]F",
+          "[F"
         ]
       }
     },
-    "inputBehavior": {
-      "hardtime": {
-        "enabled": false
-      }
-    },
-    "rest": {
-      "enabled": false
-    },
-    "rsync": {
-      "transfer": {
-        "upload_rsync_params": [
-          "-rlzi",
-          "--checksum",
-          "--exclude",
-          ".git",
-          "--exclude",
-          ".idea",
-          "--exclude",
-          ".DS_Store",
-          "--exclude",
-          ".nvim",
-          "--exclude",
-          "*.pyc"
-        ],
-        "download_rsync_params": [
-          "-rlzi",
-          "--checksum",
-          "--exclude",
-          ".git"
+    "python": {
+      "resolver": "uv",
+      "fallback_resolver": "activated",
+      "project_root_markers": [
+        "uv.lock",
+        "pyproject.toml",
+        ".venv",
+        ".git"
+      ],
+      "python_path": null,
+      "venv_path": null,
+      "run_prefix": [
+        "uv",
+        "run"
+      ],
+      "lsp": {
+        "type_checker": "pyright",
+        "lint": "ruff"
+      },
+      "format": {
+        "provider": "ruff",
+        "fallback": [
+          "isort",
+          "black"
         ]
       }
     }
   },
-  "format": {
-    "format_on_save": true
-  },
-  "colorscheme": {
-    "name": "vim",
-    "opt": {}
+  "plugins": {
+    "messenger.nvim": {
+      "enabled": false
+    }
   }
 }
