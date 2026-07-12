@@ -7,6 +7,8 @@ function M.setup()
     return
   end
 
+  vim.opt.runtimepath:append(vim.fn.stdpath("data") .. "/site")
+
   vim.treesitter.language.register("json", "jsonc")
   vim.treesitter.language.register("tsx", "typescriptreact")
 

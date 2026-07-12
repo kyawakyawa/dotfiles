@@ -110,7 +110,7 @@ function M.set_default_config_path(path)
   end)
 end
 
-function M.get_default_config_path(path)
+function M.get_default_config_path()
   return default_config_path
 end
 
@@ -132,10 +132,10 @@ local load_local_config = function()
     return nil
   end
 
-  config_path = config_dir .. "/config.json"
+  local config_path = config_dir .. "/config.json"
 
   if vim.uv.fs_stat(config_path) then
-    json_decoder = vim.fn.json_decode
+    local json_decoder = vim.fn.json_decode
 
     -- TODO: json5のサポートを追加する (lazy.nvimのload前に読む必要がある)
     -- local ok, json5 = pcall(require, 'json5')
@@ -150,7 +150,7 @@ local load_local_config = function()
     local content = f:read("*all")
     f:close()
 
-    json = json_decoder(content)
+    local json = json_decoder(content)
 
     config_path_loaded = config_path
 
@@ -167,7 +167,7 @@ function M.print_config_path()
     return
   end
 
-  config_path = config_dir .. "/config.json"
+  local config_path = config_dir .. "/config.json"
   print(config_path)
 end
 

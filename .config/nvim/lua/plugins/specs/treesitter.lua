@@ -45,14 +45,17 @@ local function patch_tree_sitter_manager_git_args()
     local normalized = { "git" }
     local work_tree
 
-    for _, arg in ipairs(args) do
-      if arg == "git" then
-        -- already added
-      elseif arg == "--no-advice" and not no_advice_supported then
-        -- Git before 2.44 does not support this global option.
-      elseif type(arg) == "string" and arg:sub(1, 12) == "--work-tree=" then
+    for index, arg in ipairs(args) do
+      local skip = index == 1 and arg == "git"
+
+      if type(arg) == "string" and arg:sub(1, 12) == "--work-tree=" then
         work_tree = arg:sub(13)
-      else
+        skip = true
+      elseif arg == "--no-advice" and not no_advice_supported then
+        skip = true
+      end
+
+      if not skip then
         table.insert(normalized, arg)
       end
     end

@@ -33,6 +33,7 @@ vim.api.nvim_set_keymap("n", "\\", ",", { noremap = true })
 
 -- user config
 local init_dir = vim.fn.fnamemodify(vim.fn.expand("<sfile>:p"), ":h")
+vim.opt.runtimepath:prepend(init_dir)
 require("config").setup({
   default_config_path = init_dir .. "/default_config.json",
 })
