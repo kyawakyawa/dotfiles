@@ -1,43 +1,81 @@
-# Neovim config memo
+# Neovim config
 
-この README は `init.lua` を起点に、実際に読み込まれる設定を忘れないためのメモです。
-コメントアウトされていて `require` されない plugin 設定は対象外です。
+Neovim 0.12 以降を前提にした軽量構成です。
+plugin manager は `lazy.nvim` ではなく builtin の `vim.pack` を使います。
 
-## 起動時の基本設定
+主な方針:
 
-- `vim.loader` が使える場合は有効化して Lua の読み込みを高速化する。
-- 行番号、スペースインデント、`tabstop=2` / `shiftwidth=2`、検索ハイライト、カーソル行、`termguicolors`、グローバルステータスラインを有効化する。
-- Python / Node / Perl / Ruby provider は使わない前提で無効化している。
-- leader は `,`。
-- ノーマルモードの `\` は `,` にマップされている。
-- `:ConfigInfo` で、この設定が見つけたプロジェクトローカル設定ファイルを表示する。
-- OpenCL の `*.cl` は filetype を `cl` にする。
-- VSCode ではない通常の Neovim では、ターミナルモードの `<ESC>` でノーマルモードへ戻る。
-- Goneovim では `<D-v>` をノーマル / インサート / コマンドラインでクリップボード貼り付けに使う。
-- WSL では `win32yank` を `+` / `*` レジスタに使う。
-- インサートモードを抜けたとき、環境に応じて IME を英数に戻す。
-  WSL / Windows は `zenhan 0`、macOS は `im-select com.apple.keylayout.ABC`、Linux は `fcitx5-remote -c`。
+- plugin 定義は `lua/plugin_registry.lua` に集約する。
+- plugin 設定は `lua/plugins/specs/*.lua` に分ける。
+- feature 単位と plugin 単位の on/off を `default_config.json` / `.nvim/config.json` で制御する。
+- 補完は `blink.cmp` / `nvim-cmp` ではなく Neovim builtin LSP completion を使う。
+- Treesitter parser install は `tree-sitter-manager.nvim`、runtime は builtin `vim.treesitter.start()` を使う。
+- 起動を複雑にしすぎず、default では必要な plugin だけを素直に読み込む。
 
-## 設定ファイル
+## Requirements
 
-既定値は `default_config.json` から読む。
-プロジェクト配下に `.nvim/config.json` がある場合は、上位ディレクトリを探索して見つけたものを既定値にマージする。
+- Neovim 0.12+
+- `git`
+- `rg`
+- C compiler
+- `tree-sitter` CLI
+- 必要に応じて `yazi`, `codex`, `uv`, formatter 各種
 
-既定では次の状態になっている。
+CI では Neovim `v0.12.4` AppImage、`tree-sitter-cli@0.26.10`、`stylua v2.5.2`、`luacheck` で smoke test します。
 
-- 補完: 有効、engine は `blink-cmp`
-- ファイラ: `yazi.nvim`
-- format on save: 有効
-- colorscheme: `vim`
+## Entry Points
 
-## 読み込まれるプラグイン
+| Path | Role |
+| --- | --- |
+| `init.lua` | 起動時の基本 option、provider 無効化、色、plugin 読み込み |
+| `default_config.json` | 既定の feature/plugin/language 設定 |
+| `lua/config/init.lua` | JSONC 対応 config loader |
+| `lua/plugin_registry.lua` | `vim.pack` 用 plugin registry |
+| `lua/plugins.lua` | registry を解決して `vim.pack.add()` と setup を実行 |
+| `lua/plugins/specs/*.lua` | 各 plugin の設定 |
+| `lua/features/treesitter.lua` | builtin Treesitter runtime 設定 |
+| `lua/python_env.lua` | Python interpreter resolver |
+| `nvim-pack-lock.json` | `vim.pack` lock file |
+
+## Config System
+
+既定値は `default_config.json` です。
+プロジェクト配下に `.nvim/config.json` があれば、上位ディレクトリを探索してマージします。
+
+JSONC コメントに対応しています。
+
+```jsonc
+{
+  "features": {
+    "debug": { "enabled": true },
+    "treesitter": { "context": true },
+    "ai": {
+      "copilot": { "enabled": true }
+    }
+  },
+  "plugins": {
+    "nvim-treesitter-context": { "enabled": true }
+  }
+}
+```
+
+解決順:
+
+1. VSCode などの実行環境制約
+2. plugin 個別 override
+3. feature group / subfeature
+4. default config
+
+`:ConfigInfo` で default/local config の検出状態を確認できます。
+
+## Features
 
 ### LSP
 
-`mason.nvim`、`mason-lspconfig.nvim`、`nvim-lspconfig` を使う。
-`BufReadPost` / `BufAdd` / `BufNewFile` で読み込まれる。
+LSP runtime は builtin の `vim.lsp.config()` / `vim.lsp.enable()` を使います。
+server install 管理は `mason.nvim` / `mason-lspconfig.nvim` を使います。
 
-自動インストール対象の LSP は次の通り。
+既定の ensure install:
 
 - `clangd`
 - `pyright`
@@ -45,118 +83,230 @@
 - `jsonls`
 - `bashls`
 - `lua_ls`
+- `texlab`
 
-`clangd` は `--background-index`、`--header-insertion=never`、`--pch-storage=memory`、`--clang-tidy` 付きで起動する。
-Python は上位に `.venv` が見つかれば、その環境を `pyright` の `venvPath` / `pythonPath` に使う。
-診断は virtual text に `message (source: code)` 形式で表示する。
+主なコマンド:
 
-### 補完
+- `:PythonEnvInfo`
+- `:PyrightClientInfo`
+- `:BufferDiagnosticsInfo`
 
-既定では `blink.cmp` を使う。
-source は `lsp`、`path`、`snippets`、`buffer`。
-`friendly-snippets` も入る。
+Python は `languages.python.resolver = "uv"` が既定です。
+`.venv/bin/python` を優先し、見つからない場合は `activated` resolver に fallback します。
+pyright には `pythonPath`, `venvPath`, `venv`, `extraPaths`, `cmd_env` を渡します。
 
-`default_config.json` または `.nvim/config.json` で `plugins.complement.engine` を `nvim-cmp` にすると、`nvim-cmp` 系に切り替わる。
-その場合は `lspkind.nvim`、`LuaSnip`、`cmp-nvim-lsp`、`cmp-buffer`、`cmp-path`、`cmp-cmdline` などを使う。
+### Completion
 
-### ファジーファインダ
+補完は builtin LSP completion を使います。
 
-`telescope.nvim` を使う。
-`find_files` の探索コマンドは設定ファイルの `plugins.fuzzy_finder.telescope.find_command` を使う。
-既定では `rg --files --hidden`。
+既定:
 
-### ファイル操作
+- auto trigger 有効
+- manual trigger: `<C-Space>`
+- confirm: `<C-y>`
+- `completeopt=menuone,noinsert,popup`
+- `pumborder=rounded`
+- `pumblend=8`
+- LSP kind icon 表示あり
 
-既定では `yazi.nvim` を使う。
-`plugins.file_explorer.name` が `yazi` 以外の場合は `neo-tree.nvim` を使う分岐がある。
+`noselect` は使っていません。
+そのため、候補 menu が出た状態で `<C-y>` を押すと先頭候補を確定できます。
 
-### 表示
+補完 popup の色は `features.ui.completion_popup` で調整します。
 
-`incline.nvim` を使う。
-右上付近のバッファ表示に、ファイル名、変更状態、Git 差分数、診断数、filetype icon を表示する。
-Git 差分は `gitsigns.nvim`、アイコンは `nvim-web-devicons` に依存する。
+### Inline Completion / Copilot
 
-### Git
+`copilot-language-server` は opt-in です。
+default では起動しません。
 
-次の Git 関連プラグインを使う。
+有効化例:
 
-- `gitsigns.nvim`: hunk の移動、stage / reset、blame、diff、deleted 行表示
-- `messenger.nvim`: GitHub の通知表示
-- `diffview.nvim`: diff / history UI
-- `gitlinker.nvim`: 現在行や選択範囲、リポジトリの URL を取得 / ブラウザで開く
+```jsonc
+{
+  "features": {
+    "ai": {
+      "copilot": {
+        "enabled": true
+      }
+    }
+  }
+}
+```
 
-### 括弧
+有効化すると Mason ensure / `vim.lsp.enable()` に `copilot` が追加されます。
+Copilot の sign-in/out command は `nvim-lspconfig` の `copilot` config が提供します。
 
-`autoclose.nvim` を使う。
-インサートモードに入ったタイミングで読み込まれ、括弧やクォートを自動で閉じる。
+- `:LspCopilotSignIn`
+- `:LspCopilotSignOut`
+
+inline completion key:
+
+| mode | key | action |
+| --- | --- | --- |
+| insert | `<C-f>` | accept inline completion |
+| insert | `<M-[>` | previous inline completion |
+| insert | `<M-]>` | next inline completion |
 
 ### Treesitter
 
-`nvim-treesitter`、`nvim-treesitter-context`、`nvim-treesitter-textobjects` を使う。
-`nvim-treesitter` 本体は `main` branch を明示して使う。
+Parser install/update は `tree-sitter-manager.nvim` を使います。
+Highlight runtime は plugin に任せず、FileType autocmd で builtin `vim.treesitter.start()` を呼びます。
 
-parser は C / C++ / CMake / Make / CUDA / GLSL / Rust / Python / Lua / HTML / CSS / JavaScript / TypeScript / JSON / JSONC / JSON5 / TSX / TOML / YAML / Vim / Bash / Regex / Markdown を対象にする。
-main branch では `nvim-treesitter.configs` は使わず、`require("nvim-treesitter").setup()` と `vim.treesitter.start()` で有効化する。
-parser は `:MyTSInstall` でまとめて install でき、plugin update 時は `:TSUpdate` が走る。
+Commands:
 
-`treesitter-context` は現在位置の関数やクラスなどの文脈を最大 5 行まで上部に表示する。
+- `:TreesitterInstallConfigured`
+- `:TreesitterUpdateConfigured`
+- `:TreesitterBufferInfo`
 
-### ターミナル
+Notes:
 
-`toggleterm.nvim` を使う。
-現在の cwd の basename から `<basename>-neovim` という zellij session 名を作り、float terminal で `zellij attach -c` する。
+- `jsonc` filetype には `json` parser を登録します。
+- `typescriptreact` filetype には `tsx` parser を登録します。
+- `latex` parser は現状 build が不安定なため初期 install 対象から外しています。
+- `tree-sitter-manager.nvim` の Git 呼び出し差異を吸収する runtime patch があります。
 
-### フォーマット
+`nvim-treesitter-textobjects` は継続します。
+`nvim-treesitter-context` は default off です。
 
-`conform.nvim` を使う。
-既定では保存時フォーマットが有効。
-手動フォーマット用のキーもある。
+### Search / File
 
-filetype ごとの formatter は次の通り。
+- `telescope.nvim` を継続利用します。
+- `yazi.nvim` を継続利用します。
 
-- Python: `ruff_format` があれば `ruff_fix` + `ruff_format`、なければ `isort` + `black`
-- JSON: `jq`
-- C++ / CUDA: `clang-format`
-- Lua: `stylua`
-- YAML: `yamlfmt`
+### Git
 
-## キーマップ
+継続:
 
-### 共通
+- `gitsigns.nvim`
+- `diffview.nvim`
+- `gitlinker.nvim`
 
-| mode | key | 動作 |
+削除:
+
+- `messenger.nvim`
+
+`gitlinker.nvim` は VSCode Neovim でも有効です。
+`diffview.nvim` は command 起動のみで、新規 shortcut は追加していません。
+
+### Terminal
+
+`toggleterm.nvim` を使います。
+Zellij 連携は削除しました。
+
+| mode | key | action |
+| --- | --- | --- |
+| normal | `<leader>z` | default shell terminal |
+| normal | `<leader>cx` | `codex` terminal |
+
+### Format
+
+`conform.nvim` を継続します。
+
+- format on save 有効
+- manual format: `<space>f`
+- LSP format は fallback
+
+Python は `ruff_fix + ruff_format` を優先し、なければ `isort + black` に fallback します。
+
+### UI
+
+継続:
+
+- `incline.nvim`
+- `nvim-web-devicons`
+- builtin `vim` colorscheme
+- popup border
+
+削除:
+
+- greeter/dashboard
+- animation/smooth scroll
+- minimap/scrollbar
+- bufferline/statusline plugin
+- window manager plugin
+
+`incline.nvim` は shell の `Ctrl-x Ctrl-e` などで 1 行目の長い command を編集するケースに配慮し、短い shell buffer の 1 行目では隠すようにしています。
+
+### Editing
+
+`autoclose.nvim` は継続します。
+
+### Debug
+
+DAP 系は default off で registry に残しています。
+
+有効化例:
+
+```jsonc
+{
+  "features": {
+    "debug": {
+      "enabled": true
+    }
+  }
+}
+```
+
+有効化される plugin:
+
+- `nvim-dap`
+- `nvim-dap-ui`
+- `nvim-dap-virtual-text`
+- `nvim-dap-python`
+- `nvim-nio`
+
+主な key:
+
+| mode | key | action |
+| --- | --- | --- |
+| normal | `<leader>d` | DAP UI toggle |
+| normal | `<leader>w` | add watch |
+| normal | `<leader><leader>df` | eval |
+| normal | `<F5>` | continue |
+| normal | `<F10>` | step over |
+| normal | `<F11>` | step into |
+| normal | `<F12>` | step out |
+| normal | `<leader>b` | toggle breakpoint |
+| normal | `<leader>bc` | conditional breakpoint |
+| normal | `<leader>l` | log point |
+| normal | `<leader>dc` | close DAP REPL |
+
+## Keymaps
+
+`<leader>` は `,` です。
+
+### Common
+
+| mode | key | action |
 | --- | --- | --- |
 | normal | `\` | `,` として扱う |
-| terminal | `<ESC>` | terminal mode から normal mode へ戻る |
-| normal / insert / command | `<D-v>` | Goneovim でクリップボード貼り付け |
+| terminal | `<ESC>` | terminal mode から normal mode |
+| normal / insert / command | `<D-v>` | Goneovim paste |
 
 ### LSP
 
-LSP が attach したバッファで有効になる。
-
-| mode | key | 動作 |
+| mode | key | action |
 | --- | --- | --- |
-| normal | `gD` | 宣言へ移動 |
-| normal | `gd` | 定義へ移動 |
-| normal | `K` | hover 表示 |
+| normal | `gD` | declaration |
+| normal | `gd` | definition |
+| normal | `K` | hover |
 | normal | `gh` | references |
 | normal | `gi` | implementation |
 | normal | `<C-k>` | signature help |
-| normal | `<space>wa` | workspace folder 追加 |
-| normal | `<space>wr` | workspace folder 削除 |
-| normal | `<space>wl` | workspace folder 一覧表示 |
+| normal | `<space>wa` | add workspace folder |
+| normal | `<space>wr` | remove workspace folder |
+| normal | `<space>wl` | list workspace folders |
 | normal | `<space>D` | type definition |
 | normal | `<space>rn` | rename |
 | normal | `<space>ca` | code action |
-| normal | `<leader>cd` | 現在行の diagnostic float |
-| normal | `[d` | 前の diagnostic へ移動し、float 表示 |
-| normal | `]d` | 次の diagnostic へ移動し、float 表示 |
+| normal | `<leader>cd` | line diagnostic float |
+| normal | `[d` | previous diagnostic |
+| normal | `]d` | next diagnostic |
+| insert | `<C-Space>` | manual LSP completion |
 
 ### Telescope
 
-`<leader>` は `,`。
-
-| mode | key | 動作 |
+| mode | key | action |
 | --- | --- | --- |
 | normal | `<leader>ff` | files |
 | normal | `<leader>fgr` | live grep |
@@ -169,115 +319,86 @@ LSP が attach したバッファで有効になる。
 | normal | `<leader>gr` | LSP references |
 | normal | `<leader>fre` | registers |
 
-### ファイラ
+### Yazi
 
-既定の `yazi.nvim` のキー。
-
-| mode | key | 動作 |
+| mode | key | action |
 | --- | --- | --- |
-| normal / visual | `<leader>-` | 現在ファイル位置で Yazi を開く |
-| normal | `<leader>cw` | Neovim の cwd で Yazi を開く |
-| normal | `<C-Up>` | 最後の Yazi session を再開 / toggle |
-
-`neo-tree.nvim` に切り替えた場合のキー。
-
-| mode | key | 動作 |
-| --- | --- | --- |
-| normal | `<space>e` | filesystem tree を左に toggle |
-| normal | `<space>g` | git status tree を左に toggle |
+| normal / visual | `<leader>-` | open Yazi at current file |
+| normal | `<leader>cw` | open Yazi at cwd |
+| normal | `<C-Up>` | resume/toggle last Yazi session |
 
 ### Git
 
-`gitsigns.nvim` のキー。
-
-| mode | key | 動作 |
+| mode | key | action |
 | --- | --- | --- |
-| normal | `]c` | 次の hunk |
-| normal | `[c` | 前の hunk |
-| normal / visual | `<leader>hs` | hunk を stage |
-| normal / visual | `<leader>hr` | hunk を reset |
-| normal | `<leader>hS` | buffer 全体を stage |
-| normal | `<leader>hu` | hunk の stage を undo |
-| normal | `<leader>hR` | buffer 全体を reset |
-| normal | `<leader>hp` | hunk preview |
-| normal | `<leader>hb` | 現在行の blame |
-| normal | `<leader>tb` | current line blame の toggle |
-| normal | `<leader>hd` | 現在ファイルの diff |
-| normal | `<leader>hD` | `~` との差分 |
-| normal | `<leader>td` | deleted 行表示の toggle |
+| normal | `]c` | next hunk |
+| normal | `[c` | previous hunk |
+| normal / visual | `<leader>hs` | stage hunk |
+| normal / visual | `<leader>hr` | reset hunk |
+| normal | `<leader>hS` | stage buffer |
+| normal | `<leader>hu` | undo stage hunk |
+| normal | `<leader>hR` | reset buffer |
+| normal | `<leader>hp` | preview hunk |
+| normal | `<leader>hb` | line blame |
+| normal | `<leader>tb` | toggle line blame |
+| normal | `<leader>hd` | diff this |
+| normal | `<leader>hD` | diff against `~` |
+| normal | `<leader>td` | toggle deleted |
 | operator / visual | `ih` | hunk text object |
+| normal / visual | `<leader>gb` | open line/range URL |
+| normal | `<leader>gY` | copy repository URL |
+| normal | `<leader>gB` | open repository URL |
 
-その他の Git キー。
+### Treesitter Textobjects
 
-| mode | key | 動作 |
-| --- | --- | --- |
-| normal | `<leader>gm` | messenger.nvim の通知表示 |
-| normal | `<leader>gb` | 現在行の URL をブラウザで開く |
-| visual | `<leader>gb` | 選択範囲の URL をブラウザで開く |
-| normal | `<leader>gY` | repository URL を取得 |
-| normal | `<leader>gB` | repository URL をブラウザで開く |
-
-### Treesitter textobjects
-
-| mode | key | 動作 |
+| mode | key | action |
 | --- | --- | --- |
 | visual / operator | `af` | function outer |
 | visual / operator | `if` | function inner |
 | visual / operator | `ac` | class outer |
 | visual / operator | `ic` | class inner |
 | visual / operator | `as` | scope |
-| normal | `]f` | 次の function 開始へ |
-| normal | `]F` | 次の function 終了へ |
-| normal | `[f` | 前の function 開始へ |
-| normal | `[F` | 前の function 終了へ |
-| normal | `]c` | 次の class 開始へ |
-| normal | `]C` | 次の class 終了へ |
-| normal | `[c` | 前の class 開始へ |
-| normal | `[C` | 前の class 終了へ |
+| normal / visual / operator | `]f` | next function start |
+| normal / visual / operator | `]F` | next function end |
+| normal / visual / operator | `[f` | previous function start |
+| normal / visual / operator | `[F` | previous function end |
 
-`[c` / `]c` は `gitsigns.nvim` でも使っているため、実際の挙動は読み込み状況とバッファの状態に依存する。
+`[c` / `]c` は gitsigns 用に残し、Treesitter class movement には使いません。
 
-### ターミナル
+## CI
 
-| mode | key | 動作 |
-| --- | --- | --- |
-| normal | `<leader>z` | zellij session を float terminal で toggle |
+GitHub Actions workflow:
 
-### フォーマット
+- `.github/workflows/neovim.yml`
 
-| mode | key | 動作 |
-| --- | --- | --- |
-| normal | `<space>f` | `conform.format()` |
+Checks:
 
-### 補完
+- download Neovim `v0.12.4` x86_64 AppImage
+- extract AppImage and run `AppRun`
+- install `tree-sitter-cli@0.26.10`
+- install `stylua v2.5.2`
+- install `luacheck`
+- `stylua --check`
+- `luacheck`
+- default config headless smoke
+- feature-rich config headless smoke
+- Python Treesitter parser install/build/load/parse/query/textobjects smoke
 
-`blink.cmp` は `keymap.preset = "default"`。
-主に次のキーを使う。
+Local equivalents:
 
-| mode | key | 動作 |
-| --- | --- | --- |
-| insert | `<C-Space>` | menu を開く。menu 表示中は docs を開く |
-| insert | `<C-n>` / `<C-p>` | 次 / 前の候補 |
-| insert | `<Up>` / `<Down>` | 次 / 前の候補 |
-| insert | `<C-y>` | 確定 |
-| insert | `<C-e>` | menu を閉じる |
-| insert | `<C-k>` | signature help toggle |
+```sh
+/home/user/.cargo/bin/stylua --check --config-path .config/nvim/stylua.toml \
+  .config/nvim/init.lua .config/nvim/essential.lua .config/nvim/lua .github/scripts/nvim_smoke.lua
 
-`nvim-cmp` に切り替えた場合は次のキーを使う。
+/home/user/.luarocks/bin/luacheck \
+  .config/nvim/init.lua .config/nvim/essential.lua .config/nvim/lua .github/scripts/nvim_smoke.lua
 
-| mode | key | 動作 |
-| --- | --- | --- |
-| insert | `<C-b>` | docs を上へスクロール |
-| insert | `<C-f>` | docs を下へスクロール |
-| insert | `<C-Space>` | 補完開始 |
-| insert | `<C-e>` | 補完中止 |
-| insert | `<CR>` | 選択中の候補を確定 |
-| insert / select | `<Tab>` | 候補確定、snippet jump、または補完開始 |
-| insert / select | `<S-Tab>` | 前候補、または snippet の前位置へ |
+NVIM_SMOKE_SCENARIO=default nvim --headless -u .config/nvim/init.lua \
+  +'luafile .github/scripts/nvim_smoke.lua' +qa!
+```
 
-## コマンド
+## Notes
 
-| command | 動作 |
-| --- | --- |
-| `:ConfigInfo` | 読み込まれる `.nvim/config.json` のパスを表示 |
-| `:MyTSInstall` | Treesitter parser をまとめて update / install |
+Migration notes are kept under:
+
+- `docs/notes/202607_vim_pack_migration_.md`
