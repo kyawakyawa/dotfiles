@@ -39,6 +39,7 @@
         "noselect",
         "popup"
       ],
+      "trigger_characters": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_",
       "snippets": false,
       "signature_help": {
         "enabled": true,

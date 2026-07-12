@@ -70,6 +70,17 @@ vim.cmd([[colorscheme vim]])
 
 if require("config").get("features.ui.popup_border", true) then
   vim.o.winborder = "rounded"
+  pcall(function()
+    vim.o.pumborder = "rounded"
+  end)
+end
+
+if require("config").is_feature_enabled("completion") then
+  vim.opt.completeopt = require("config").get("features.completion.completeopt", {
+    "menuone",
+    "noselect",
+    "popup",
+  })
 end
 
 require("features.treesitter").setup()

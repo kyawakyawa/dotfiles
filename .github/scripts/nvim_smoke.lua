@@ -60,6 +60,16 @@ local function assert_core()
   assert_true(command_exists("PyrightClientInfo"), "PyrightClientInfo should exist")
   assert_true(command_exists("BufferDiagnosticsInfo"), "BufferDiagnosticsInfo should exist")
 
+  assert_true(
+    vim.o.completeopt == "menuone,noselect,popup",
+    "completeopt should enable native popup completion"
+  )
+  assert_true(vim.o.winborder == "rounded", "winborder should be rounded")
+  local has_pumborder, pumborder = pcall(function()
+    return vim.o.pumborder
+  end)
+  assert_true(not has_pumborder or pumborder == "rounded", "pumborder should be rounded")
+
   assert_active("telescope.nvim")
   assert_active("yazi.nvim")
   assert_active("toggleterm.nvim")

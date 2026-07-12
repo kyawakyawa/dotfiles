@@ -6,6 +6,51 @@ local function lsp_config()
   return config.get("features.lsp", {})
 end
 
+local function completion_trigger_characters()
+  local chars = config.get("features.completion.trigger_characters", "")
+  if type(chars) == "string" then
+    local result = {}
+    for index = 1, #chars do
+      table.insert(result, chars:sub(index, index))
+    end
+    return result
+  end
+  return chars
+end
+
+local function extend_completion_triggers(client)
+  local provider = client.server_capabilities.completionProvider
+  if not provider then
+    return
+  end
+
+  local triggers = provider.triggerCharacters or {}
+  for _, char in ipairs(completion_trigger_characters()) do
+    if char ~= "" and not vim.list_contains(triggers, char) then
+      table.insert(triggers, char)
+    end
+  end
+  provider.triggerCharacters = triggers
+end
+
+local function enable_completion(client, bufnr)
+  if
+    not client:supports_method("textDocument/completion")
+    or not config.is_feature_enabled("completion")
+  then
+    return
+  end
+
+  extend_completion_triggers(client)
+  vim.bo[bufnr].completeopt = table.concat(
+    config.get("features.completion.completeopt", { "menuone", "noselect", "popup" }),
+    ","
+  )
+  vim.lsp.completion.enable(true, client.id, bufnr, {
+    autotrigger = config.get("features.completion.autotrigger", true),
+  })
+end
+
 function M.setup()
   local cfg = lsp_config()
   local ensure_installed = cfg.ensure_installed
@@ -106,14 +151,18 @@ function M.setup()
       })
     end
 
-    if
-      client:supports_method("textDocument/completion") and config.is_feature_enabled("completion")
-    then
-      vim.lsp.completion.enable(true, client.id, bufnr, {
-        autotrigger = config.get("features.completion.autotrigger", true),
-      })
-    end
+    enable_completion(client, bufnr)
   end
+
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("native_lsp_completion", { clear = true }),
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if client then
+        enable_completion(client, args.buf)
+      end
+    end,
+  })
 
   vim.lsp.config("*", {
     root_markers = { ".git", ".hg" },
