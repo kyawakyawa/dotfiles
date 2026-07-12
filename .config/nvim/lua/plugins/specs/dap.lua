@@ -12,12 +12,7 @@ local function setup_keymaps(cfg)
       silent = true,
       desc = "DAP add watch",
     })
-    vim.keymap.set(
-      "n",
-      "<leader><leader>df",
-      dapui.eval,
-      { silent = true, desc = "DAP eval" }
-    )
+    vim.keymap.set("n", "<leader><leader>df", dapui.eval, { silent = true, desc = "DAP eval" })
   end
   vim.keymap.set("n", "<F5>", dap.continue, { silent = true, desc = "DAP continue" })
   vim.keymap.set("n", "<F10>", dap.step_over, { silent = true, desc = "DAP step over" })
