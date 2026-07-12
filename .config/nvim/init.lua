@@ -78,7 +78,7 @@ end
 if require("config").is_feature_enabled("completion") then
   vim.opt.completeopt = require("config").get("features.completion.completeopt", {
     "menuone",
-    "noselect",
+    "noinsert",
     "popup",
   })
 end

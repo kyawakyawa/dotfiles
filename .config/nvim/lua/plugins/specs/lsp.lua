@@ -43,7 +43,7 @@ local function enable_completion(client, bufnr)
 
   extend_completion_triggers(client)
   vim.bo[bufnr].completeopt = table.concat(
-    config.get("features.completion.completeopt", { "menuone", "noselect", "popup" }),
+    config.get("features.completion.completeopt", { "menuone", "noinsert", "popup" }),
     ","
   )
   vim.lsp.completion.enable(true, client.id, bufnr, {

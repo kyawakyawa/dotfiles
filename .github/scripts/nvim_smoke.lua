@@ -61,7 +61,7 @@ local function assert_core()
   assert_true(command_exists("BufferDiagnosticsInfo"), "BufferDiagnosticsInfo should exist")
 
   assert_true(
-    vim.o.completeopt == "menuone,noselect,popup",
+    vim.o.completeopt == "menuone,noinsert,popup",
     "completeopt should enable native popup completion"
   )
   assert_true(vim.o.winborder == "rounded", "winborder should be rounded")

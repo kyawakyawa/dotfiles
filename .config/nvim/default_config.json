@@ -36,7 +36,7 @@
       "confirm_key": "<C-y>",
       "completeopt": [
         "menuone",
-        "noselect",
+        "noinsert",
         "popup"
       ],
       "trigger_characters": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_",
