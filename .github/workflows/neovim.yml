@@ -1,0 +1,128 @@
+name: Neovim
+
+on:
+  push:
+    paths:
+      - ".config/nvim/**"
+      - ".luacheckrc"
+      - ".github/workflows/neovim.yml"
+      - ".github/scripts/nvim_smoke.lua"
+  pull_request:
+    paths:
+      - ".config/nvim/**"
+      - ".luacheckrc"
+      - ".github/workflows/neovim.yml"
+      - ".github/scripts/nvim_smoke.lua"
+  workflow_dispatch:
+
+jobs:
+  headless:
+    name: Headless smoke test
+    runs-on: ubuntu-24.04
+
+    env:
+      NVIM_VERSION: v0.12.4
+      NVIM_APPIMAGE_URL: https://github.com/neovim/neovim/releases/download/v0.12.4/nvim-linux-x86_64.appimage
+      STYLUA_VERSION: v2.5.2
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential curl git lua5.1 luarocks npm ripgrep unzip
+          npm install -g tree-sitter-cli@0.26.10
+          sudo luarocks install luacheck
+
+      - name: Install stylua
+        run: |
+          curl -fsSL "https://github.com/JohnnyMorganz/StyLua/releases/download/$STYLUA_VERSION/stylua-linux-x86_64.zip" \
+            -o "$RUNNER_TEMP/stylua.zip"
+          unzip -q "$RUNNER_TEMP/stylua.zip" -d "$RUNNER_TEMP/stylua"
+          chmod +x "$RUNNER_TEMP/stylua/stylua"
+          echo "STYLUA=$RUNNER_TEMP/stylua/stylua" >> "$GITHUB_ENV"
+
+      - name: Check Lua formatting
+        run: |
+          "$STYLUA" --check --config-path .config/nvim/stylua.toml \
+            .config/nvim/init.lua \
+            .config/nvim/essential.lua \
+            .config/nvim/lua \
+            .github/scripts/nvim_smoke.lua
+
+      - name: Lint Lua
+        run: |
+          luacheck \
+            .config/nvim/init.lua \
+            .config/nvim/essential.lua \
+            .config/nvim/lua \
+            .github/scripts/nvim_smoke.lua
+
+      - name: Download Neovim AppImage
+        run: |
+          curl -fsSL "$NVIM_APPIMAGE_URL" -o "$RUNNER_TEMP/nvim.appimage"
+          chmod +x "$RUNNER_TEMP/nvim.appimage"
+          "$RUNNER_TEMP/nvim.appimage" --appimage-extract >/dev/null
+          mv squashfs-root "$RUNNER_TEMP/nvim"
+          echo "NVIM=$RUNNER_TEMP/nvim/AppRun" >> "$GITHUB_ENV"
+
+      - name: Check Neovim version
+        run: |
+          "$NVIM" --version
+          "$NVIM" --version | grep "NVIM $NVIM_VERSION"
+
+      - name: Smoke test default config
+        env:
+          XDG_DATA_HOME: ${{ runner.temp }}/xdg-default/data
+          XDG_STATE_HOME: ${{ runner.temp }}/xdg-default/state
+          XDG_CACHE_HOME: ${{ runner.temp }}/xdg-default/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/xdg-default/config
+          NVIM_SMOKE_SCENARIO: default
+        run: |
+          "$NVIM" --headless -u "$GITHUB_WORKSPACE/.config/nvim/init.lua" \
+            +'luafile .github/scripts/nvim_smoke.lua' +qa!
+
+      - name: Prepare feature-rich project config
+        run: |
+          mkdir -p "$RUNNER_TEMP/nvim-feature-project/.nvim"
+          cat > "$RUNNER_TEMP/nvim-feature-project/.nvim/config.json" <<'JSON'
+          {
+            "features": {
+              "debug": {
+                "enabled": true
+              },
+              "treesitter": {
+                "context": true
+              }
+            },
+            "languages": {
+              "treesitter": {
+                "parsers": [
+                  "python"
+                ],
+                "start_filetypes": [
+                  "python"
+                ]
+              }
+            },
+            "plugins": {
+              "nvim-treesitter-context": {
+                "enabled": true
+              }
+            }
+          }
+          JSON
+
+      - name: Smoke test feature-rich config
+        env:
+          XDG_DATA_HOME: ${{ runner.temp }}/xdg-feature/data
+          XDG_STATE_HOME: ${{ runner.temp }}/xdg-feature/state
+          XDG_CACHE_HOME: ${{ runner.temp }}/xdg-feature/cache
+          XDG_CONFIG_HOME: ${{ runner.temp }}/xdg-feature/config
+          NVIM_SMOKE_SCENARIO: feature_rich
+        working-directory: ${{ runner.temp }}/nvim-feature-project
+        run: |
+          "$NVIM" --headless -u "$GITHUB_WORKSPACE/.config/nvim/init.lua" \
+            +"luafile $GITHUB_WORKSPACE/.github/scripts/nvim_smoke.lua" +qa!

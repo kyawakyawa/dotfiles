@@ -33,8 +33,11 @@ vim.api.nvim_set_keymap("n", "\\", ",", { noremap = true })
 
 -- user config
 local init_dir = vim.fn.fnamemodify(vim.fn.expand("<sfile>:p"), ":h")
-require("util").set_default_config_path(init_dir .. "/default_config.json")
-vim.api.nvim_create_user_command("ConfigInfo", require("util").print_config_path, {})
+vim.opt.runtimepath:prepend(init_dir)
+require("config").setup({
+  default_config_path = init_dir .. "/default_config.json",
+})
+vim.api.nvim_create_user_command("ConfigInfo", require("config").print_info, {})
 
 if not vim.g.vscode then
   -- For OpenCL
@@ -61,9 +64,49 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 
     -- Foating windowの背景の色の設定
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE", fg = "NONE" })
+
+    local popup = require("config").get("features.ui.completion_popup", {})
+    vim.api.nvim_set_hl(0, "Pmenu", { bg = popup.background, fg = popup.foreground })
+    vim.api.nvim_set_hl(0, "PmenuSel", {
+      bg = popup.selection_background,
+      fg = popup.selection_foreground,
+    })
+    vim.api.nvim_set_hl(0, "PmenuKind", { bg = popup.background, fg = popup.kind_foreground })
+    vim.api.nvim_set_hl(0, "PmenuKindSel", {
+      bg = popup.selection_background,
+      fg = popup.kind_foreground,
+    })
+    vim.api.nvim_set_hl(0, "PmenuExtra", { bg = popup.background, fg = popup.extra_foreground })
+    vim.api.nvim_set_hl(0, "PmenuExtraSel", {
+      bg = popup.selection_background,
+      fg = popup.extra_foreground,
+    })
+    vim.api.nvim_set_hl(0, "PmenuSbar", { bg = popup.selection_background })
+    vim.api.nvim_set_hl(0, "PmenuThumb", { bg = popup.border_foreground })
+    vim.api.nvim_set_hl(0, "FloatBorder", { fg = popup.border_foreground })
   end,
 })
 vim.cmd([[colorscheme vim]])
+
+if require("config").get("features.ui.popup_border", true) then
+  vim.o.winborder = "rounded"
+  pcall(function()
+    vim.o.pumborder = "rounded"
+  end)
+end
+pcall(function()
+  vim.o.pumblend = require("config").get("features.ui.completion_popup.blend", 0)
+end)
+
+if require("config").is_feature_enabled("completion") then
+  vim.opt.completeopt = require("config").get("features.completion.completeopt", {
+    "menuone",
+    "noinsert",
+    "popup",
+  })
+end
+
+require("features.treesitter").setup()
 
 -- Plugins
 require("plugins") -- プラグインの読み込み
