@@ -109,11 +109,13 @@ function M.setup()
     table.insert(ensure_installed, "copilot")
   end
 
-  require("mason").setup()
-  require("mason-lspconfig").setup({
-    automatic_enable = cfg.automatic_enable == true,
-    ensure_installed = ensure_installed,
-  })
+  if config.is_feature_enabled("lsp.server_manager") then
+    require("mason").setup()
+    require("mason-lspconfig").setup({
+      automatic_enable = cfg.automatic_enable == true,
+      ensure_installed = ensure_installed,
+    })
+  end
 
   vim.api.nvim_create_user_command("PythonEnvInfo", function()
     require("python_env").print_info(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
