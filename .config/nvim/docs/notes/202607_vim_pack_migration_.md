@@ -21,7 +21,7 @@
 - pyright は `.venv` の `pythonPath` / `venvPath` / `extraPaths` / `cmd_env` を反映済み。
 - `toggleterm.nvim` は Zellij 連携を削除し、default shell と `codex` terminal に変更済み。
 - DAP 系は registry に残し、`features.debug.enabled = false` の default off。
-- Copilot は `features.ai.copilot.enabled = false` の opt-in。
+- Copilot は `features.ai.enabled = true` と `features.ai.copilot.enabled = true` の opt-in。
 - GitHub Actions で Neovim 0.12.4 AppImage smoke、Treesitter parser build、`stylua --check`、`luacheck` を実行する。
 
 ## 目的

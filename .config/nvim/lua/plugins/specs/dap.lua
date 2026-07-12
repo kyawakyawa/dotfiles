@@ -29,6 +29,10 @@ local function setup_keymaps()
   vim.keymap.set("n", "<leader>dc", dap.repl.close, { silent = true, desc = "DAP close repl" })
 end
 
+local function load_launch_json()
+  require("dap.ext.vscode").load_launchjs()
+end
+
 function M.setup()
   local cfg = config.get("features.debug", {})
   local dap = require("dap")
@@ -60,6 +64,10 @@ function M.setup()
 
   if cfg.virtual_text ~= false then
     require("nvim-dap-virtual-text").setup()
+  end
+
+  if cfg.launch_json ~= false then
+    load_launch_json()
   end
 
   setup_keymaps()

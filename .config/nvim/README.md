@@ -50,6 +50,7 @@ JSONC コメントに対応しています。
     "debug": { "enabled": true },
     "treesitter": { "context": true },
     "ai": {
+      "enabled": true,
       "copilot": { "enabled": true }
     }
   },
@@ -125,6 +126,7 @@ default では起動しません。
 {
   "features": {
     "ai": {
+      "enabled": true,
       "copilot": {
         "enabled": true
       }
