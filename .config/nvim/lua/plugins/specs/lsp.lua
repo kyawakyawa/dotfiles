@@ -51,10 +51,47 @@ local function enable_completion(client, bufnr)
   })
 end
 
+local function copilot_config()
+  return config.get("features.ai.copilot", {})
+end
+
+local function is_copilot_enabled()
+  return config.is_feature_enabled("ai.copilot")
+end
+
+local function enable_inline_completion(client, bufnr)
+  local copilot = copilot_config()
+  if
+    client.name ~= "copilot"
+    or not is_copilot_enabled()
+    or copilot.inline_completion == false
+    or not client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, bufnr)
+  then
+    return
+  end
+
+  vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
+
+  vim.keymap.set("i", copilot.accept_key or "<C-f>", vim.lsp.inline_completion.get, {
+    buffer = bufnr,
+    desc = "Accept inline completion",
+  })
+  vim.keymap.set("i", copilot.previous_key or "<M-[>", function()
+    vim.lsp.inline_completion.select({ count = -1 })
+  end, { buffer = bufnr, desc = "Previous inline completion" })
+  vim.keymap.set("i", copilot.next_key or "<M-]>", function()
+    vim.lsp.inline_completion.select({ count = 1 })
+  end, { buffer = bufnr, desc = "Next inline completion" })
+end
+
 function M.setup()
   local cfg = lsp_config()
-  local ensure_installed = cfg.ensure_installed
-    or { "clangd", "pyright", "ruff", "jsonls", "bashls", "lua_ls", "texlab" }
+  local ensure_installed = vim.deepcopy(
+    cfg.ensure_installed or { "clangd", "pyright", "ruff", "jsonls", "bashls", "lua_ls", "texlab" }
+  )
+  if is_copilot_enabled() and not vim.list_contains(ensure_installed, "copilot") then
+    table.insert(ensure_installed, "copilot")
+  end
 
   require("mason").setup()
   require("mason-lspconfig").setup({
@@ -152,6 +189,7 @@ function M.setup()
     end
 
     enable_completion(client, bufnr)
+    enable_inline_completion(client, bufnr)
   end
 
   vim.api.nvim_create_autocmd("LspAttach", {
@@ -160,6 +198,7 @@ function M.setup()
       local client = vim.lsp.get_client_by_id(args.data.client_id)
       if client then
         enable_completion(client, args.buf)
+        enable_inline_completion(client, args.buf)
       end
     end,
   })
@@ -214,6 +253,10 @@ function M.setup()
     },
   })
 
+  vim.lsp.config("copilot", {
+    root_markers = { ".git" },
+  })
+
   local diagnostics = cfg.diagnostics or {}
   local virtual_text = diagnostics.virtual_text ~= false
       and {
@@ -245,7 +288,12 @@ function M.setup()
 
   local enable = cfg.enable
   if enable == nil then
-    enable = ensure_installed
+    enable = vim.deepcopy(ensure_installed)
+  else
+    enable = vim.deepcopy(enable)
+  end
+  if is_copilot_enabled() and not vim.list_contains(enable, "copilot") then
+    table.insert(enable, "copilot")
   end
   vim.lsp.enable(enable)
 

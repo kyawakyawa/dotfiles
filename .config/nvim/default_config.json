@@ -116,6 +116,16 @@
     "python": {
       "enabled": true
     },
+    "ai": {
+      "enabled": false,
+      "copilot": {
+        "enabled": false,
+        "inline_completion": true,
+        "accept_key": "<C-f>",
+        "previous_key": "<M-[>",
+        "next_key": "<M-]>"
+      }
+    },
     "editing": {
       "enabled": true,
       "autoclose": true
