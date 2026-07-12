@@ -15,6 +15,7 @@
         "pyright",
         "ruff",
         "jsonls",
+        "yamlls",
         "bashls",
         "lua_ls",
         "texlab"
