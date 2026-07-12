@@ -40,6 +40,35 @@
         "popup"
       ],
       "trigger_characters": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_",
+      "kind_icons": true,
+      "kind_icon_default": "󰈔",
+      "kind_icon_map": {
+        "Text": "󰉿",
+        "Method": "󰆧",
+        "Function": "󰊕",
+        "Constructor": "",
+        "Field": "󰜢",
+        "Variable": "󰀫",
+        "Class": "󰠱",
+        "Interface": "",
+        "Module": "",
+        "Property": "󰜢",
+        "Unit": "󰑭",
+        "Value": "󰎠",
+        "Enum": "",
+        "Keyword": "󰌋",
+        "Snippet": "",
+        "Color": "󰏘",
+        "File": "󰈙",
+        "Reference": "󰈇",
+        "Folder": "󰉋",
+        "EnumMember": "",
+        "Constant": "󰏿",
+        "Struct": "󰙅",
+        "Event": "",
+        "Operator": "󰆕",
+        "TypeParameter": "󰅲"
+      },
       "snippets": false,
       "signature_help": {
         "enabled": true,
@@ -111,7 +140,17 @@
       "minimap": false,
       "scrollbar": false,
       "window_manager": false,
-      "popup_border": true
+      "popup_border": true,
+      "completion_popup": {
+        "blend": 8,
+        "background": "#1f2430",
+        "foreground": "#d8dee9",
+        "selection_background": "#3a4658",
+        "selection_foreground": "#ffffff",
+        "kind_foreground": "#88c0d0",
+        "extra_foreground": "#8b949e",
+        "border_foreground": "#5e81ac"
+      }
     },
     "python": {
       "enabled": true

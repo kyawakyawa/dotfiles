@@ -48,6 +48,22 @@ local function enable_completion(client, bufnr)
   )
   vim.lsp.completion.enable(true, client.id, bufnr, {
     autotrigger = config.get("features.completion.autotrigger", true),
+    convert = function(item)
+      if not config.get("features.completion.kind_icons", true) then
+        return {}
+      end
+
+      local kind_name = vim.lsp.protocol.CompletionItemKind[item.kind]
+      local icon = kind_name
+        and config.get({ "features", "completion", "kind_icon_map", kind_name })
+      if not icon then
+        icon = config.get("features.completion.kind_icon_default", "󰈔")
+      end
+
+      return {
+        abbr = icon .. " " .. item.label,
+      }
+    end,
   })
 end
 

@@ -69,6 +69,7 @@ local function assert_core()
     return vim.o.pumborder
   end)
   assert_true(not has_pumborder or pumborder == "rounded", "pumborder should be rounded")
+  assert_true(vim.o.pumblend == 8, "pumblend should make completion popup slightly transparent")
 
   assert_active("telescope.nvim")
   assert_active("yazi.nvim")
