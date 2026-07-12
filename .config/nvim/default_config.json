@@ -12,6 +12,7 @@
       "automatic_enable": false,
       "ensure_installed": [
         "clangd",
+        "gopls",
         "pyright",
         "ruff",
         "jsonls",

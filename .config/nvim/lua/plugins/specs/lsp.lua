@@ -104,7 +104,7 @@ function M.setup()
   local cfg = lsp_config()
   local ensure_installed = vim.deepcopy(
     cfg.ensure_installed
-      or { "clangd", "pyright", "ruff", "jsonls", "yamlls", "bashls", "lua_ls", "texlab" }
+      or { "clangd", "gopls", "pyright", "ruff", "jsonls", "yamlls", "bashls", "lua_ls", "texlab" }
   )
   if is_copilot_enabled() and not vim.list_contains(ensure_installed, "copilot") then
     table.insert(ensure_installed, "copilot")
