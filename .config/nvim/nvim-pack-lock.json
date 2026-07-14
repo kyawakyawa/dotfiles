@@ -69,6 +69,10 @@
       "rev": "dad71387de386a946b123079d0e53f23028f3abd",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
+    "overlook.nvim": {
+      "rev": "a86f2afc05278a485978cd308fab920b0a490282",
+      "src": "https://github.com/WilliamHsieh/overlook.nvim"
+    },
     "plenary.nvim": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"

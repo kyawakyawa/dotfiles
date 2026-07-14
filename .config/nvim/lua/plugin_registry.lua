@@ -87,6 +87,12 @@ return {
     setup = "plugins.specs.autoclose",
   },
   {
+    id = "overlook.nvim",
+    src = "https://github.com/WilliamHsieh/overlook.nvim",
+    env = { vscode = false },
+    setup = "plugins.specs.overlook",
+  },
+  {
     id = "tree-sitter-manager.nvim",
     src = "https://github.com/romus204/tree-sitter-manager.nvim",
     feature = "treesitter.parser_manager",
