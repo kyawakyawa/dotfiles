@@ -6,6 +6,7 @@ if [ ! -e ~/.vim ]; then ln -s "$DOTFILES_DIR/.vim" ~/.vim ; else echo .vim is e
 if [ ! -e ~/.gitconfig ]; then ln -s "$DOTFILES_DIR/.gitconfig" ~/.gitconfig ; else echo .gitconfig is exist; fi
 if [ ! -e ~/.tmux.conf ]; then ln -s "$DOTFILES_DIR/.tmux.conf" ~/.tmux.conf ; else echo .tmux.conf is exist; fi
 mkdir -p ~/.config
+if [ ! -e ~/.config/herdr ]; then ln -s "$DOTFILES_DIR/.config/herdr" ~/.config/herdr ; else echo .config/herdr is exist; fi
 if [ ! -e ~/.config/nvim ]; then ln -s "$DOTFILES_DIR/.config/nvim" ~/.config/nvim ; else echo .config/nvim is exist; fi
 if [ ! -e ~/.config/efm-langserver ]; then ln -s "$DOTFILES_DIR/.config/efm-langserver" ~/.config/efm-langserver ; else echo .config/efm-langserver is exist; fi
 if [ ! -e ~/.config/lazygit ]; then ln -s "$DOTFILES_DIR/.config/lazygit" ~/.config/lazygit ; else echo .config/lazygit is exist; fi

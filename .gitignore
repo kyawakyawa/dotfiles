@@ -3,3 +3,7 @@
 /.config/nvim/lua/packer_compiled.lua
 /.config/alacritty/alacritty-win.toml
 /.config/alacritty/alacritty-unix.toml
+
+/.config/herdr/herdr-client.log
+/.config/herdr/herdr-server.log
+/.config/herdr/session.json

@@ -1,0 +1,45 @@
+onboarding = false
+
+[terminal]
+new_cwd = "follow"
+shell_mode = "auto"
+
+[keys]
+prefix = "ctrl+q"
+
+# tmuxと同じペイン移動
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# window相当
+new_tab = "prefix+c"
+previous_tab = "prefix+p"
+next_tab = "prefix+n"
+switch_tab = "prefix+1..9"
+
+# tmuxに比較的近いキー
+copy_mode = "prefix+["
+close_pane = "prefix+x"
+zoom = "prefix+z"
+
+# Herdrではresize modeに入ってからhjkl
+resize_mode = "prefix+r"
+
+# tmuxのprefix+wに近い一覧表示
+workspace_picker = "prefix+w"
+
+# detachはtmuxに寄せる
+detach = "prefix+d"
+
+# Herdr独自UI
+toggle_sidebar = "prefix+b"
+goto = "prefix+g"
+
+navigate_workspace_down = ["j", "ctrl+n", "down"]
+navigate_workspace_up   = ["k", "ctrl+p", "up"]
+
+# Pane splitting (tmux互換)
+split_vertical   = ["prefix+%" , "prefix+v"]
+split_horizontal = ["prefix+\"", "prefix+-"]
